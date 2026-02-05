@@ -72,25 +72,96 @@ NOESIS 2026 is a tech fest website showcasing competitions, events, sponsors, an
    npm run preview
    ```
 
+## 🚀 Deployment
+
+### Netlify Deployment
+
+This website is configured for deployment on Netlify.
+
+#### Option 1: Deploy via Netlify UI
+
+1. **Connect Repository**
+   - Go to [Netlify](https://app.netlify.com)
+   - Click "Add new site" → "Import an existing project"
+   - Connect your GitHub repository
+
+2. **Build Settings** (Auto-detected from `netlify.toml`)
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+   - **Node version:** 18
+
+3. **Deploy**
+   - Click "Deploy site"
+   - Netlify will automatically build and deploy
+
+#### Option 2: Deploy via Netlify CLI
+
+1. **Install Netlify CLI**
+   ```bash
+   npm install -g netlify-cli
+   ```
+
+2. **Login to Netlify**
+   ```bash
+   netlify login
+   ```
+
+3. **Initialize and Deploy**
+   ```bash
+   netlify init
+   netlify deploy --prod
+   ```
+
+#### Netlify Configuration
+
+The project includes `netlify.toml` with:
+- ✅ Build configuration (command, publish directory)
+- ✅ SPA redirect rules (all routes → index.html)
+- ✅ Security headers
+- ✅ Cache optimization for static assets
+
+#### Environment Variables
+
+If needed, add environment variables in Netlify dashboard:
+- **Site Settings** → **Environment Variables**
+
+#### Custom Domain
+
+1. Go to **Site Settings** → **Domain Management**
+2. Add your custom domain
+3. Follow DNS configuration instructions
+
+#### Continuous Deployment
+
+- ✅ Automatic deployments on push to `main` branch
+- ✅ Preview deployments for pull requests
+- ✅ Build logs and deployment status in Netlify dashboard
+
 ## 🏗️ Project Structure
 
 ```
-src/
-├── components/          # React components
-│   ├── CompetitionCard.jsx
-│   ├── EventCard.jsx
-│   └── CountUp.jsx
-├── hooks/              # Custom React hooks
-│   ├── useStickyScroll.js
-│   └── useScrollVelocity.js
-├── constants/          # Configuration constants
-│   └── scrollConfig.js
-├── utils/              # Utility functions
-│   └── stickyScrollCalculator.js
-├── App.jsx             # Main application component
-├── App.css             # Main stylesheet
-├── useInView.js        # IntersectionObserver hook
-└── main.jsx            # Application entry point
+.
+├── netlify.toml        # Netlify deployment configuration
+├── public/
+│   ├── _redirects      # Netlify SPA redirect rules
+│   └── noesis-logo.png
+├── src/
+│   ├── components/     # React components
+│   │   ├── CompetitionCard.jsx
+│   │   ├── EventCard.jsx
+│   │   └── CountUp.jsx
+│   ├── hooks/         # Custom React hooks
+│   │   ├── useStickyScroll.js
+│   │   └── useScrollVelocity.js
+│   ├── constants/     # Configuration constants
+│   │   └── scrollConfig.js
+│   ├── utils/         # Utility functions
+│   │   └── stickyScrollCalculator.js
+│   ├── App.jsx        # Main application component
+│   ├── App.css        # Main stylesheet
+│   ├── useInView.js   # IntersectionObserver hook
+│   └── main.jsx       # Application entry point
+└── dist/              # Build output (generated)
 ```
 
 ## 🎨 Architecture

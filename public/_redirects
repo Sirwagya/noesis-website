@@ -1,0 +1,5 @@
+# Netlify SPA Redirect Rules
+# This file ensures all routes redirect to index.html for client-side routing
+# This is a fallback - netlify.toml also handles this, but this ensures compatibility
+
+/*    /index.html   200
