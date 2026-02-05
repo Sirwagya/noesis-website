@@ -35,4 +35,9 @@ export const SCROLL_CONFIG = {
   // Nav bar
   NAV_SCROLL_THRESHOLD: 0.95, // Show nav when 95% through hero
   NAV_SCROLLED_THRESHOLD: 60, // px - nav scrolled state threshold
+  
+  // Hero section scroll thresholds
+  HERO_SCROLL_PAST_THRESHOLD: 0.9, // Show competitions when scrolled past 90% of hero height
+  HERO_SCROLL_NEAR_THRESHOLD: 0.8, // Hide competitions when near top (within 80% of hero height)
+  PARALLAX_INTENSITY_REDUCTION: 0.5, // Reduce parallax intensity for smoother effect
 }

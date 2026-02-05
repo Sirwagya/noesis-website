@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
+import { UI_CONSTANTS } from '../constants/ui'
+import { ANIMATION_DURATIONS } from '../constants/animations'
 
 /**
  * Page Loader Component
  * Elegant loading screen with NOESIS logo and progress indicator
+ * 
+ * @returns {JSX.Element|null} Loader component or null when hidden
  */
 export function PageLoader() {
   const [progress, setProgress] = useState(0)
@@ -17,19 +21,19 @@ export function PageLoader() {
           // Fade out after loading completes
           setTimeout(() => {
             setIsVisible(false)
-          }, 500)
+          }, ANIMATION_DURATIONS.PAGE_LOADER_FADE)
           return 100
         }
-        return prev + 2
+        return prev + UI_CONSTANTS.PAGE_LOADER_INCREMENT
       })
-    }, 30)
+    }, UI_CONSTANTS.PAGE_LOADER_INTERVAL)
 
     // Also check if page is actually loaded
     const handleLoad = () => {
       setProgress(100)
       setTimeout(() => {
         setIsVisible(false)
-      }, 500)
+      }, ANIMATION_DURATIONS.PAGE_LOADER_FADE)
     }
 
     if (document.readyState === 'complete') {

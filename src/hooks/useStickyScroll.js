@@ -6,10 +6,15 @@ import { SCROLL_CONFIG } from '../constants/scrollConfig'
  * Custom hook for managing sticky scroll behavior
  * Optimized with IntersectionObserver, cached measurements, and batched updates
  * 
- * @param {Object} params
- * @param {React.RefObject} params.sectionRef - Section element ref
- * @param {React.RefObject} params.listRef - List container ref
- * @returns {Object} Scroll state: { titlePosition, activeIndex, parallaxData, progress, cardPositions }
+ * @param {Object} params - Hook parameters
+ * @param {React.RefObject<HTMLElement>} params.sectionRef - Section element ref
+ * @param {React.RefObject<HTMLElement>} params.listRef - List container ref
+ * @returns {Object} Scroll state object
+ * @returns {string} returns.titlePosition - Position of title ('left-middle' | 'up')
+ * @returns {number} returns.activeIndex - Index of currently active card (-1 if none)
+ * @returns {Object<number, number>} returns.parallaxData - Map of card index to parallax offset
+ * @returns {number} returns.progress - Scroll progress (0 to 1)
+ * @returns {Object<number, string>} returns.cardPositions - Map of card index to position
  */
 export function useStickyScroll({ sectionRef, listRef }) {
   const [state, setState] = useState({

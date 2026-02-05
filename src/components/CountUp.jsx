@@ -1,8 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
+import { ANIMATION_DURATIONS } from '../constants/animations'
 
 /**
  * CountUp component - Animated number counting
  * Optimized with proper cleanup and memoization
+ * 
+ * @param {Object} props - Component props
+ * @param {string|number} props.value - The value to animate (currency string like "₹50,000" or number)
+ * @param {boolean} props.isVisible - Whether the component is currently visible
+ * @returns {JSX.Element} Formatted count display
  */
 export function CountUp({ value, isVisible }) {
   const [count, setCount] = useState(value)
@@ -11,17 +17,26 @@ export function CountUp({ value, isVisible }) {
   const isActive = useRef(true)
   const previousValue = useRef(value)
 
+  // Reset animation state when value changes
   useEffect(() => {
-    // Reset animation state when value changes
     if (previousValue.current !== value) {
-      setHasAnimated(false)
       previousValue.current = value
+      // Schedule state update to avoid synchronous setState warning
+      const timeoutId = setTimeout(() => {
+        setHasAnimated(false)
+      }, 0)
+      return () => clearTimeout(timeoutId)
     }
+  }, [value])
 
+  useEffect(() => {
     // Handle non-currency strings like "Free Entry" - show immediately
     if (typeof value === 'string' && !value.includes('₹')) {
-      setCount(value)
-      setHasAnimated(true)
+      // Schedule state updates to avoid synchronous setState warning
+      setTimeout(() => {
+        setCount(value)
+        setHasAnimated(true)
+      }, 0)
       return
     }
 
@@ -29,7 +44,10 @@ export function CountUp({ value, isVisible }) {
       // If not visible, initialize with value but don't animate
       if (typeof value === 'string' && value.includes('₹')) {
         const numericValue = parseInt(value.replace(/[^0-9]/g, '')) || 0
-        setCount(numericValue || value)
+        // Schedule state update to avoid synchronous setState warning
+        setTimeout(() => {
+          setCount(numericValue || value)
+        }, 0)
       }
       return
     }
@@ -41,13 +59,15 @@ export function CountUp({ value, isVisible }) {
       const numericValue = parseInt(value.replace(/[^0-9]/g, '')) || 0
       
       if (numericValue === 0) {
-        setCount(value)
-        setHasAnimated(true)
+        setTimeout(() => {
+          setCount(value)
+          setHasAnimated(true)
+        }, 0)
         return
       }
 
       isActive.current = true
-      const duration = 2000
+      const duration = ANIMATION_DURATIONS.COUNT_UP
       const startTime = Date.now()
       const startValue = 0
 

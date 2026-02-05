@@ -4,6 +4,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Skip to main content link - Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-noesis-purple);
+  color: var(--color-noesis-white);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: var(--z-index-skip-link);
+  border-radius: 0 0 4px 0;
+  transition: top var(--transition-fast) ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-noesis-pink);
+  outline-offset: 2px;
+}
+
 /* Scroll Progress Indicator */
 .scroll-progress {
   position: fixed;
@@ -11,24 +32,39 @@
   left: 0;
   width: 100%;
   height: 3px;
-  z-index: 9999;
+  z-index: var(--z-index-progress);
   background: rgba(10, 10, 10, 0.3);
   pointer-events: none;
 }
 
 .scroll-progress__bar {
   height: 100%;
-  background: linear-gradient(90deg, #6A00FF 0%, #8B5CF6 25%, #FF2F92 50%, #8B5CF6 75%, #6A00FF 100%);
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #6a00ff 0%,
+    #8b5cf6 25%,
+    #ff2f92 50%,
+    #8b5cf6 75%,
+    #6a00ff 100%
+  );
   background-size: 200% 100%;
-  transition: width 0.1s ease-out;
-  box-shadow: 0 0 10px rgba(106, 0, 255, 0.5),
-              0 0 20px rgba(255, 47, 146, 0.3),
-              0 0 30px rgba(139, 92, 246, 0.2);
-  animation: progress-glow 3s ease-in-out infinite, gradient-shift 4s ease infinite;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  box-shadow:
+    0 0 10px rgba(106, 0, 255, 0.5),
+    0 0 20px rgba(255, 47, 146, 0.3),
+    0 0 30px rgba(139, 92, 246, 0.2);
+  animation:
+    progress-glow 3s ease-in-out infinite,
+    gradient-shift 4s ease infinite;
 }
 
 @keyframes progress-glow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
     opacity: 1;
   }
@@ -46,9 +82,12 @@
   border: 2px solid rgba(106, 0, 255, 0.6);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
+  z-index: var(--z-index-cursor);
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  transition:
+    width var(--transition-fast) ease,
+    height var(--transition-fast) ease,
+    border-color var(--transition-fast) ease;
   mix-blend-mode: difference;
   box-shadow: 0 0 20px rgba(106, 0, 255, 0.5);
 }
@@ -57,12 +96,19 @@
   position: fixed;
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle, rgba(106, 0, 255, 0.8) 0%, rgba(255, 47, 146, 0.6) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(106, 0, 255, 0.8) 0%,
+    rgba(255, 47, 146, 0.6) 100%
+  );
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9997;
+  z-index: var(--z-index-cursor-trail);
   transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  transition:
+    width var(--transition-normal) ease,
+    height var(--transition-normal) ease,
+    opacity var(--transition-normal) ease;
   mix-blend-mode: difference;
   filter: blur(2px);
 }
@@ -82,7 +128,13 @@
 
 /* Hide default cursor on interactive elements when custom cursor is active */
 @media (pointer: fine) {
-  a, button, .competition-hero, .event-hero, .contact__link, .btn, .nav__link {
+  a,
+  button,
+  .competition-hero,
+  .event-hero,
+  .contact__link,
+  .btn,
+  .nav__link {
     cursor: none;
   }
 }
@@ -92,14 +144,15 @@
   position: fixed;
   inset: 0;
   background: var(--color-noesis-black);
-  z-index: 10000;
+  z-index: var(--z-index-loader);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-              visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity var(--animation-duration-slow) cubic-bezier(0.4, 0, 0.2, 1),
+    visibility var(--animation-duration-slow) cubic-bezier(0.4, 0, 0.2, 1),
+    transform var(--animation-duration-slow) cubic-bezier(0.4, 0, 0.2, 1);
   visibility: visible;
 }
 
@@ -111,15 +164,13 @@
 }
 
 .page-loader__content {
-  animation: scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.page-loader__content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
   text-align: center;
+  animation: scale-in var(--animation-duration-scale-in)
+    cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .page-loader__logo {
@@ -135,7 +186,8 @@
 }
 
 @keyframes loader-logo-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
@@ -156,17 +208,28 @@
 
 .page-loader__progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #6A00FF 0%, #8B5CF6 25%, #FF2F92 50%, #8B5CF6 75%, #6A00FF 100%);
+  background: linear-gradient(
+    90deg,
+    #6a00ff 0%,
+    #8b5cf6 25%,
+    #ff2f92 50%,
+    #8b5cf6 75%,
+    #6a00ff 100%
+  );
   background-size: 200% 100%;
   border-radius: 2px;
   transition: width 0.3s ease-out;
-  box-shadow: 0 0 10px rgba(106, 0, 255, 0.6),
-              0 0 20px rgba(255, 47, 146, 0.4);
-  animation: progress-shimmer 2s ease-in-out infinite, gradient-shift 3s ease infinite;
+  box-shadow:
+    0 0 10px rgba(106, 0, 255, 0.6),
+    0 0 20px rgba(255, 47, 146, 0.4);
+  animation:
+    progress-shimmer 2s ease-in-out infinite,
+    gradient-shift 3s ease infinite;
 }
 
 @keyframes progress-shimmer {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -184,7 +247,8 @@
 }
 
 @keyframes loader-text-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
   }
   50% {
@@ -358,7 +422,7 @@ img {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #6A00FF 0%, #FF2F92 100%);
+  background: linear-gradient(90deg, #6a00ff 0%, #ff2f92 100%);
   transform: translateX(-50%);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
@@ -465,9 +529,10 @@ img {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   /* Smooth background transitions */
-  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2; /* Ensure sections are above grid background */
   opacity: 1;
   filter: blur(0);
@@ -674,6 +739,15 @@ img {
   font-size: clamp(2.5rem, 6.5vw, 3.6rem);
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+/* Remove underline from Events section title */
+.events__side .section__title::after {
+  display: none;
+}
+
+/* Events section title gradient override */
+.events__side .section__title {
   background: linear-gradient(
     135deg,
     #fafafa 0%,
@@ -925,7 +999,8 @@ img {
 }
 
 @keyframes text-glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     filter: drop-shadow(0 0 30px rgba(106, 0, 255, 0.3))
       drop-shadow(0 0 50px rgba(106, 0, 255, 0.15));
   }
@@ -1017,7 +1092,8 @@ img {
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0) drop-shadow(0 0 30px rgba(106, 0, 255, 0.3)) drop-shadow(0 0 50px rgba(106, 0, 255, 0.15));
+    filter: blur(0) drop-shadow(0 0 30px rgba(106, 0, 255, 0.3))
+      drop-shadow(0 0 50px rgba(106, 0, 255, 0.15));
   }
 }
 
@@ -1039,7 +1115,7 @@ img {
 }
 
 .btn::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1048,8 +1124,9 @@ img {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 0;
 }
@@ -1131,14 +1208,24 @@ img {
   gap: 1.25rem;
   color: var(--color-noesis-white);
   font-family: var(--font-body);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1),
+    color var(--transition-normal) ease;
+  will-change: transform;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   animation: scroll-entrance 1s ease-out 1.2s both;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1),
+    color var(--transition-normal) ease;
   z-index: 10;
+  will-change: transform;
 }
 
 @keyframes scroll-entrance {
@@ -1155,6 +1242,16 @@ img {
 .hero__scroll:hover {
   color: var(--color-noesis-white);
   transform: translateX(-50%) translateY(-8px);
+}
+
+.hero__scroll:active {
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.hero__scroll:focus-visible {
+  outline: 2px solid var(--color-noesis-purple);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .hero__scroll:hover .hero__scroll-icon {
@@ -1178,6 +1275,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    transform var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1),
+    border-color var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease;
+  will-change: transform, border-color, box-shadow;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
     0 4px 20px rgba(106, 0, 255, 0.2),
@@ -1695,9 +1797,10 @@ img {
 }
 
 .competition-hero {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   perspective: 1000px;
   will-change: transform, filter, box-shadow;
@@ -1727,13 +1830,15 @@ img {
 }
 
 .competition-hero:hover {
-  transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.05) rotateX(3deg) rotateY(-2deg) translateZ(20px);
+  transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.05) rotateX(3deg)
+    rotateY(-2deg) translateZ(20px);
   z-index: 4;
   filter: brightness(1.1);
-  box-shadow: 0 25px 70px rgba(106, 0, 255, 0.4),
-              0 0 100px rgba(106, 0, 255, 0.2),
-              0 0 120px rgba(255, 47, 146, 0.15),
-              inset 0 0 30px rgba(106, 0, 255, 0.1);
+  box-shadow:
+    0 25px 70px rgba(106, 0, 255, 0.4),
+    0 0 100px rgba(106, 0, 255, 0.2),
+    0 0 120px rgba(255, 47, 146, 0.15),
+    inset 0 0 30px rgba(106, 0, 255, 0.1);
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
@@ -1999,6 +2104,31 @@ img {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   touch-action: pan-y;
+  /* Default: visible when not hidden by hero */
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    pointer-events 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide only when explicitly hidden */
+.section--events.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+/* Show state (ensures visibility) - higher specificity to override hide */
+.section--events.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
 }
 
 /* Remove background layers for seamless blending */
@@ -2033,10 +2163,10 @@ img {
 .events__side {
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, left, top;
-  align-self: center;
   position: relative;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 3;
 }
 
 .section--events.in-view .events__side {
@@ -2054,7 +2184,6 @@ img {
   transform: translateY(-50%);
   text-align: left;
   width: auto;
-  align-self: start;
 }
 
 .events__side--up {
@@ -2064,7 +2193,6 @@ img {
   transform: translateY(0);
   text-align: left;
   width: auto;
-  align-self: start;
 }
 
 .events__side .section__lead {
@@ -2075,20 +2203,30 @@ img {
   list-style: none;
   margin: 0;
   padding: 0;
-  position: relative;
-  height: calc(var(--total-events, 7) * 100vh);
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scroll-snap-type: y mandatory;
   transition:
     transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.section--events.in-view .events__list {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
 }
 
 .event-hero {
-  position: absolute;
-  top: calc(var(--card-index, 0) * 100vh);
-  left: 0;
-  width: 100%;
+  position: relative;
   height: 100vh;
   padding: 4rem 3rem;
   border-radius: 0;
@@ -2101,108 +2239,36 @@ img {
   opacity: 1;
   /* Use CSS custom property for parallax - defaults to 0 */
   --parallax-y: 0px;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: translate3d(0, var(--parallax-y, 40px), 0);
   /* Smooth card transitions */
   transition:
-    top 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
     filter 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   overflow: hidden;
   /* GPU acceleration */
   backface-visibility: hidden;
   perspective: 1000px;
-  transform-style: preserve-3d;
   /* Optimize will-change - only when active */
-  will-change: transform, filter, box-shadow;
+  will-change: auto;
   /* Blur effect removed */
   z-index: 1;
-  position: relative;
-}
-
-.event-hero::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, #6a00ff, #ff2f92, #6a00ff);
-  background-size: 200% 200%;
-  border-radius: inherit;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.4s ease;
-  animation: gradient-shift 3s ease infinite;
-  pointer-events: none;
-}
-
-.event-hero:hover::before {
-  opacity: 0.2;
-  filter: blur(10px);
-}
-
-/* Moved to three-event layout styles section below */
-
-/* Three-event visible layout styles */
-.event-hero--previous {
-  /* Position previous card so bottom 25% is visible at top of viewport */
-  /* Previous card is at (index - 1) * 100vh, we want it positioned so its bottom 25vh is visible */
-  /* So: top = (index - 1) * 100vh - 75vh = index * 100vh - 100vh - 75vh = index * 100vh - 175vh */
-  /* But simpler: position it relative to active card's position */
-  top: calc((var(--card-index, 0) - 1) * 100vh - 75vh);
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
-  z-index: 1;
-  opacity: 0.25;
-  pointer-events: none;
-  /* Clip to show only bottom 25% */
-  clip-path: inset(75% 0 0 0);
 }
 
 .event-hero--active {
-  /* Active card at its natural position based on index */
-  top: calc(var(--card-index, 0) * 100vh);
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  transform: translate3d(0, var(--parallax-y, 0), 0);
   z-index: 3;
-  opacity: 1;
-  pointer-events: auto;
-  clip-path: inset(0 0 0 0);
   /* Only apply will-change when actively animating */
-  will-change: transform, opacity, top;
-}
-
-.event-hero--next {
-  /* Position next card so top 25% is visible at bottom of viewport */
-  /* Next card is at (index + 1) * 100vh, we want it positioned so its top 25vh is visible */
-  /* So: top = (index + 1) * 100vh - 75vh = index * 100vh + 100vh - 75vh = index * 100vh + 25vh */
-  top: calc((var(--card-index, 0) + 1) * 100vh - 75vh);
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
-  z-index: 2;
-  opacity: 0.25;
-  pointer-events: none;
-  /* Clip to show only top 25% */
-  clip-path: inset(0 0 75% 0);
-}
-
-.event-hero--hidden {
-  /* Hidden cards stay at their natural position but are invisible */
-  top: calc(var(--card-index, 0) * 100vh);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 0;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
-  visibility: hidden;
-  clip-path: inset(0 0 0 0);
+  will-change: transform, opacity;
 }
 
 /* Corner glows removed - background color effect used instead */
 
 .section--events.in-view .event-hero {
-  /* Don't override position-specific styles */
-  /* opacity and transform are handled by position classes */
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* Staggered card entrances with enhanced animations */
@@ -2235,31 +2301,67 @@ img {
   animation: card-entrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
 }
 
-/* Transition already defined in main .event-hero rule above */
+.event-hero {
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform, filter, box-shadow;
+  position: relative;
+}
+
+.event-hero::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #6a00ff, #ff2f92, #6a00ff);
+  background-size: 200% 200%;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  animation: gradient-shift 3s ease infinite;
+  pointer-events: none;
+}
+
+.event-hero:hover::before {
+  opacity: 0.2;
+  filter: blur(10px);
+}
 
 .event-hero:hover {
-  transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.05) rotateX(3deg) rotateY(-2deg) translateZ(20px);
+  transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.05) rotateX(3deg)
+    rotateY(-2deg) translateZ(20px);
   z-index: 4;
   filter: brightness(1.1);
-  box-shadow: 0 25px 70px rgba(106, 0, 255, 0.4),
-              0 0 100px rgba(106, 0, 255, 0.2),
-              0 0 120px rgba(255, 47, 146, 0.15),
-              inset 0 0 30px rgba(106, 0, 255, 0.1);
+  box-shadow:
+    0 25px 70px rgba(106, 0, 255, 0.4),
+    0 0 100px rgba(106, 0, 255, 0.2),
+    0 0 120px rgba(255, 47, 146, 0.15),
+    inset 0 0 30px rgba(106, 0, 255, 0.1);
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 25px 70px rgba(106, 0, 255, 0.4),
-                0 0 100px rgba(106, 0, 255, 0.2),
-                0 0 120px rgba(255, 47, 146, 0.15),
-                inset 0 0 30px rgba(106, 0, 255, 0.1);
+  0%,
+  100% {
+    box-shadow:
+      0 25px 70px rgba(106, 0, 255, 0.4),
+      0 0 100px rgba(106, 0, 255, 0.2),
+      0 0 120px rgba(255, 47, 146, 0.15),
+      inset 0 0 30px rgba(106, 0, 255, 0.1);
   }
   50% {
-    box-shadow: 0 30px 80px rgba(106, 0, 255, 0.5),
-                0 0 120px rgba(106, 0, 255, 0.3),
-                0 0 150px rgba(255, 47, 146, 0.2),
-                inset 0 0 40px rgba(106, 0, 255, 0.15);
+    box-shadow:
+      0 30px 80px rgba(106, 0, 255, 0.5),
+      0 0 120px rgba(106, 0, 255, 0.3),
+      0 0 150px rgba(255, 47, 146, 0.2),
+      inset 0 0 40px rgba(106, 0, 255, 0.15);
   }
 }
 
@@ -2281,7 +2383,6 @@ img {
   );
   border: 1px solid rgba(106, 0, 255, 0.3);
   border-radius: 50px;
-  backdrop-filter: blur(12px) saturate(180%);
   font-family: var(--font-body);
   font-size: var(--font-size-sm);
   font-weight: 600;
@@ -2292,6 +2393,7 @@ img {
   align-self: flex-start;
   position: relative;
   z-index: 1;
+  backdrop-filter: blur(12px) saturate(180%);
   box-shadow: 0 4px 20px rgba(106, 0, 255, 0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2809,7 +2911,7 @@ img {
 }
 
 .contact__link::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2818,9 +2920,10 @@ img {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.6s ease;
+  transition:
+    width 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s ease;
   pointer-events: none;
   z-index: 0;
 }
@@ -3246,38 +3349,6 @@ img {
   .custom-cursor-trail {
     display: none !important;
   }
-}
-
-/* High Contrast Support - Accessibility */
-@media (prefers-contrast: high) {
-  .competition-hero,
-  .event-hero {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .btn,
-  .contact__link {
-    border: 2px solid currentColor;
-  }
-
-  .nav__link {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-}
-
-/* Focus Visible Enhancement - Accessibility */
-*:focus-visible {
-  outline: 2px solid var(--color-noesis-purple);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.btn:focus-visible,
-.contact__link:focus-visible,
-.nav__link:focus-visible {
-  outline-color: var(--color-noesis-pink);
-  outline-offset: 2px;
-}
 
   .competition-hero,
   .event-hero,
@@ -3307,6 +3378,20 @@ img {
 
 /* High Contrast Support - Accessibility */
 @media (prefers-contrast: high) {
+  .competition-hero,
+  .event-hero {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .btn,
+  .contact__link {
+    border: 2px solid currentColor;
+  }
+
+  .nav__link {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
   .nav__link,
   .contact__link,
   .competition-hero__badge,
@@ -3322,17 +3407,18 @@ img {
   }
 }
 
-/* Focus Visible - Accessibility */
+/* Focus Visible Enhancement - Accessibility */
 *:focus-visible {
-  outline: 2px solid rgba(106, 0, 255, 0.8);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-noesis-purple);
+  outline-offset: 4px;
   border-radius: 4px;
 }
 
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid rgba(106, 0, 255, 0.8);
-  outline-offset: 3px;
+.btn:focus-visible,
+.contact__link:focus-visible,
+.nav__link:focus-visible {
+  outline-color: var(--color-noesis-pink);
+  outline-offset: 2px;
 }
 
 /* Print Styles */

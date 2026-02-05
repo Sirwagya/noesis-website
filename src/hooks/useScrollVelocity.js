@@ -4,23 +4,28 @@ import { SCROLL_CONFIG } from '../constants/scrollConfig'
 /**
  * Custom hook for calculating scroll velocity with exponential moving average smoothing
  * Provides smooth velocity tracking for dynamic effects
+ * 
+ * @returns {number} Current scroll velocity in pixels per second (capped at 2000)
  */
 export function useScrollVelocity() {
   const [velocity, setVelocity] = useState(0)
   const lastScrollY = useRef(0)
-  const lastScrollTime = useRef(Date.now())
+  const lastScrollTime = useRef(0)
   const smoothedVelocity = useRef(0)
+  const isActive = useRef(true)
 
   useEffect(() => {
+    // Initialize time on mount
+    lastScrollTime.current = Date.now()
+    
     let rafId = null
-    let isActive = true
 
     const handleScroll = () => {
-      if (!isActive) return
+      if (!isActive.current) return
       if (rafId) return
 
       rafId = requestAnimationFrame(() => {
-        if (!isActive) return
+        if (!isActive.current) return
 
         const now = Date.now()
         const timeDelta = Math.max(now - lastScrollTime.current, 1) // Prevent division by zero
@@ -50,7 +55,7 @@ export function useScrollVelocity() {
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      isActive = false
+      isActive.current = false
       if (rafId) cancelAnimationFrame(rafId)
       window.removeEventListener('scroll', handleScroll)
     }

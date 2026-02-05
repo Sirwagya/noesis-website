@@ -52,6 +52,35 @@ h1, h2, h3, h4, h5, h6 {
   --animation-duration-fast: 0.2s;
   --animation-duration-normal: 0.4s;
   --animation-duration-slow: 0.8s;
+  --animation-duration-count-up: 2s;
+  --animation-duration-page-loader-fade: 0.5s;
+  --animation-duration-scale-in: 0.6s;
+  
+  /* Transition durations */
+  --transition-fast: 0.3s;
+  --transition-normal: 0.4s;
+  --transition-slow: 0.8s;
+  
+  /* Z-index layers */
+  --z-index-base: 1;
+  --z-index-above: 2;
+  --z-index-overlay: 3;
+  --z-index-modal: 4;
+  --z-index-cursor: 9997;
+  --z-index-cursor-trail: 9998;
+  --z-index-progress: 9999;
+  --z-index-loader: 10000;
+  --z-index-skip-link: 10000;
+  
+  /* Opacity values */
+  --opacity-subtle: 0.15;
+  --opacity-medium: 0.25;
+  --opacity-visible: 0.3;
+  --opacity-default: 0.7;
+  --opacity-strong: 0.85;
+  --opacity-full: 0.9;
+  --opacity-opaque: 0.95;
+  
   --glow-intensity: 0.5;
   --shadow-intensity: 1;
   

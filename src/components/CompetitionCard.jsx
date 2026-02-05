@@ -7,7 +7,7 @@ import { CountUp } from './CountUp'
  */
 export const CompetitionCard = React.memo(({
   competition,
-  index,
+  index, // eslint-disable-line no-unused-vars
   isActive,
   parallaxY,
   scrollVelocity,

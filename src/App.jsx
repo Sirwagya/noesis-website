@@ -9,6 +9,8 @@ import { CursorEffect } from "./components/CursorEffect";
 import { PageLoader } from "./components/PageLoader";
 import { Particles } from "./components/Particles";
 import { SCROLL_CONFIG } from "./constants/scrollConfig";
+import { competitionsList, competitionBackgrounds } from "./data/competitionsData";
+import { eventsList, eventBackgrounds } from "./data/eventsData";
 import "./App.css";
 
 const navLinks = [
@@ -18,199 +20,10 @@ const navLinks = [
   { label: "About", id: "about" },
 ];
 
-// Corner glow configurations removed - using background color effect instead
-
-// Dynamic background colors - enhanced gradients with more distinct colors per competition
-const competitionBackgrounds = [
-  // Purple dominant - Competition 1
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(106, 0, 255, 0.45) 0%, rgba(139, 92, 246, 0.35) 25%, rgba(168, 85, 247, 0.2) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Blue-Cyan blend - Competition 2
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(96, 165, 250, 0.45) 0%, rgba(79, 209, 197, 0.35) 25%, rgba(59, 130, 246, 0.2) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Purple-Pink blend - Competition 3
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(168, 85, 247, 0.45) 0%, rgba(139, 92, 246, 0.35) 25%, rgba(255, 47, 146, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Cyan-Blue blend - Competition 4
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(79, 209, 197, 0.45) 0%, rgba(96, 165, 250, 0.35) 25%, rgba(59, 130, 246, 0.2) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Purple-Violet blend - Competition 5
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(139, 92, 246, 0.45) 0%, rgba(120, 119, 198, 0.35) 25%, rgba(168, 85, 247, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Blue-Purple blend - Competition 6
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(96, 165, 250, 0.45) 0%, rgba(168, 85, 247, 0.35) 25%, rgba(139, 92, 246, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Deep Purple - Competition 7
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(168, 85, 247, 0.45) 0%, rgba(139, 92, 246, 0.35) 25%, rgba(106, 0, 255, 0.3) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Cyan-Purple blend - Competition 8
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(79, 209, 197, 0.45) 0%, rgba(96, 165, 250, 0.35) 25%, rgba(139, 92, 246, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Indigo-Cyan blend - Competition 9
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(120, 119, 198, 0.45) 0%, rgba(79, 209, 197, 0.35) 25%, rgba(96, 165, 250, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Purple-Pink vibrant - Competition 10
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(139, 92, 246, 0.45) 0%, rgba(168, 85, 247, 0.35) 25%, rgba(255, 47, 146, 0.3) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Blue-Cyan fresh - Competition 11
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(96, 165, 250, 0.45) 0%, rgba(79, 209, 197, 0.35) 25%, rgba(59, 130, 246, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Purple dominant vibrant - Competition 12
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(168, 85, 247, 0.45) 0%, rgba(120, 119, 198, 0.35) 25%, rgba(139, 92, 246, 0.3) 50%, rgba(10, 10, 10, 0.95) 100%)",
-  // Cyan-Purple elegant - Competition 13
-  "radial-gradient(ellipse 140% 120% at 50% 50%, rgba(79, 209, 197, 0.45) 0%, rgba(139, 92, 246, 0.35) 25%, rgba(168, 85, 247, 0.25) 50%, rgba(10, 10, 10, 0.95) 100%)",
-];
-
-const eventBackgrounds = [
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255, 47, 146, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(139, 92, 246, 0.35) 0%, rgba(96, 165, 250, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(255, 47, 146, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(79, 209, 197, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255, 47, 146, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(96, 165, 250, 0.35) 0%, rgba(255, 47, 146, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-  "radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)",
-];
-
-const competitionsList = [
-  {
-    name: "Scratch that Code",
-    category: "Tech/Coding",
-    tagline: "Sprintathon",
-    desc: "8-hour hackathon sprint where innovation meets speed. Build, code, and create amazing projects in record time.",
-    prizePool: "₹50,000",
-  },
-  {
-    name: "CodeBlitz",
-    category: "Tech/Coding",
-    tagline: "ICPC Simulation",
-    desc: "Experience the intensity of competitive programming. Solve complex algorithmic challenges in this ICPC-style competition.",
-    prizePool: "₹45,000",
-  },
-  {
-    name: "Peek-a-Code",
-    category: "Tech/Coding",
-    tagline: "Blind Coding Challenge",
-    desc: "Code without seeing your screen! Test your programming skills and memory in this unique blind coding challenge.",
-    prizePool: "₹30,000",
-  },
-  {
-    name: "Minute to Win It",
-    category: "Tech/Coding",
-    tagline: "60 Second Coding Competition",
-    desc: "Speed coding at its finest. Solve problems in 60 seconds and prove you can code under pressure.",
-    prizePool: "₹25,000",
-  },
-  {
-    name: "AlgoQuest",
-    category: "Tech/Coding",
-    tagline: "Coding Treasure Hunt",
-    desc: "Embark on an algorithmic adventure. Solve puzzles, crack codes, and hunt for the ultimate programming treasure.",
-    prizePool: "₹40,000",
-  },
-  {
-    name: "Build or Bust",
-    category: "Business",
-    tagline: "B-Plan Challenge",
-    desc: "Pitch your startup idea to industry experts. Transform your business plan into reality and win exciting prizes.",
-    prizePool: "₹50,000",
-  },
-  {
-    name: "Vedam Stock Exchange",
-    category: "Business",
-    tagline: "Buy or Bail",
-    desc: "Navigate the virtual stock market. Make strategic decisions, trade smart, and emerge as the top investor.",
-    prizePool: "₹35,000",
-  },
-  {
-    name: "Run Robo Run",
-    category: "Robotics",
-    tagline: "Robo Race",
-    desc: "Race your autonomous robot to victory. Design, build, and compete in this thrilling robotics race competition.",
-    prizePool: "₹40,000",
-  },
-  {
-    name: "ROBOCLASH",
-    category: "Robotics",
-    tagline: "Robo War",
-    desc: "Battle of the bots! Compete in intense robot combat where strategy and engineering meet head-on.",
-    prizePool: "₹45,000",
-  },
-  {
-    name: "BGMI",
-    category: "Esports",
-    tagline: "Battle Royale",
-    desc: "Showcase your gaming skills in India's most popular mobile battle royale. Team up and dominate the battleground.",
-    prizePool: "₹30,000",
-  },
-  {
-    name: "Valorant",
-    category: "Esports",
-    tagline: "Tactical FPS",
-    desc: "Prove your tactical prowess in this competitive FPS. Precision, strategy, and teamwork lead to victory.",
-    prizePool: "₹35,000",
-  },
-  {
-    name: "Chess",
-    category: "Esports",
-    tagline: "Mind Games",
-    desc: "Master the 64 squares. Compete in intense chess matches where every move counts and strategy reigns supreme.",
-    prizePool: "₹20,000",
-  },
-  {
-    name: "FIFA",
-    category: "Esports",
-    tagline: "Virtual Football",
-    desc: "Score goals and win championships in the virtual football arena. Show off your FIFA skills and claim glory.",
-    prizePool: "₹25,000",
-  },
-];
-
-const eventsList = [
-  {
-    name: "Tech Insiders",
-    category: "Tech Talks",
-    tagline: "ICPC Finalist / GSOC",
-    desc: "Learn from the best! Join ICPC finalists and Google Summer of Code contributors as they share their journey, insights, and tips for competitive programming success.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "Tech Insiders",
-    category: "Tech Talks",
-    tagline: "YTD",
-    desc: "Discover the latest tech trends and innovations. Industry leaders share their experiences and vision for the future of technology.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "Unplugged",
-    category: "Cultural",
-    tagline: "Jamming Session",
-    desc: "Let the music flow! Join fellow participants for an acoustic jamming session where creativity meets rhythm.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "Spotlight",
-    category: "Cultural",
-    tagline: "Talent Show",
-    desc: "Step into the spotlight! Showcase your hidden talents - singing, dancing, magic, comedy, or anything that makes you shine.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "Stand Up Comedy",
-    category: "Cultural",
-    tagline: "Laugh Out Loud",
-    desc: "Get ready to laugh! Enjoy hilarious stand-up performances from talented comedians. A night filled with humor and entertainment.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "Step Up Showdown",
-    category: "Cultural",
-    tagline: "Dance Competition",
-    desc: "Move to the beat! Compete in this electrifying dance competition where rhythm, style, and passion take center stage.",
-    prizePool: "Free Entry",
-  },
-  {
-    name: "After Hours",
-    category: "Cultural",
-    tagline: "DJ Night",
-    desc: "End the fest with a bang! Dance the night away at our electrifying DJ night featuring the best beats and vibes.",
-    prizePool: "Free Entry",
-  },
-];
-
 function App() {
   // Refs
   const heroRef = useRef(null);
   const blobRef = useRef(null);
-  const gridRef = useRef(null);
   const competitionsSectionRef = useRef(null);
   const eventsSectionRef = useRef(null);
   const competitionsListRef = useRef(null);
@@ -224,13 +37,12 @@ function App() {
   const aboutRef = useInView();
   const contactRef = useInView();
 
+
   // Nav state (combined for better batching)
   const [navState, setNavState] = useState({
     atBottom: true,
     scrolled: false,
-    transform: 0,
     opacity: 0.95,
-    scale: 1,
   });
 
   // State to control competitions visibility - initialize based on scroll position
@@ -238,7 +50,7 @@ function App() {
     if (typeof window !== "undefined") {
       const y = window.scrollY;
       const heroHeight = heroRef.current?.offsetHeight || window.innerHeight;
-      return y >= heroHeight * 0.9;
+      return y >= heroHeight * SCROLL_CONFIG.HERO_SCROLL_PAST_THRESHOLD;
     }
     return false;
   });
@@ -264,7 +76,7 @@ function App() {
     const checkInitialVisibility = () => {
       const y = window.scrollY;
       const heroHeight = heroRef.current?.offsetHeight || window.innerHeight;
-      const initialShow = y >= heroHeight * 0.9;
+      const initialShow = y >= heroHeight * SCROLL_CONFIG.HERO_SCROLL_PAST_THRESHOLD;
       setShowCompetitions(initialShow);
     };
 
@@ -275,59 +87,71 @@ function App() {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Dynamic background color based on active card - changes smoothly as user scrolls through competitions
-  useEffect(() => {
+  // Memoize background calculation to prevent unnecessary recalculations
+  const activeBackground = useMemo(() => {
     const competitionsActiveIndex = competitionsScroll.activeIndex;
     const eventsActiveIndex = eventsScroll.activeIndex;
     const isInHero = heroInViewRef.isInView;
 
     // Determine which section is active and get background
-    let activeBackground = "var(--color-noesis-black)"; // Default hero background
-
-    // If in hero section, always use default black background for smooth transition
     if (isInHero) {
-      activeBackground = "var(--color-noesis-black)";
+      return "var(--color-noesis-black)"; // Default hero background
     } else if (
       competitionsActiveIndex !== -1 &&
       competitionsActiveIndex < competitionBackgrounds.length
     ) {
       // Use competition-specific gradient background - changes as user scrolls through each competition
-      activeBackground = competitionBackgrounds[competitionsActiveIndex];
+      return competitionBackgrounds[competitionsActiveIndex];
     } else if (
       eventsActiveIndex !== -1 &&
       eventsActiveIndex < eventBackgrounds.length
     ) {
       // Use event-specific gradient background
-      activeBackground = eventBackgrounds[eventsActiveIndex];
+      return eventBackgrounds[eventsActiveIndex];
     }
-
-    // Apply background to document root - CSS transition handles smooth color changes
-    // Background will smoothly transition between different gradient colors as user scrolls
-    document.documentElement.style.setProperty(
-      "--page-background",
-      activeBackground,
-    );
-
-    // Control grid visibility based on section
-    // More visible in hero, subtle in competitions/events
-    let gridOpacity = 0.25;
-    let gradientOpacity = 0.85;
-
-    if (isInHero) {
-      gridOpacity = 0.3; // More visible in hero
-      gradientOpacity = 0.7; // Less gradient overlay
-    } else if (competitionsActiveIndex !== -1 || eventsActiveIndex !== -1) {
-      gridOpacity = 0.15; // Subtle in competitions/events
-      gradientOpacity = 0.9; // More gradient overlay
-    }
-
-    document.documentElement.style.setProperty("--grid-opacity", gridOpacity.toString());
-    document.documentElement.style.setProperty("--gradient-opacity", gradientOpacity.toString());
+    return "var(--color-noesis-black)"; // Default fallback
   }, [
     competitionsScroll.activeIndex,
     eventsScroll.activeIndex,
     heroInViewRef.isInView,
   ]);
+
+  // Memoize grid and gradient opacity values
+  const { gridOpacity, gradientOpacity } = useMemo(() => {
+    const competitionsActiveIndex = competitionsScroll.activeIndex;
+    const eventsActiveIndex = eventsScroll.activeIndex;
+    const isInHero = heroInViewRef.isInView;
+
+    if (isInHero) {
+      return { gridOpacity: 0.3, gradientOpacity: 0.7 }; // More visible in hero
+    } else if (competitionsActiveIndex !== -1 || eventsActiveIndex !== -1) {
+      return { gridOpacity: 0.15, gradientOpacity: 0.9 }; // Subtle in competitions/events
+    }
+    return { gridOpacity: 0.25, gradientOpacity: 0.85 }; // Default
+  }, [
+    competitionsScroll.activeIndex,
+    eventsScroll.activeIndex,
+    heroInViewRef.isInView,
+  ]);
+
+  // Apply background and opacity values to document root
+  useEffect(() => {
+    const root = document.documentElement;
+    const currentBackground = root.style.getPropertyValue("--page-background");
+    const currentGridOpacity = root.style.getPropertyValue("--grid-opacity");
+    const currentGradientOpacity = root.style.getPropertyValue("--gradient-opacity");
+
+    // Only update if values have changed to prevent unnecessary style recalculations
+    if (currentBackground !== activeBackground) {
+      root.style.setProperty("--page-background", activeBackground);
+    }
+    if (currentGridOpacity !== gridOpacity.toString()) {
+      root.style.setProperty("--grid-opacity", gridOpacity.toString());
+    }
+    if (currentGradientOpacity !== gradientOpacity.toString()) {
+      root.style.setProperty("--gradient-opacity", gradientOpacity.toString());
+    }
+  }, [activeBackground, gridOpacity, gradientOpacity]);
 
   // Scroll handler for nav and hero parallax
   useEffect(() => {
@@ -342,7 +166,6 @@ function App() {
 
         const y = window.scrollY;
         const heroHeight = heroRef.current?.offsetHeight || window.innerHeight;
-        const competitionsSection = competitionsSectionRef.current;
 
         // Nav calculations
         const scrollProgress = Math.min(y / heroHeight, 1);
@@ -351,9 +174,7 @@ function App() {
         setNavState({
           atBottom: isAtBottom,
           scrolled: y > SCROLL_CONFIG.NAV_SCROLLED_THRESHOLD,
-          transform: isAtBottom ? 0 : 0,
           opacity: isAtBottom ? 0.95 : 1,
-          scale: isAtBottom ? 1 : 1,
         });
 
         // Control competitions visibility based on scroll position
@@ -362,9 +183,9 @@ function App() {
 
         // Show competitions when scrolled past hero (prioritize scroll position over isInHero)
         // This fixes the issue where isInHero stays true even when scrolling past hero
-        // Hide when scrolling back up to hero (within 80% of hero height)
-        const scrolledPastHero = y >= heroHeight * 0.9;
-        const isNearHeroTop = y < heroHeight * 0.8;
+        // Hide when scrolling back up to hero (within threshold of hero height)
+        const scrolledPastHero = y >= heroHeight * SCROLL_CONFIG.HERO_SCROLL_PAST_THRESHOLD;
+        const isNearHeroTop = y < heroHeight * SCROLL_CONFIG.HERO_SCROLL_NEAR_THRESHOLD;
         const shouldShowCompetitions =
           (scrolledPastHero && !isNearHeroTop) ||
           (competitionsInView && !isInHero);
@@ -373,7 +194,7 @@ function App() {
 
         // Enhanced hero parallax with smooth easing
         const parallaxFactor = isInHero ? SCROLL_CONFIG.HERO_BLOB_PARALLAX : 0;
-        const smoothParallax = y * parallaxFactor * 0.5; // Reduced intensity for smoother effect
+        const smoothParallax = y * parallaxFactor * SCROLL_CONFIG.PARALLAX_INTENSITY_REDUCTION;
         
         setParallaxY({
           blob: smoothParallax,
@@ -398,7 +219,14 @@ function App() {
 
   const scrollToSection = useCallback((id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      // Use smooth scroll with better browser compatibility
+      el.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+    }
   }, []);
 
   return (
@@ -410,7 +238,6 @@ function App() {
         <header
           className={`nav nav--at-top ${navState.scrolled ? "nav--scrolled" : ""}`}
           style={{
-            transform: `translateY(${navState.transform}px) scale(${navState.scale})`,
             opacity: navState.opacity,
           }}
         >
@@ -438,6 +265,13 @@ function App() {
                   type="button"
                   className="nav__link"
                   onClick={() => scrollToSection(id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      scrollToSection(id);
+                    }
+                  }}
+                  aria-label={`Navigate to ${label} section`}
                 >
                   {label}
                 </button>
@@ -448,11 +282,18 @@ function App() {
       )}
 
       <main className={`main ${!navState.atBottom ? "main--nav-top" : ""}`}>
+        {/* Skip to main content link for accessibility */}
+        <a href="#hero" className="skip-link" aria-label="Skip to main content">
+          Skip to main content
+        </a>
         <section
           id="hero"
           ref={(el) => {
             heroRef.current = el;
-            heroInViewRef.ref.current = el;
+            // Assigning ref.current is valid - refs are mutable
+            if (heroInViewRef?.ref) {
+              heroInViewRef.ref.current = el;
+            }
           }}
           className={`section section--hero ${heroInViewRef.isInView ? "in-view" : ""}`}
         >
@@ -468,20 +309,30 @@ function App() {
           <div className="hero__content">
             <h1 className="hero__title">NOESIS</h1>
           </div>
-          <div
+          <button
+            type="button"
             className="hero__scroll"
             onClick={() => scrollToSection("competitions")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollToSection("competitions");
+              }
+            }}
+            aria-label="Scroll to competitions section"
           >
             <span>Scroll</span>
-            <div className="hero__scroll-icon" />
-          </div>
+            <div className="hero__scroll-icon" aria-hidden="true" />
+          </button>
         </section>
 
         <section
           id="competitions"
           className={`section section--competitions ${competitionsRef.isInView && showCompetitions ? "in-view" : ""} ${showCompetitions ? "show" : "hide"}`}
           ref={(el) => {
-            competitionsRef.ref.current = el;
+            if (competitionsRef?.ref) {
+              competitionsRef.ref.current = el;
+            }
             competitionsSectionRef.current = el;
           }}
           aria-label="Competitions"
@@ -499,7 +350,7 @@ function App() {
             <ul className="competitions__list" ref={competitionsListRef}>
               {competitionsList.map((comp, index) => (
                 <CompetitionCard
-                  key={comp.name}
+                  key={comp.id || comp.name}
                   competition={comp}
                   index={index}
                   isActive={competitionsScroll.activeIndex === index}
@@ -516,7 +367,9 @@ function App() {
           id="events"
           className={`section section--events ${eventsRef.isInView ? "in-view" : ""}`}
           ref={(el) => {
-            eventsRef.ref.current = el;
+            if (eventsRef?.ref) {
+              eventsRef.ref.current = el;
+            }
             eventsSectionRef.current = el;
           }}
           aria-label="Events"
@@ -531,25 +384,18 @@ function App() {
             >
               <h2 className="section__title">Events</h2>
             </div>
-            <ul 
-              className="events__list" 
-              ref={eventsListRef}
-              style={{ '--total-events': eventsList.length }}
-            >
-              {eventsList.map((event, index) => {
-                const position = eventsScroll.cardPositions[index] || 'hidden'
-                return (
-                  <EventCard
-                    key={`${event.name}-${index}`}
-                    event={event}
-                    index={index}
-                    isActive={eventsScroll.activeIndex === index}
-                    position={position}
-                    parallaxY={eventsScroll.parallaxData[index] || 0}
-                    scrollVelocity={scrollVelocity}
-                  />
-                )
-              })}
+            <ul className="events__list" ref={eventsListRef}>
+              {eventsList.map((event, index) => (
+                <EventCard
+                  key={event.id || `${event.name}-${index}`}
+                  event={event}
+                  index={index}
+                  isActive={eventsScroll.activeIndex === index}
+                  parallaxY={eventsScroll.parallaxData[index] || 0}
+                  scrollVelocity={scrollVelocity}
+                  listPosition="normal"
+                />
+              ))}
             </ul>
           </div>
         </section>
@@ -617,7 +463,7 @@ function App() {
             </div>
             <h2 className="section__title">Get in Touch</h2>
             <p className="section__lead">
-              Ready to be part of Vedam tech fest?
+              Ready to be part of Vedam Tech Fest?
             </p>
             <div className="contact__cta">
               <a
@@ -626,14 +472,23 @@ function App() {
               >
                 hello@noesis.in
               </a>
-              <a href="#" className="btn btn--primary">
+              <a 
+                href="#" 
+                className="btn btn--primary"
+                aria-label="Register for NOESIS 2026"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    // Add registration logic here
+                  }
+                }}
+              >
                 Register
               </a>
             </div>
             <footer className="footer">
               <p>
-                © 2026 NOESIS Vedam tech fest. Where Innovation Meets
-                Imagination.
+                © 2026 NOESIS — Vedam Tech Fest. Where Innovation Meets Imagination.
               </p>
             </footer>
           </div>

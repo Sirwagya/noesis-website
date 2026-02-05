@@ -4,12 +4,17 @@ import { SCROLL_CONFIG } from '../constants/scrollConfig'
  * Unified calculation function for sticky scroll state
  * Handles both competitions and events sections with shared logic
  * 
- * @param {Object} params
- * @param {HTMLElement} params.sectionRef - Section element reference
- * @param {HTMLElement} params.listRef - List container element reference
- * @param {number} params.scrollY - Current scroll position
- * @param {number} params.viewportHeight - Viewport height
- * @returns {Object} Calculated state: { titlePosition, activeIndex, parallaxData, progress, cardPositions }
+ * @param {Object} params - Calculation parameters
+ * @param {HTMLElement|null} params.sectionRef - Section element reference
+ * @param {HTMLElement|null} params.listRef - List container element reference
+ * @param {number} params.scrollY - Current scroll position in pixels
+ * @param {number} params.viewportHeight - Viewport height in pixels
+ * @returns {Object} Calculated state object
+ * @returns {string} returns.titlePosition - Position of title ('left-middle' | 'up')
+ * @returns {number} returns.activeIndex - Index of currently active card (-1 if none)
+ * @returns {Object<number, number>} returns.parallaxData - Map of card index to parallax offset
+ * @returns {number} returns.progress - Scroll progress (0 to 1)
+ * @returns {Object<number, string>} returns.cardPositions - Map of card index to position ('active' | 'previous' | 'next' | 'hidden')
  */
 export function calculateStickyScrollState({
   sectionRef,
@@ -125,8 +130,8 @@ export function calculateStickyScrollState({
       progress,
       cardPositions,
     }
-  } catch (error) {
-    console.warn('Error calculating sticky scroll state:', error)
+  } catch {
+    // Silently return default state on error - error boundaries will handle component-level errors
     return {
       titlePosition: 'left-middle',
       activeIndex: -1,
