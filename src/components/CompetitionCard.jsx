@@ -13,13 +13,18 @@ export const CompetitionCard = React.memo(({
   scrollVelocity,
   listPosition,
 }) => {
+  // Apply scroll velocity effect (brightness only, no blur)
+  const velocityFactor = Math.min(scrollVelocity / 1000, 0.3); // Normalize to 0-0.3
+  
   return (
     <li
       key={competition.name}
       className={`competition-hero ${isActive ? 'competition-hero--active' : ''}`}
       style={{
         '--parallax-y': `${parallaxY}px`,
+        '--velocity-factor': velocityFactor,
         transform: `translate3d(0, ${parallaxY}px, 0)`,
+        filter: `brightness(${1 + velocityFactor * 0.2})`,
       }}
     >
       <div className="competition-hero__badge">{competition.category}</div>

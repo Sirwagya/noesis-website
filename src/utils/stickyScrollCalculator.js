@@ -9,7 +9,7 @@ import { SCROLL_CONFIG } from '../constants/scrollConfig'
  * @param {HTMLElement} params.listRef - List container element reference
  * @param {number} params.scrollY - Current scroll position
  * @param {number} params.viewportHeight - Viewport height
- * @returns {Object} Calculated state: { titlePosition, activeIndex, parallaxData, progress }
+ * @returns {Object} Calculated state: { titlePosition, activeIndex, parallaxData, progress, cardPositions }
  */
 export function calculateStickyScrollState({
   sectionRef,
@@ -23,6 +23,7 @@ export function calculateStickyScrollState({
       activeIndex: -1,
       parallaxData: {},
       progress: 0,
+      cardPositions: {},
     }
   }
 
@@ -63,6 +64,10 @@ export function calculateStickyScrollState({
     const viewportBottom = scrollY + viewportHeight
     const processRange = viewportHeight * 2 // Process cards within 2 viewport heights
 
+    // Calculate card positions (previous/active/next/hidden)
+    const cardPositions = {}
+    const totalCards = cardElements.length
+
     Array.from(cardElements).forEach((card, index) => {
       const cardRect = card.getBoundingClientRect()
       const cardTop = cardRect.top + scrollY
@@ -93,11 +98,32 @@ export function calculateStickyScrollState({
       }
     })
 
+    // Determine card positions based on active index
+    if (closestIndex >= 0 && totalCards > 0) {
+      for (let i = 0; i < totalCards; i++) {
+        if (i === closestIndex) {
+          cardPositions[i] = 'active'
+        } else if (i === closestIndex - 1 && closestIndex > 0) {
+          cardPositions[i] = 'previous'
+        } else if (i === closestIndex + 1 && closestIndex < totalCards - 1) {
+          cardPositions[i] = 'next'
+        } else {
+          cardPositions[i] = 'hidden'
+        }
+      }
+    } else {
+      // No active card found, mark all as hidden
+      for (let i = 0; i < totalCards; i++) {
+        cardPositions[i] = 'hidden'
+      }
+    }
+
     return {
       titlePosition,
       activeIndex: closestIndex,
       parallaxData,
       progress,
+      cardPositions,
     }
   } catch (error) {
     console.warn('Error calculating sticky scroll state:', error)
@@ -106,6 +132,7 @@ export function calculateStickyScrollState({
       activeIndex: -1,
       parallaxData: {},
       progress: 0,
+      cardPositions: {},
     }
   }
 }

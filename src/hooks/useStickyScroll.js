@@ -9,7 +9,7 @@ import { SCROLL_CONFIG } from '../constants/scrollConfig'
  * @param {Object} params
  * @param {React.RefObject} params.sectionRef - Section element ref
  * @param {React.RefObject} params.listRef - List container ref
- * @returns {Object} Scroll state: { titlePosition, activeIndex, parallaxData, progress }
+ * @returns {Object} Scroll state: { titlePosition, activeIndex, parallaxData, progress, cardPositions }
  */
 export function useStickyScroll({ sectionRef, listRef }) {
   const [state, setState] = useState({
@@ -17,6 +17,7 @@ export function useStickyScroll({ sectionRef, listRef }) {
     activeIndex: -1,
     parallaxData: {},
     progress: 0,
+    cardPositions: {},
   })
 
   // Cache for DOM measurements
