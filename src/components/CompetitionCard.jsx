@@ -10,30 +10,18 @@ export const CompetitionCard = React.memo(({
   index,
   isActive,
   parallaxY,
-  glowConfig,
   scrollVelocity,
   listPosition,
 }) => {
-  const velocityClass = scrollVelocity > 500 ? 'high' : 'normal'
-
   return (
     <li
       key={competition.name}
       className={`competition-hero ${isActive ? 'competition-hero--active' : ''}`}
-      data-velocity={velocityClass}
       style={{
         '--parallax-y': `${parallaxY}px`,
-        '--glow-top-left': glowConfig.topLeft,
-        '--glow-top-right': glowConfig.topRight,
-        '--glow-bottom-left': glowConfig.bottomLeft,
-        '--glow-bottom-right': glowConfig.bottomRight,
         transform: `translate3d(0, ${parallaxY}px, 0)`,
       }}
     >
-      <div className="competition-hero__glow competition-hero__glow--top-left" />
-      <div className="competition-hero__glow competition-hero__glow--top-right" />
-      <div className="competition-hero__glow competition-hero__glow--bottom-left" />
-      <div className="competition-hero__glow competition-hero__glow--bottom-right" />
       <div className="competition-hero__badge">{competition.category}</div>
       <h3 className="competition-hero__title">{competition.name}</h3>
       <p className="competition-hero__tagline">{competition.tagline}</p>

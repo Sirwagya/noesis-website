@@ -14,32 +14,33 @@ const navLinks = [
   { label: 'About', id: 'about' },
 ]
 
-// Corner glow configurations for competitions - unique gradients per card
-const competitionCornerGlows = [
-  { topLeft: 'rgba(139, 92, 246, 0.4)', topRight: 'rgba(96, 165, 250, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(79, 209, 197, 0.3)' },
-  { topLeft: 'rgba(96, 165, 250, 0.4)', topRight: 'rgba(139, 92, 246, 0.3)', bottomLeft: 'rgba(79, 209, 197, 0.3)', bottomRight: 'rgba(168, 85, 247, 0.3)' },
-  { topLeft: 'rgba(168, 85, 247, 0.4)', topRight: 'rgba(79, 209, 197, 0.3)', bottomLeft: 'rgba(139, 92, 246, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
-  { topLeft: 'rgba(79, 209, 197, 0.4)', topRight: 'rgba(168, 85, 247, 0.3)', bottomLeft: 'rgba(96, 165, 250, 0.3)', bottomRight: 'rgba(139, 92, 246, 0.3)' },
-  { topLeft: 'rgba(139, 92, 246, 0.4)', topRight: 'rgba(120, 119, 198, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(79, 209, 197, 0.3)' },
-  { topLeft: 'rgba(96, 165, 250, 0.4)', topRight: 'rgba(168, 85, 247, 0.3)', bottomLeft: 'rgba(79, 209, 197, 0.3)', bottomRight: 'rgba(139, 92, 246, 0.3)' },
-  { topLeft: 'rgba(168, 85, 247, 0.4)', topRight: 'rgba(139, 92, 246, 0.3)', bottomLeft: 'rgba(120, 119, 198, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
-  { topLeft: 'rgba(79, 209, 197, 0.4)', topRight: 'rgba(96, 165, 250, 0.3)', bottomLeft: 'rgba(139, 92, 246, 0.3)', bottomRight: 'rgba(168, 85, 247, 0.3)' },
-  { topLeft: 'rgba(120, 119, 198, 0.4)', topRight: 'rgba(79, 209, 197, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
-  { topLeft: 'rgba(139, 92, 246, 0.4)', topRight: 'rgba(168, 85, 247, 0.3)', bottomLeft: 'rgba(96, 165, 250, 0.3)', bottomRight: 'rgba(79, 209, 197, 0.3)' },
-  { topLeft: 'rgba(96, 165, 250, 0.4)', topRight: 'rgba(79, 209, 197, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(139, 92, 246, 0.3)' },
-  { topLeft: 'rgba(168, 85, 247, 0.4)', topRight: 'rgba(120, 119, 198, 0.3)', bottomLeft: 'rgba(79, 209, 197, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
-  { topLeft: 'rgba(79, 209, 197, 0.4)', topRight: 'rgba(139, 92, 246, 0.3)', bottomLeft: 'rgba(120, 119, 198, 0.3)', bottomRight: 'rgba(168, 85, 247, 0.3)' },
+// Corner glow configurations removed - using background color effect instead
+
+// Dynamic background colors - enhanced gradients for more prominent effect
+const competitionBackgrounds = [
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(106, 0, 255, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(96, 165, 250, 0.35) 0%, rgba(79, 209, 197, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(79, 209, 197, 0.35) 0%, rgba(96, 165, 250, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(139, 92, 246, 0.35) 0%, rgba(120, 119, 198, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(96, 165, 250, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(79, 209, 197, 0.35) 0%, rgba(96, 165, 250, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(120, 119, 198, 0.35) 0%, rgba(79, 209, 197, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(139, 92, 246, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(96, 165, 250, 0.35) 0%, rgba(79, 209, 197, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(120, 119, 198, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(79, 209, 197, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
 ]
 
-// Corner glow configurations for events - unique gradients per card
-const eventCornerGlows = [
-  { topLeft: 'rgba(139, 92, 246, 0.4)', topRight: 'rgba(96, 165, 250, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(79, 209, 197, 0.3)' },
-  { topLeft: 'rgba(96, 165, 250, 0.4)', topRight: 'rgba(139, 92, 246, 0.3)', bottomLeft: 'rgba(79, 209, 197, 0.3)', bottomRight: 'rgba(168, 85, 247, 0.3)' },
-  { topLeft: 'rgba(168, 85, 247, 0.4)', topRight: 'rgba(79, 209, 197, 0.3)', bottomLeft: 'rgba(139, 92, 246, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
-  { topLeft: 'rgba(79, 209, 197, 0.4)', topRight: 'rgba(168, 85, 247, 0.3)', bottomLeft: 'rgba(96, 165, 250, 0.3)', bottomRight: 'rgba(139, 92, 246, 0.3)' },
-  { topLeft: 'rgba(139, 92, 246, 0.4)', topRight: 'rgba(120, 119, 198, 0.3)', bottomLeft: 'rgba(168, 85, 247, 0.3)', bottomRight: 'rgba(79, 209, 197, 0.3)' },
-  { topLeft: 'rgba(96, 165, 250, 0.4)', topRight: 'rgba(168, 85, 247, 0.3)', bottomLeft: 'rgba(79, 209, 197, 0.3)', bottomRight: 'rgba(139, 92, 246, 0.3)' },
-  { topLeft: 'rgba(168, 85, 247, 0.4)', topRight: 'rgba(139, 92, 246, 0.3)', bottomLeft: 'rgba(120, 119, 198, 0.3)', bottomRight: 'rgba(96, 165, 250, 0.3)' },
+const eventBackgrounds = [
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255, 47, 146, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(139, 92, 246, 0.35) 0%, rgba(96, 165, 250, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(255, 47, 146, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(79, 209, 197, 0.35) 0%, rgba(168, 85, 247, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(255, 47, 146, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(96, 165, 250, 0.35) 0%, rgba(255, 47, 146, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
+  'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(168, 85, 247, 0.35) 0%, rgba(139, 92, 246, 0.25) 30%, rgba(10, 10, 10, 0.9) 100%)',
 ]
 
 const competitionsList = [
@@ -77,12 +78,11 @@ function App() {
   const eventsSectionRef = useRef(null)
   const competitionsListRef = useRef(null)
   const eventsListRef = useRef(null)
-  const competitionsBgRef = useRef(null)
-  const eventsBgRef = useRef(null)
 
   // Intersection observers for sections
   const competitionsRef = useInView()
   const eventsRef = useInView()
+  const heroInViewRef = useInView()
   const sponsorsRef = useInView()
   const aboutRef = useInView()
   const contactRef = useInView()
@@ -94,6 +94,16 @@ function App() {
     transform: 0,
     opacity: 0.95,
     scale: 1,
+  })
+
+  // State to control competitions visibility - initialize based on scroll position
+  const [showCompetitions, setShowCompetitions] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const y = window.scrollY
+      const heroHeight = heroRef.current?.offsetHeight || window.innerHeight
+      return y >= heroHeight * 0.9
+    }
+    return false
   })
 
   // Hero parallax state
@@ -110,16 +120,45 @@ function App() {
     listRef: eventsListRef,
   })
 
-  // Memoize glow configs to prevent recalculation
-  const competitionGlowConfigs = useMemo(
-    () => competitionsList.map((_, index) => competitionCornerGlows[index % competitionCornerGlows.length]),
-    []
-  )
+  // Glow configs removed - using background color effect instead
 
-  const eventGlowConfigs = useMemo(
-    () => eventsList.map((_, index) => eventCornerGlows[index % eventCornerGlows.length]),
-    []
-  )
+  // Initial check for competitions visibility on mount
+  useEffect(() => {
+    const checkInitialVisibility = () => {
+      const y = window.scrollY
+      const heroHeight = heroRef.current?.offsetHeight || window.innerHeight
+      const initialShow = y >= heroHeight * 0.9
+      setShowCompetitions(initialShow)
+    }
+    
+    // Check immediately and after a short delay to ensure DOM is ready
+    checkInitialVisibility()
+    const timeoutId = setTimeout(checkInitialVisibility, 100)
+    
+    return () => clearTimeout(timeoutId)
+  }, [])
+
+  // Dynamic background color based on active card - with smooth hero transition
+  useEffect(() => {
+    const competitionsActiveIndex = competitionsScroll.activeIndex
+    const eventsActiveIndex = eventsScroll.activeIndex
+    const isInHero = heroInViewRef.isInView
+    
+    // Determine which section is active and get background
+    let activeBackground = 'var(--color-noesis-black)' // Default hero background
+    
+    // If in hero section, always use default black background for smooth transition
+    if (isInHero) {
+      activeBackground = 'var(--color-noesis-black)'
+    } else if (competitionsActiveIndex !== -1 && competitionsActiveIndex < competitionBackgrounds.length) {
+      activeBackground = competitionBackgrounds[competitionsActiveIndex]
+    } else if (eventsActiveIndex !== -1 && eventsActiveIndex < eventBackgrounds.length) {
+      activeBackground = eventBackgrounds[eventsActiveIndex]
+    }
+    
+    // Apply background to document root for smooth transitions
+    document.documentElement.style.setProperty('--page-background', activeBackground)
+  }, [competitionsScroll.activeIndex, eventsScroll.activeIndex, heroInViewRef.isInView])
 
   // Scroll handler for nav and hero parallax
   useEffect(() => {
@@ -134,6 +173,7 @@ function App() {
 
         const y = window.scrollY
         const heroHeight = heroRef.current?.offsetHeight || window.innerHeight
+        const competitionsSection = competitionsSectionRef.current
 
         // Nav calculations
         const scrollProgress = Math.min(y / heroHeight, 1)
@@ -147,19 +187,24 @@ function App() {
           scale: isAtBottom ? 1 : 1,
         })
 
-        // Hero parallax
-        setParallaxY({
-          blob: y * SCROLL_CONFIG.HERO_BLOB_PARALLAX,
-          grid: y * SCROLL_CONFIG.HERO_GRID_PARALLAX,
-        })
+        // Control competitions visibility based on scroll position
+        const isInHero = heroInViewRef.isInView
+        const competitionsInView = competitionsRef.isInView
+        
+        // Show competitions when scrolled past hero (prioritize scroll position over isInHero)
+        // This fixes the issue where isInHero stays true even when scrolling past hero
+        // Hide when scrolling back up to hero (within 80% of hero height)
+        const scrolledPastHero = y >= heroHeight * 0.9
+        const isNearHeroTop = y < heroHeight * 0.8
+        const shouldShowCompetitions = (scrolledPastHero && !isNearHeroTop) || (competitionsInView && !isInHero)
+        
+        setShowCompetitions(shouldShowCompetitions)
 
-        // Background parallax
-        if (competitionsBgRef.current) {
-          competitionsBgRef.current.style.transform = `translateY(${y * SCROLL_CONFIG.BACKGROUND_PARALLAX}px)`
-        }
-        if (eventsBgRef.current) {
-          eventsBgRef.current.style.transform = `translateY(${y * SCROLL_CONFIG.BACKGROUND_PARALLAX}px)`
-        }
+        // Hero parallax - only apply when not in hero section
+        setParallaxY({
+          blob: isInHero ? y * SCROLL_CONFIG.HERO_BLOB_PARALLAX : 0,
+          grid: 0, // Grid removed, no parallax needed
+        })
 
         rafId = null
       })
@@ -175,7 +220,7 @@ function App() {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
     }
-  }, [])
+  }, [heroInViewRef.isInView, competitionsRef.isInView])
 
   const scrollToSection = useCallback((id) => {
     const el = document.getElementById(id)
@@ -215,16 +260,23 @@ function App() {
       )}
 
       <main className={`main ${!navState.atBottom ? 'main--nav-top' : ''}`}>
-        <section id="hero" ref={heroRef} className="section section--hero">
+        <section 
+          id="hero" 
+          ref={(el) => {
+            heroRef.current = el
+            heroInViewRef.ref.current = el
+          }} 
+          className={`section section--hero ${heroInViewRef.isInView ? 'in-view' : ''}`}
+        >
           <div ref={blobRef} className="hero__blob" aria-hidden="true" style={{ transform: `translateY(${parallaxY.blob}px)` }} />
+          <div className="hero__blob-secondary" aria-hidden="true" />
           <div className="hero__bg" />
-          <div ref={gridRef} className="hero__grid" aria-hidden="true" style={{ transform: `translateY(${parallaxY.grid}px)` }} />
+          <div className="hero__particles" aria-hidden="true" />
           <div className="hero__content">
-            <span className="hero__logo-wrap">
-              <img src="/noesis-logo.png" alt="NOESIS 2026" className="hero__logo" />
-            </span>
+            <h1 className="hero__title">NOESIS</h1>
             <p className="hero__tagline">Where Innovation Meets Imagination</p>
-            <span className="hero__year">Vedam tech fest</span>
+            <span className="hero__year">Vedam tech fest 2026</span>
+            <p className="hero__description">Join us for an extraordinary journey into the future of technology, innovation, and creativity.</p>
           </div>
           <div className="hero__scroll" onClick={() => scrollToSection('competitions')}>
             <span>Scroll</span>
@@ -234,7 +286,7 @@ function App() {
 
         <section
           id="competitions"
-          className={`section section--competitions ${competitionsRef.isInView ? 'in-view' : ''}`}
+          className={`section section--competitions ${competitionsRef.isInView && showCompetitions ? 'in-view' : ''} ${showCompetitions ? 'show' : 'hide'}`}
           ref={(el) => {
             competitionsRef.ref.current = el
             competitionsSectionRef.current = el
@@ -243,7 +295,6 @@ function App() {
           aria-live="polite"
           aria-atomic="false"
         >
-          <div ref={competitionsBgRef} className="section--competitions__bg-layer" aria-hidden="true" />
           <div className="section__inner section__inner--competitions">
             <div
               className={`competitions__side competitions__side--${competitionsScroll.titlePosition}`}
@@ -260,7 +311,6 @@ function App() {
                   index={index}
                   isActive={competitionsScroll.activeIndex === index}
                   parallaxY={competitionsScroll.parallaxData[index] || 0}
-                  glowConfig={competitionGlowConfigs[index]}
                   scrollVelocity={scrollVelocity}
                   listPosition="normal"
                 />
@@ -280,7 +330,6 @@ function App() {
           aria-live="polite"
           aria-atomic="false"
         >
-          <div ref={eventsBgRef} className="section--events__bg-layer" aria-hidden="true" />
           <div className="section__inner section__inner--events">
             <div
               className={`events__side events__side--${eventsScroll.titlePosition}`}
@@ -297,7 +346,6 @@ function App() {
                   index={index}
                   isActive={eventsScroll.activeIndex === index}
                   parallaxY={eventsScroll.parallaxData[index] || 0}
-                  glowConfig={eventGlowConfigs[index]}
                   scrollVelocity={scrollVelocity}
                 />
               ))}
