@@ -1,0 +1,682 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+let isRegistered = false;
+
+const MOTION_PROFILE = {
+  desktop: {
+    nav: { end: "+=420", scrub: 0.32 },
+    hero: { end: "+=130%", scrub: 0.28 },
+    overview: {
+      endFactor: 108,
+      scrub: 0.32,
+      parallax: { from: -28, to: 24, scrub: 0.45 },
+    },
+    chapter: {
+      revealScrub: 0.34,
+      parallaxScrub: 0.45,
+      microPinEnd: "+=24%",
+      microPinScrub: 0.46,
+      layerShift: {
+        deep: { from: -28, to: 26 },
+        mid: { from: -22, to: 20 },
+        soft: { from: -16, to: 14 },
+      },
+    },
+    featured: { fromY: -6, toY: 10, scrub: 0.36 },
+    cards: {
+      fromYFactor: -4,
+      toYFactor: 8,
+      fromXBase: 1.8,
+      fromXDepth: 1.2,
+      toXBase: 3,
+      toXDepth: 1.6,
+      scrub: 0.36,
+    },
+    section: {
+      from: -18,
+      to: 16,
+      scrub: 0.4,
+      innerFromY: 24,
+      innerScrub: 0.38,
+    },
+    canvas: {
+      scrub: 0.55,
+      matrixY: 18,
+      auroraY: -10,
+      auroraX: 6,
+      auroraScale: 1.05,
+      beamsY: 14,
+      beamsRotate: 5,
+      grainY: 20,
+      matrixOpacity: 0.34,
+      beamsOpacity: 0.58,
+      grainOpacity: 0.22,
+    },
+    pulse: { start: "top 66%", end: "top 34%" },
+  },
+  mobile: {
+    nav: { end: "+=320", scrub: 0.32 },
+    hero: { end: "+=72%", scrub: 0.26 },
+    overview: {
+      endFactor: 88,
+      scrub: 0.3,
+      parallax: { from: -14, to: 12, scrub: 0.4 },
+    },
+    chapter: {
+      revealScrub: 0.3,
+      parallax: { from: -12, to: 10, scrub: 0.4 },
+    },
+    cards: {
+      fromYFactor: -2,
+      toYFactor: 5,
+      fromXBase: 0.8,
+      fromXDepth: 0.8,
+      toXBase: 1.8,
+      toXDepth: 1.1,
+      scrub: 0.35,
+    },
+    section: { from: -10, to: 9, scrub: 0.4 },
+    canvas: {
+      scrub: 0.45,
+      matrixY: 10,
+      auroraY: -7,
+      auroraX: 4,
+      auroraScale: 1.03,
+      beamsY: 8,
+      beamsRotate: 3,
+      grainY: 12,
+      matrixOpacity: 0.3,
+      beamsOpacity: 0.54,
+      grainOpacity: 0.2,
+    },
+    pulse: { start: "top 72%", end: "top 40%" },
+  },
+};
+
+function ensureRegistered() {
+  if (!isRegistered) {
+    gsap.registerPlugin(ScrollTrigger);
+    isRegistered = true;
+  }
+}
+
+function getDesktopLayerShift(preset) {
+  const shift = MOTION_PROFILE.desktop.chapter.layerShift[preset];
+  return shift ?? MOTION_PROFILE.desktop.chapter.layerShift.mid;
+}
+
+function getLaneMultiplier(lane) {
+  if (lane === "left") {
+    return -1;
+  }
+
+  if (lane === "right") {
+    return 1;
+  }
+
+  return 0;
+}
+
+function createNavScene(nav, config) {
+  if (!nav) {
+    return;
+  }
+
+  gsap.fromTo(
+    nav,
+    {
+      "--nav-bg-alpha": 0.18,
+      "--nav-blur": "8px",
+      "--nav-border-alpha": 0.08,
+      "--nav-shadow-alpha": 0.08,
+    },
+    {
+      "--nav-bg-alpha": 0.66,
+      "--nav-blur": "18px",
+      "--nav-border-alpha": 0.22,
+      "--nav-shadow-alpha": 0.28,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: config.end,
+        scrub: config.scrub,
+      },
+    }
+  );
+}
+
+function createCanvasScene(layers, config) {
+  if (!layers.matrix || !layers.aurora || !layers.beams || !layers.grain) {
+    return;
+  }
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: config.scrub,
+      },
+    })
+    .to(
+      layers.matrix,
+      { yPercent: config.matrixY, opacity: config.matrixOpacity, ease: "none" },
+      0
+    )
+    .to(
+      layers.aurora,
+      {
+        yPercent: config.auroraY,
+        xPercent: config.auroraX,
+        scale: config.auroraScale,
+        ease: "none",
+      },
+      0
+    )
+    .to(
+      layers.beams,
+      {
+        yPercent: config.beamsY,
+        rotate: config.beamsRotate,
+        opacity: config.beamsOpacity,
+        ease: "none",
+      },
+      0
+    )
+    .to(
+      layers.grain,
+      { yPercent: config.grainY, opacity: config.grainOpacity, ease: "none" },
+      0
+    );
+}
+
+function createChapterPulseToggles(chapters, pulseConfig) {
+  chapters.forEach((section) => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: pulseConfig.start,
+      end: pulseConfig.end,
+      toggleClass: { targets: section, className: "is-active-chapter" },
+    });
+  });
+}
+
+export function setupScrollScenes({
+  heroRef,
+  overviewRef,
+  chapterElements,
+  onTrackProgress,
+}) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) {
+    return () => {};
+  }
+
+  ensureRegistered();
+
+  const mm = gsap.matchMedia();
+  const nav = document.querySelector(".site-nav");
+  const staticSections = Array.from(document.querySelectorAll(".section"));
+  const allChapters = Array.from(document.querySelectorAll(".chapter, .section"));
+  const storyCanvasLayers = {
+    matrix: document.querySelector(".story-canvas__layer--matrix"),
+    aurora: document.querySelector(".story-canvas__layer--aurora"),
+    beams: document.querySelector(".story-canvas__layer--beams"),
+    grain: document.querySelector(".story-canvas__layer--grain"),
+  };
+
+  mm.add("(min-width: 1024px)", () => {
+    const config = MOTION_PROFILE.desktop;
+    const hero = heroRef.current;
+    const overview = overviewRef.current;
+
+    if (!hero || !overview) {
+      return;
+    }
+
+    createNavScene(nav, config.nav);
+    createChapterPulseToggles(allChapters, config.pulse);
+    createCanvasScene(storyCanvasLayers, config.canvas);
+
+    const heroTitle = hero.querySelector(".hero__title");
+    const heroRevealItems = [
+      hero.querySelector(".hero__eyebrow"),
+      hero.querySelector(".hero__subtitle"),
+      hero.querySelector(".hero__meta"),
+      hero.querySelector(".hero__actions"),
+    ].filter(Boolean);
+
+    gsap.set(heroRevealItems, { y: 34, opacity: 0 });
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: config.hero.end,
+          scrub: config.hero.scrub,
+          pin: true,
+          anticipatePin: 1,
+        },
+      })
+      .to(
+        heroTitle,
+        {
+          scale: 0.82,
+          yPercent: -14,
+          transformOrigin: "50% 50%",
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        heroRevealItems,
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 0.45,
+          ease: "none",
+        },
+        0.04
+      );
+
+    const trackCount = Math.max(chapterElements.length, 1);
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: overview,
+          start: "top top",
+          end: `+=${trackCount * config.overview.endFactor}%`,
+          scrub: config.overview.scrub,
+          pin: true,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const activeIndex = Math.min(
+              trackCount - 1,
+              Math.floor(self.progress * trackCount)
+            );
+            const activeTrack = chapterElements[activeIndex];
+
+            if (activeTrack && onTrackProgress) {
+              onTrackProgress(activeTrack.trackId, self.progress);
+            }
+          },
+        },
+      })
+      .fromTo(
+        overview.querySelector(".program-overview__headline"),
+        { y: 26, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.28, ease: "none" },
+        0
+      )
+      .fromTo(
+        overview.querySelector(".program-overview__summary"),
+        { y: 22, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.3, ease: "none" },
+        0.06
+      )
+      .fromTo(
+        overview.querySelectorAll(".track-rail__item"),
+        { y: 12, opacity: 0.4 },
+        { y: 0, opacity: 1, stagger: 0.05, duration: 0.28, ease: "none" },
+        0.1
+      );
+
+    gsap.fromTo(
+      overview,
+      { "--overview-parallax": `${config.overview.parallax.from}px` },
+      {
+        "--overview-parallax": `${config.overview.parallax.to}px`,
+        ease: "none",
+        scrollTrigger: {
+          trigger: overview,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: config.overview.parallax.scrub,
+        },
+      }
+    );
+
+    chapterElements.forEach(({ trackId, element }) => {
+      if (!element) {
+        return;
+      }
+
+      const header = element.querySelector(".track-chapter__header");
+      const featured = element.querySelector(".program-card--featured");
+      const cards = Array.from(element.querySelectorAll(".program-card"));
+      const shift = getDesktopLayerShift(element.dataset.parallaxPreset);
+
+      ScrollTrigger.create({
+        trigger: element,
+        start: "top 56%",
+        end: "bottom 56%",
+        onEnter: () => onTrackProgress?.(trackId, 1),
+        onEnterBack: () => onTrackProgress?.(trackId, 1),
+      });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top 76%",
+            end: "top 42%",
+            scrub: config.chapter.revealScrub,
+          },
+        })
+        .fromTo(
+          element.querySelectorAll(
+            ".track-chapter__eyebrow, .track-chapter__title, .track-chapter__description"
+          ),
+          { y: 32, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.07, duration: 0.32, ease: "none" },
+          0
+        )
+        .fromTo(
+          cards,
+          { y: 16, opacity: 0.16 },
+          { y: 0, opacity: 1, stagger: 0.04, duration: 0.26, ease: "none" },
+          0.08
+        );
+
+      gsap.fromTo(
+        element,
+        { "--chapter-parallax": `${shift.from}px` },
+        {
+          "--chapter-parallax": `${shift.to}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.chapter.parallaxScrub,
+          },
+        }
+      );
+
+      if (header) {
+        ScrollTrigger.create({
+          trigger: element,
+          start: "top top+=108",
+          end: config.chapter.microPinEnd,
+          scrub: config.chapter.microPinScrub,
+          pin: header,
+          pinSpacing: true,
+        });
+      }
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.cards.scrub,
+          },
+        })
+        .fromTo(
+          featured,
+          { yPercent: config.featured.fromY },
+          { yPercent: config.featured.toY, ease: "none" },
+          0
+        )
+        .fromTo(
+          cards,
+          {
+            yPercent: (_, target) =>
+              config.cards.fromYFactor * Number(target.dataset.depth || "2"),
+            xPercent: (_, target) => {
+              const depth = Number(target.dataset.depth || "2");
+              const lane = getLaneMultiplier(target.dataset.lane || "deck");
+              return lane * (config.cards.fromXBase + depth * config.cards.fromXDepth);
+            },
+          },
+          {
+            yPercent: (_, target) =>
+              config.cards.toYFactor * Number(target.dataset.depth || "2"),
+            xPercent: (_, target) => {
+              const depth = Number(target.dataset.depth || "2");
+              const lane = getLaneMultiplier(target.dataset.lane || "deck");
+              return lane * (config.cards.toXBase + depth * config.cards.toXDepth);
+            },
+            ease: "none",
+          },
+          0
+        );
+    });
+
+    staticSections.forEach((section) => {
+      gsap.fromTo(
+        section,
+        { "--section-parallax": `${config.section.from}px` },
+        {
+          "--section-parallax": `${config.section.to}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.section.scrub,
+          },
+        }
+      );
+
+      const sectionInner = section.querySelector(".section__inner");
+      if (sectionInner) {
+        gsap.fromTo(
+          sectionInner,
+          { y: config.section.innerFromY, opacity: 0.8 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 82%",
+              end: "top 42%",
+              scrub: config.section.innerScrub,
+            },
+          }
+        );
+      }
+    });
+  });
+
+  mm.add("(max-width: 1023px)", () => {
+    const config = MOTION_PROFILE.mobile;
+    const hero = heroRef.current;
+    const overview = overviewRef.current;
+
+    if (!hero || !overview) {
+      return;
+    }
+
+    createNavScene(nav, config.nav);
+    createChapterPulseToggles(allChapters, config.pulse);
+    createCanvasScene(storyCanvasLayers, config.canvas);
+
+    const heroContent = hero.querySelectorAll(".hero__content > *");
+    gsap.set(heroContent, { y: 18, opacity: 0 });
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: config.hero.end,
+          scrub: config.hero.scrub,
+          pin: true,
+          anticipatePin: 1,
+        },
+      })
+      .to(heroContent, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.06,
+        duration: 0.24,
+        ease: "none",
+      });
+
+    const trackCount = Math.max(chapterElements.length, 1);
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: overview,
+          start: "top top",
+          end: `+=${trackCount * config.overview.endFactor}%`,
+          scrub: config.overview.scrub,
+          pin: true,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const activeIndex = Math.min(
+              trackCount - 1,
+              Math.floor(self.progress * trackCount)
+            );
+            const activeTrack = chapterElements[activeIndex];
+
+            if (activeTrack && onTrackProgress) {
+              onTrackProgress(activeTrack.trackId, self.progress);
+            }
+          },
+        },
+      })
+      .fromTo(
+        overview.querySelectorAll(".program-overview__headline, .program-overview__summary"),
+        { y: 16, opacity: 0.18 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
+        0
+      )
+      .fromTo(
+        overview.querySelectorAll(".track-rail__item"),
+        { y: 8, opacity: 0.45 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
+        0.06
+      );
+
+    gsap.fromTo(
+      overview,
+      { "--overview-parallax": `${config.overview.parallax.from}px` },
+      {
+        "--overview-parallax": `${config.overview.parallax.to}px`,
+        ease: "none",
+        scrollTrigger: {
+          trigger: overview,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: config.overview.parallax.scrub,
+        },
+      }
+    );
+
+    chapterElements.forEach(({ trackId, element }) => {
+      if (!element) {
+        return;
+      }
+
+      const cards = Array.from(element.querySelectorAll(".program-card"));
+
+      ScrollTrigger.create({
+        trigger: element,
+        start: "top 68%",
+        end: "bottom 50%",
+        onEnter: () => onTrackProgress?.(trackId, 1),
+        onEnterBack: () => onTrackProgress?.(trackId, 1),
+      });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top 82%",
+            end: "top 44%",
+            scrub: config.chapter.revealScrub,
+          },
+        })
+        .fromTo(
+          element.querySelectorAll(".track-chapter__header, .program-card"),
+          { y: 18, opacity: 0.2 },
+          { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
+          0
+        );
+
+      gsap.fromTo(
+        element,
+        { "--chapter-parallax": `${config.chapter.parallax.from}px` },
+        {
+          "--chapter-parallax": `${config.chapter.parallax.to}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.chapter.parallax.scrub,
+          },
+        }
+      );
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.cards.scrub,
+          },
+        })
+        .fromTo(
+          cards,
+          {
+            yPercent: (_, target) =>
+              config.cards.fromYFactor * Number(target.dataset.depth || "2"),
+            xPercent: (_, target) => {
+              const depth = Number(target.dataset.depth || "2");
+              const lane = getLaneMultiplier(target.dataset.lane || "deck");
+              return lane * (config.cards.fromXBase + depth * config.cards.fromXDepth);
+            },
+          },
+          {
+            yPercent: (_, target) =>
+              config.cards.toYFactor * Number(target.dataset.depth || "2"),
+            xPercent: (_, target) => {
+              const depth = Number(target.dataset.depth || "2");
+              const lane = getLaneMultiplier(target.dataset.lane || "deck");
+              return lane * (config.cards.toXBase + depth * config.cards.toXDepth);
+            },
+            ease: "none",
+          },
+          0
+        );
+    });
+
+    staticSections.forEach((section) => {
+      gsap.fromTo(
+        section,
+        { "--section-parallax": `${config.section.from}px` },
+        {
+          "--section-parallax": `${config.section.to}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: config.section.scrub,
+          },
+        }
+      );
+    });
+  });
+
+  return () => {
+    mm.revert();
+    ScrollTrigger.refresh();
+  };
+}

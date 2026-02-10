@@ -1,419 +1,87 @@
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Premium font rendering */
-body {
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "liga" 1;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "liga" 1;
-}
-
 :root {
-  /* Brand Colors - NOESIS 2026 */
-  --color-noesis-black: #0A0A0A;
-  --color-noesis-dark: #141414;
-  --color-noesis-white: #FAFAFA;
-  --color-noesis-purple: #6A00FF;
-  --color-noesis-purple-light: #8B5CF6;
-  --color-noesis-purple-dark: #4C1D95;
-  --color-noesis-pink: #FF2F92;
-  --color-noesis-pink-light: #FF5FA8;
-  --color-noesis-pink-dark: #CC1F6F;
-  --color-noesis-cyan: #4FD1C5;
-  --color-noesis-blue: #60A5FA;
-  
-  /* Gradients */
-  --gradient-noesis: linear-gradient(135deg, #6A00FF 0%, #FF2F92 100%);
-  --gradient-noesis-subtle: linear-gradient(135deg, rgba(106, 0, 255, 0.8) 0%, rgba(255, 47, 146, 0.8) 100%);
-  --gradient-noesis-soft: linear-gradient(135deg, rgba(106, 0, 255, 0.1) 0%, rgba(255, 47, 146, 0.1) 100%);
-  --gradient-purple: linear-gradient(135deg, #6A00FF 0%, #8B5CF6 50%, #A855F7 100%);
-  --gradient-pink: linear-gradient(135deg, #FF2F92 0%, #FF5FA8 50%, #FF8FC7 100%);
-  
-  /* Typography - Premium fonts */
-  --font-heading: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: swap; /* Font loading strategy */
-  
-  /* Animation durations */
-  --animation-duration-fast: 0.2s;
-  --animation-duration-normal: 0.4s;
-  --animation-duration-slow: 0.8s;
-  --animation-duration-count-up: 2s;
-  --animation-duration-page-loader-fade: 0.5s;
-  --animation-duration-scale-in: 0.6s;
-  
-  /* Transition durations */
-  --transition-fast: 0.3s;
-  --transition-normal: 0.4s;
-  --transition-slow: 0.8s;
-  
-  /* Z-index layers */
-  --z-index-base: 1;
-  --z-index-above: 2;
-  --z-index-overlay: 3;
-  --z-index-modal: 4;
-  --z-index-cursor: 9997;
-  --z-index-cursor-trail: 9998;
-  --z-index-progress: 9999;
-  --z-index-loader: 10000;
-  --z-index-skip-link: 10000;
-  
-  /* Opacity values */
-  --opacity-subtle: 0.15;
-  --opacity-medium: 0.25;
-  --opacity-visible: 0.3;
-  --opacity-default: 0.7;
-  --opacity-strong: 0.85;
-  --opacity-full: 0.9;
-  --opacity-opaque: 0.95;
-  
-  --glow-intensity: 0.5;
-  --shadow-intensity: 1;
-  
-  /* Typography Scale - Base (Desktop) - Slightly reduced */
-  --font-size-xs: 0.7rem;
-  --font-size-sm: 0.8rem;
-  --font-size-base: 0.9375rem;
-  --font-size-lg: 1.05rem;
-  --font-size-xl: 1.15rem;
-  --font-size-2xl: 1.4rem;
-  --font-size-3xl: 1.75rem;
-  --font-size-4xl: 2.1rem;
-  --font-size-5xl: 2.8rem;
-  --font-size-6xl: 3.5rem;
-  --font-size-7xl: 4.2rem;
-  --font-size-8xl: 5.6rem;
-  
-  /* Responsive Typography Scale - Mobile - Slightly reduced */
-  --font-size-xs-mobile: 0.65rem;
-  --font-size-sm-mobile: 0.75rem;
-  --font-size-base-mobile: 0.875rem; /* 14px minimum for readability */
-  --font-size-lg-mobile: 0.9375rem;
-  --font-size-xl-mobile: 1.05rem;
-  --font-size-2xl-mobile: 1.15rem;
-  --font-size-3xl-mobile: 1.4rem;
-  --font-size-4xl-mobile: 1.65rem;
-  --font-size-5xl-mobile: 1.9rem;
-  --font-size-6xl-mobile: 2.35rem;
-  --font-size-7xl-mobile: 2.8rem;
-  --font-size-8xl-mobile: 3.75rem;
-  
-  /* Responsive Typography Scale - Tablet - Slightly reduced */
-  --font-size-xs-tablet: 0.7rem;
-  --font-size-sm-tablet: 0.8rem;
-  --font-size-base-tablet: 0.9375rem;
-  --font-size-lg-tablet: 1.05rem;
-  --font-size-xl-tablet: 1.15rem;
-  --font-size-2xl-tablet: 1.4rem;
-  --font-size-3xl-tablet: 1.75rem;
-  --font-size-4xl-tablet: 2.1rem;
-  --font-size-5xl-tablet: 2.35rem;
-  --font-size-6xl-tablet: 2.8rem;
-  --font-size-7xl-tablet: 3.5rem;
-  --font-size-8xl-tablet: 4.7rem;
-  
-  /* Letter Spacing - Premium refined spacing */
-  --letter-spacing-tight: -0.03em;
-  --letter-spacing-normal: -0.01em;
-  --letter-spacing-wide: 0.03em;
-  --letter-spacing-wider: 0.06em;
-  --letter-spacing-widest: 0.15em;
-  
-  /* Letter Spacing - Mobile (tighter for small screens) */
-  --letter-spacing-tight-mobile: -0.03em;
-  --letter-spacing-normal-mobile: 0;
-  --letter-spacing-wide-mobile: 0.03em;
-  --letter-spacing-wider-mobile: 0.08em;
-  
-  /* Line Height */
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
-  
-  /* Line Height - Mobile (more spacing for readability) */
-  --line-height-tight-mobile: 1.15;
-  --line-height-snug-mobile: 1.3;
-  --line-height-normal-mobile: 1.6;
-  --line-height-relaxed-mobile: 1.8;
-  
-  /* Accessibility */
-  --font-size-min: 0.9375rem; /* 15px minimum for body text */
-  --line-length-max: 75ch; /* Optimal line length */
-  --line-length-min: 45ch; /* Minimum readable line length */
+  --bg-0: #05070f;
+  --bg-1: #090d1a;
+  --surface-0: rgba(13, 17, 29, 0.78);
+  --surface-1: rgba(18, 24, 40, 0.92);
+  --surface-2: rgba(30, 38, 61, 0.95);
+  --text-0: #f6f8ff;
+  --text-1: rgba(246, 248, 255, 0.84);
+  --text-2: rgba(246, 248, 255, 0.64);
+  --accent-0: #6a00ff;
+  --accent-1: #ff2f92;
+  --accent-2: #52c8ff;
+  --border-soft: rgba(123, 141, 183, 0.24);
+  --shadow-lg: 0 22px 70px rgba(7, 10, 20, 0.45);
+  --shadow-md: 0 10px 36px rgba(6, 9, 18, 0.35);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --max-content: 1200px;
+  --font-heading: "Clash Display", "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Space Grotesk", "Segoe UI", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-  /* Hide scrollbars for seamless scrolling */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-  scroll-padding-top: 0;
-  -webkit-overflow-scrolling: touch;
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  /* Dynamic background that changes based on active card - enhanced for more prominent effect */
-  background: var(--page-background, var(--color-noesis-black));
-  background-attachment: fixed;
-  color: var(--color-noesis-white);
+  color: var(--text-0);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(106, 0, 255, 0.2), transparent 38%),
+    radial-gradient(circle at 76% 0%, rgba(255, 47, 146, 0.17), transparent 35%),
+    linear-gradient(170deg, var(--bg-1) 0%, var(--bg-0) 60%);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  position: relative;
-  overflow-x: hidden;
-  /* Smooth background transitions - optimized for card changes */
-  transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-/* Gradient overlay for smooth transitions */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  background: var(--page-background, transparent);
-  opacity: var(--gradient-opacity, 0.85);
-  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  mix-blend-mode: normal;
-}
-
-/* Responsive Typography System */
-/* Mobile: Small phones (< 480px) */
-@media (max-width: 480px) {
-  :root {
-    --font-size-xs: var(--font-size-xs-mobile);
-    --font-size-sm: var(--font-size-sm-mobile);
-    --font-size-base: var(--font-size-base-mobile);
-    --font-size-lg: var(--font-size-lg-mobile);
-    --font-size-xl: var(--font-size-xl-mobile);
-    --font-size-2xl: var(--font-size-2xl-mobile);
-    --font-size-3xl: var(--font-size-3xl-mobile);
-    --font-size-4xl: var(--font-size-4xl-mobile);
-    --font-size-5xl: var(--font-size-5xl-mobile);
-    --font-size-6xl: var(--font-size-6xl-mobile);
-    --font-size-7xl: var(--font-size-7xl-mobile);
-    --font-size-8xl: var(--font-size-8xl-mobile);
-    
-    --letter-spacing-tight: var(--letter-spacing-tight-mobile);
-    --letter-spacing-wide: var(--letter-spacing-wide-mobile);
-    --letter-spacing-wider: var(--letter-spacing-wider-mobile);
-    
-    --line-height-tight: var(--line-height-tight-mobile);
-    --line-height-snug: var(--line-height-snug-mobile);
-    --line-height-normal: var(--line-height-normal-mobile);
-    --line-height-relaxed: var(--line-height-relaxed-mobile);
-  }
-  
-  body {
-    font-size: var(--font-size-base-mobile);
-    line-height: var(--line-height-normal-mobile);
-  }
-
-  /* Reduce grid complexity on mobile for better performance */
-  body::before {
-    background-size: 
-      80px 80px,
-      20px 20px,
-      80px 80px,
-      20px 20px,
-      160px 160px,
-      160px 160px;
-    transform: perspective(1000px) rotateX(70deg) translateZ(-300px);
-    animation: grid-drift-mobile 20s ease-in-out infinite;
-  }
-
-  @keyframes grid-drift-mobile {
-    0%, 100% {
-      transform: perspective(1000px) rotateX(70deg) translateZ(-300px) translateY(0) translateX(0);
-    }
-    50% {
-      transform: perspective(1000px) rotateX(70deg) translateZ(-300px) translateY(-10px) translateX(5px);
-    }
-  }
-}
-
-/* Tablet: Medium screens (481px - 1024px) */
-@media (min-width: 481px) and (max-width: 1024px) {
-  :root {
-    --font-size-xs: var(--font-size-xs-tablet);
-    --font-size-sm: var(--font-size-sm-tablet);
-    --font-size-base: var(--font-size-base-tablet);
-    --font-size-lg: var(--font-size-lg-tablet);
-    --font-size-xl: var(--font-size-xl-tablet);
-    --font-size-2xl: var(--font-size-2xl-tablet);
-    --font-size-3xl: var(--font-size-3xl-tablet);
-    --font-size-4xl: var(--font-size-4xl-tablet);
-    --font-size-5xl: var(--font-size-5xl-tablet);
-    --font-size-6xl: var(--font-size-6xl-tablet);
-    --font-size-7xl: var(--font-size-7xl-tablet);
-    --font-size-8xl: var(--font-size-8xl-tablet);
-  }
-}
-
-/* Large Desktop: Ultra-wide screens (> 1920px) */
-@media (min-width: 1920px) {
-  :root {
-    --font-size-base: 1.125rem;
-    --line-length-max: 85ch;
-  }
-}
-
-/* Accessibility: Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  body {
-    -webkit-font-smoothing: auto;
-    -moz-osx-font-smoothing: auto;
-  }
-}
-
-/* 3D Grid Background - Fixed throughout website */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: var(--grid-opacity, 0.2);
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
-  background-image: 
-    /* Horizontal grid lines - main grid (thicker) */
-    linear-gradient(rgba(106, 0, 255, 0.2) 1px, transparent 1px),
-    /* Horizontal grid lines - sub grid (thinner) */
-    linear-gradient(rgba(106, 0, 255, 0.1) 0.5px, transparent 0.5px),
-    /* Vertical grid lines - main grid (thicker) */
-    linear-gradient(90deg, rgba(106, 0, 255, 0.2) 1px, transparent 1px),
-    /* Vertical grid lines - sub grid (thinner) */
-    linear-gradient(90deg, rgba(106, 0, 255, 0.1) 0.5px, transparent 0.5px),
-    /* Accent lines for depth */
-    linear-gradient(rgba(255, 47, 146, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 47, 146, 0.08) 1px, transparent 1px);
-  background-size: 
-    120px 120px,
-    30px 30px,
-    120px 120px,
-    30px 30px,
-    240px 240px,
-    240px 240px;
-  background-position: 
-    0 0,
-    0 0,
-    0 0,
-    0 0,
-    0 0,
-    0 0;
-  /* 3D perspective effect - creates depth illusion */
-  transform: perspective(1500px) rotateX(60deg) translateZ(-400px);
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  will-change: opacity, transform;
-  /* Smooth animation for subtle movement */
-  animation: grid-drift 25s ease-in-out infinite;
-  /* Add subtle glow effect */
-  filter: blur(0.5px);
-}
-
-@keyframes grid-drift {
-  0%, 100% {
-    transform: perspective(1500px) rotateX(60deg) translateZ(-400px) translateY(0) translateX(0);
-    opacity: var(--grid-opacity, 0.2);
-  }
-  33% {
-    transform: perspective(1500px) rotateX(60deg) translateZ(-400px) translateY(-15px) translateX(10px);
-    opacity: calc(var(--grid-opacity, 0.2) * 1.1);
-  }
-  66% {
-    transform: perspective(1500px) rotateX(60deg) translateZ(-400px) translateY(10px) translateX(-10px);
-    opacity: calc(var(--grid-opacity, 0.2) * 0.9);
-  }
-}
-
-/* Gradient overlay for smooth transitions */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  background: var(--page-background, transparent);
-  opacity: var(--gradient-opacity, 0.9);
-  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  mix-blend-mode: normal;
+::selection {
+  color: var(--text-0);
+  background: rgba(123, 77, 255, 0.42);
 }
 
 #root {
   min-height: 100vh;
-  position: relative;
-  z-index: 2; /* Ensure content is above grid */
 }
 
-/* Typography Utility Classes */
-.text-responsive {
-  font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
-  line-height: var(--line-height-relaxed);
+a {
+  color: inherit;
 }
 
-.text-mobile-optimized {
-  font-size: max(var(--font-size-base), 16px);
-  line-height: var(--line-height-relaxed);
-  letter-spacing: var(--letter-spacing-normal);
+button {
+  font: inherit;
 }
 
-.text-readable {
-  max-width: var(--line-length-max);
-  min-width: var(--line-length-min);
-  line-height: var(--line-height-relaxed);
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-/* Ensure headings use optimizeLegibility */
-h1, h2, h3, h4, h5, h6 {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
