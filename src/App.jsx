@@ -88,7 +88,8 @@ function App() {
     const section = document.getElementById(sectionId);
     if (!section) return;
 
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    section.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
   }, []);
 
   const handleTrackSelect = useCallback(
@@ -172,7 +173,7 @@ function App() {
 
   return (
     <>
-      <a href="#hero" className="skip-link">
+      <a href="#program-tracks" className="skip-link">
         Skip to content
       </a>
 
@@ -190,18 +191,34 @@ function App() {
           </a>
           <nav className="site-nav__links" aria-label="Primary">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.id}
-                type="button"
+                href={`#${link.id}`}
                 className={`site-nav__link ${
                   activeNavSection === link.id ? "is-active" : ""
                 }`}
-                onClick={() => scrollToSection(link.id)}
+                aria-current={activeNavSection === link.id ? "page" : undefined}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToSection(link.id);
+                }}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </nav>
+          <div className="site-nav__cta">
+            <a
+              className="btn btn--nav"
+              href="#contact"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection("contact");
+              }}
+            >
+              Join Waitlist
+            </a>
+          </div>
         </div>
       </header>
 
@@ -218,20 +235,25 @@ function App() {
           <div className="story-canvas__layer story-canvas__layer--beams" />
           <div className="story-canvas__layer story-canvas__layer--grain" />
         </div>
+        <div className="wipe-transition" aria-hidden="true" />
 
         <section id="hero" ref={setHeroSectionRef} className="hero chapter">
           <div className="hero__content">
-            <p className="hero__eyebrow">Vedam Tech Fest 2026</p>
+            <p className="hero__eyebrow">NOESIS 2026</p>
             <h1 className="hero__title">NOESIS</h1>
             <p className="hero__subtitle">
-              India&apos;s chaptered tech-fest experience where code, culture, competition, and
-              community collide.
+              India&apos;s most immersive student tech-fest where builders, gamers, founders, and
+              performers share one stage.
             </p>
+            <div className="hero__details">
+              <span>January 16-18, 2026 · Vedam College, India</span>
+              <span>48+ Hours · 20+ Experiences · 500+ Participants</span>
+            </div>
 
             <ul className="hero__meta" aria-label="Festival overview">
-              <li>48+ Hours</li>
-              <li>20+ Experiences</li>
-              <li>500+ Participants</li>
+              <li>Live Tracks</li>
+              <li>Flagship Challenges</li>
+              <li>Creator Showcase</li>
             </ul>
 
             <div className="hero__actions">
@@ -242,7 +264,14 @@ function App() {
               >
                 Explore Program Tracks
               </button>
-              <a className="btn btn--ghost" href="mailto:hello@noesis.in">
+              <a
+                className="btn btn--ghost"
+                href="#contact"
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToSection("contact");
+                }}
+              >
                 Contact Organizers
               </a>
             </div>
@@ -288,6 +317,20 @@ function App() {
               Partner with NOESIS to power the next generation of student talent, innovation, and
               campus-scale cultural energy.
             </p>
+            <div className="sponsor-impact">
+              <article>
+                <h3>Audience Reach</h3>
+                <p>Student builders, competitive teams, and campus creators across India.</p>
+              </article>
+              <article>
+                <h3>Brand Moments</h3>
+                <p>Live activations, challenge naming rights, and immersive showcase spaces.</p>
+              </article>
+              <article>
+                <h3>Year-Round Funnel</h3>
+                <p>Digital lead capture, campus ambassadors, and curated post-fest hiring access.</p>
+              </article>
+            </div>
             <div className="sponsor-grid" role="list" aria-label="Sponsor slots">
               {["Title Partner", "Innovation Partner", "Experience Partner", "Community Partner"].map(
                 (slot) => (
@@ -297,6 +340,12 @@ function App() {
                   </article>
                 )
               )}
+            </div>
+            <div className="sponsor-cta">
+              <a className="btn btn--primary" href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsorship">
+                Request Sponsorship Deck
+              </a>
+              <span>Dedicated partnership lanes for tech, gaming, and culture.</span>
             </div>
           </div>
         </section>
@@ -309,13 +358,27 @@ function App() {
               NOESIS is Vedam&apos;s duality-driven festival system where engineering discipline
               and creative expression operate as one.
             </p>
+            <div className="about-grid">
+              <article>
+                <h3>Festival Format</h3>
+                <p>Five tracks, curated challenges, and an always-on stage for founders and performers.</p>
+              </article>
+              <article>
+                <h3>Community</h3>
+                <p>Student-led organization with mentors, alumni, and partner ecosystems.</p>
+              </article>
+              <article>
+                <h3>Outcomes</h3>
+                <p>Real product demos, team tryouts, portfolio showcases, and hiring-ready talent.</p>
+              </article>
+            </div>
             <div className="about-stats" role="list" aria-label="Festival stats">
               <article className="about-stats__item" role="listitem">
                 <h3>48+</h3>
                 <p>Hours</p>
               </article>
               <article className="about-stats__item" role="listitem">
-                <h3>5</h3>
+                <h3>6</h3>
                 <p>Program Tracks</p>
               </article>
               <article className="about-stats__item" role="listitem">
@@ -334,13 +397,34 @@ function App() {
               Registrations open soon. Connect for partnerships, speaker spots, and collaboration
               opportunities.
             </p>
+            <div className="contact-grid">
+              <article>
+                <h3>Students</h3>
+                <p>Compete, create, and showcase your work across tech, culture, and esports tracks.</p>
+              </article>
+              <article>
+                <h3>Partners</h3>
+                <p>Bring brand activations, mentorship, and prize pools to the NOESIS floor.</p>
+              </article>
+              <article>
+                <h3>Speakers</h3>
+                <p>Share founder journeys, engineering playbooks, and creative sessions.</p>
+              </article>
+            </div>
             <div className="contact-actions">
               <a href="mailto:hello@noesis.in" className="btn btn--primary">
-                hello@noesis.in
+                Email Organizers
               </a>
-              <button type="button" className="btn btn--disabled" disabled aria-disabled="true">
-                Register (Coming Soon)
-              </button>
+              <a
+                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Interest"
+                className="btn btn--ghost"
+              >
+                Join the Waitlist
+              </a>
+            </div>
+            <div className="contact-info">
+              <span>Partnerships · Speakers · Community</span>
+              <span>hello@noesis.in</span>
             </div>
             <footer className="footer">
               <p>© 2026 NOESIS — Vedam Tech Fest. Designed for a scroll-driven festival story.</p>

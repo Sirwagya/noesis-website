@@ -1,10 +1,11 @@
-export function ProgramCard({ item, variant = "default", depthLayer = 2, lane = "deck" }) {
+export function ProgramCard({ item, variant = "default", className = "" }) {
+  const variants = Array.isArray(variant) ? variant : [variant];
+  const variantClass = variants.map((entry) => `program-card--${entry}`).join(" ");
+
   return (
     <article
-      className={`program-card program-card--${variant} program-card--layer-${depthLayer}`}
+      className={`program-card ${variantClass} ${className}`.trim()}
       aria-label={item.title}
-      data-depth={String(depthLayer)}
-      data-lane={lane}
     >
       <span className="program-card__accent" aria-hidden="true" />
       <div className="program-card__meta">

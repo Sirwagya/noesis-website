@@ -6,16 +6,19 @@ let isRegistered = false;
 const MOTION_PROFILE = {
   desktop: {
     nav: { end: "+=420", scrub: 0.32 },
-    hero: { end: "+=130%", scrub: 0.28 },
+    hero: { end: "+=100%", scrub: 0.24 },
+    wipe: { scrub: 0.24 },
     overview: {
-      endFactor: 108,
-      scrub: 0.32,
+      start: "top+=10% top",
+      endFactor: 92,
+      scrub: 0.28,
       parallax: { from: -28, to: 24, scrub: 0.45 },
     },
     chapter: {
       revealScrub: 0.34,
       parallaxScrub: 0.45,
-      microPinEnd: "+=24%",
+      stageScrub: 0.34,
+      microPinEnd: "+=20%",
       microPinScrub: 0.46,
       layerShift: {
         deep: { from: -28, to: 26 },
@@ -23,7 +26,7 @@ const MOTION_PROFILE = {
         soft: { from: -16, to: 14 },
       },
     },
-    featured: { fromY: -6, toY: 10, scrub: 0.36 },
+    featured: { fromY: -5, toY: 9, scrub: 0.36 },
     cards: {
       fromYFactor: -4,
       toYFactor: 8,
@@ -57,10 +60,12 @@ const MOTION_PROFILE = {
   },
   mobile: {
     nav: { end: "+=320", scrub: 0.32 },
-    hero: { end: "+=72%", scrub: 0.26 },
+    hero: { end: "+=64%", scrub: 0.24 },
+    wipe: { scrub: 0.2 },
     overview: {
-      endFactor: 88,
-      scrub: 0.3,
+      start: "top+=8% top",
+      endFactor: 76,
+      scrub: 0.26,
       parallax: { from: -14, to: 12, scrub: 0.4 },
     },
     chapter: {
@@ -204,6 +209,58 @@ function createChapterPulseToggles(chapters, pulseConfig) {
   });
 }
 
+function createWipeScene({ hero, overview, wipeElement, scrub }) {
+  if (!hero || !overview || !wipeElement) {
+    return;
+  }
+
+  gsap.set(wipeElement, { autoAlpha: 0, yPercent: 100 });
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: overview,
+        start: "top 96%",
+        end: "top 36%",
+        scrub,
+      },
+    })
+    .to(
+      hero,
+      {
+        "--hero-atmos-opacity": 0.38,
+        ease: "none",
+      },
+      0
+    )
+    .to(
+      overview,
+      {
+        "--overview-atmos-opacity": 0.88,
+        ease: "none",
+      },
+      0
+    )
+    .to(
+      wipeElement,
+      {
+        autoAlpha: 0.8,
+        yPercent: 0,
+        ease: "none",
+      },
+      0.08
+    )
+    .to(
+      wipeElement,
+      {
+        autoAlpha: 0,
+        yPercent: -104,
+        ease: "none",
+      },
+      0.56
+    );
+}
+
 export function setupScrollScenes({
   heroRef,
   overviewRef,
@@ -223,6 +280,7 @@ export function setupScrollScenes({
 
   const mm = gsap.matchMedia();
   const nav = document.querySelector(".site-nav");
+  const pageShell = document.querySelector(".page-shell");
   const staticSections = Array.from(document.querySelectorAll(".section"));
   const allChapters = Array.from(document.querySelectorAll(".chapter, .section"));
   const storyCanvasLayers = {
@@ -236,14 +294,28 @@ export function setupScrollScenes({
     const config = MOTION_PROFILE.desktop;
     const hero = heroRef.current;
     const overview = overviewRef.current;
+    const wipeElement = document.querySelector(".wipe-transition");
 
     if (!hero || !overview) {
       return;
     }
 
+    if (pageShell) {
+      gsap.set(pageShell, {
+        "--hero-atmos-opacity": 1,
+        "--overview-atmos-opacity": 0.48,
+      });
+    }
+
     createNavScene(nav, config.nav);
     createChapterPulseToggles(allChapters, config.pulse);
     createCanvasScene(storyCanvasLayers, config.canvas);
+    createWipeScene({
+      hero,
+      overview,
+      wipeElement,
+      scrub: config.wipe.scrub,
+    });
 
     const heroTitle = hero.querySelector(".hero__title");
     const heroRevealItems = [
@@ -254,6 +326,11 @@ export function setupScrollScenes({
     ].filter(Boolean);
 
     gsap.set(heroRevealItems, { y: 34, opacity: 0 });
+    const overviewHeadline = overview.querySelector(".program-overview__headline");
+    const overviewSummary = overview.querySelector(".program-overview__summary");
+    const railItems = overview.querySelectorAll(".track-rail__item");
+    gsap.set([overviewHeadline, overviewSummary], { y: 16, autoAlpha: 0 });
+    gsap.set(railItems, { y: 14, autoAlpha: 0 });
 
     gsap
       .timeline({
@@ -294,7 +371,7 @@ export function setupScrollScenes({
       .timeline({
         scrollTrigger: {
           trigger: overview,
-          start: "top top",
+          start: config.overview.start,
           end: `+=${trackCount * config.overview.endFactor}%`,
           scrub: config.overview.scrub,
           pin: true,
@@ -313,22 +390,22 @@ export function setupScrollScenes({
         },
       })
       .fromTo(
-        overview.querySelector(".program-overview__headline"),
-        { y: 26, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.28, ease: "none" },
-        0
+        overviewHeadline,
+        { y: 14, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.18, ease: "none" },
+        0.02
       )
       .fromTo(
-        overview.querySelector(".program-overview__summary"),
-        { y: 22, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3, ease: "none" },
-        0.06
+        overviewSummary,
+        { y: 14, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 0.2, ease: "none" },
+        0.08
       )
       .fromTo(
-        overview.querySelectorAll(".track-rail__item"),
-        { y: 12, opacity: 0.4 },
-        { y: 0, opacity: 1, stagger: 0.05, duration: 0.28, ease: "none" },
-        0.1
+        railItems,
+        { y: 12, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, stagger: 0.04, duration: 0.2, ease: "none" },
+        0.18
       );
 
     gsap.fromTo(
@@ -351,9 +428,12 @@ export function setupScrollScenes({
         return;
       }
 
-      const header = element.querySelector(".track-chapter__header");
+      const stage = element.querySelector(".track-chapter__title-tower");
       const featured = element.querySelector(".program-card--featured");
       const cards = Array.from(element.querySelectorAll(".program-card"));
+      const deckCards = cards.filter((card) => !card.classList.contains("program-card--featured"));
+      const beatRows = Math.max(Math.ceil(deckCards.length / 2), 1);
+      const beatCount = Math.max(beatRows + 1, 2);
       const shift = getDesktopLayerShift(element.dataset.parallaxPreset);
 
       ScrollTrigger.create({
@@ -403,13 +483,28 @@ export function setupScrollScenes({
         }
       );
 
-      if (header) {
+      if (stage) {
+        gsap.fromTo(
+          stage,
+          { yPercent: -3 },
+          {
+            yPercent: 4,
+            ease: "none",
+            scrollTrigger: {
+              trigger: element,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: config.chapter.stageScrub,
+            },
+          }
+        );
+
         ScrollTrigger.create({
           trigger: element,
           start: "top top+=108",
           end: config.chapter.microPinEnd,
           scrub: config.chapter.microPinScrub,
-          pin: header,
+          pin: stage,
           pinSpacing: true,
         });
       }
@@ -421,6 +516,12 @@ export function setupScrollScenes({
             start: "top bottom",
             end: "bottom top",
             scrub: config.cards.scrub,
+            snap: {
+              snapTo: gsap.utils.snap(1 / (beatCount - 1)),
+              duration: { min: 0.08, max: 0.24 },
+              delay: 0,
+              ease: "power1.out",
+            },
           },
         })
         .fromTo(
@@ -430,7 +531,7 @@ export function setupScrollScenes({
           0
         )
         .fromTo(
-          cards,
+          deckCards,
           {
             yPercent: (_, target) =>
               config.cards.fromYFactor * Number(target.dataset.depth || "2"),
@@ -495,17 +596,36 @@ export function setupScrollScenes({
     const config = MOTION_PROFILE.mobile;
     const hero = heroRef.current;
     const overview = overviewRef.current;
+    const wipeElement = document.querySelector(".wipe-transition");
 
     if (!hero || !overview) {
       return;
     }
 
+    if (pageShell) {
+      gsap.set(pageShell, {
+        "--hero-atmos-opacity": 1,
+        "--overview-atmos-opacity": 0.48,
+      });
+    }
+
     createNavScene(nav, config.nav);
     createChapterPulseToggles(allChapters, config.pulse);
     createCanvasScene(storyCanvasLayers, config.canvas);
+    createWipeScene({
+      hero,
+      overview,
+      wipeElement,
+      scrub: config.wipe.scrub,
+    });
 
     const heroContent = hero.querySelectorAll(".hero__content > *");
     gsap.set(heroContent, { y: 18, opacity: 0 });
+    const mobileOverviewHeadline = overview.querySelector(".program-overview__headline");
+    const mobileOverviewSummary = overview.querySelector(".program-overview__summary");
+    const mobileRailItems = overview.querySelectorAll(".track-rail__item");
+    gsap.set([mobileOverviewHeadline, mobileOverviewSummary], { y: 12, autoAlpha: 0 });
+    gsap.set(mobileRailItems, { y: 10, autoAlpha: 0 });
 
     gsap
       .timeline({
@@ -531,7 +651,7 @@ export function setupScrollScenes({
       .timeline({
         scrollTrigger: {
           trigger: overview,
-          start: "top top",
+          start: config.overview.start,
           end: `+=${trackCount * config.overview.endFactor}%`,
           scrub: config.overview.scrub,
           pin: true,
@@ -550,16 +670,16 @@ export function setupScrollScenes({
         },
       })
       .fromTo(
-        overview.querySelectorAll(".program-overview__headline, .program-overview__summary"),
-        { y: 16, opacity: 0.18 },
-        { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
-        0
+        [mobileOverviewHeadline, mobileOverviewSummary],
+        { y: 12, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, stagger: 0.04, duration: 0.18, ease: "none" },
+        0.02
       )
       .fromTo(
-        overview.querySelectorAll(".track-rail__item"),
-        { y: 8, opacity: 0.45 },
-        { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
-        0.06
+        mobileRailItems,
+        { y: 10, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, stagger: 0.04, duration: 0.18, ease: "none" },
+        0.12
       );
 
     gsap.fromTo(
@@ -602,7 +722,7 @@ export function setupScrollScenes({
           },
         })
         .fromTo(
-          element.querySelectorAll(".track-chapter__header, .program-card"),
+          element.querySelectorAll(".track-chapter__title-tower, .program-card"),
           { y: 18, opacity: 0.2 },
           { y: 0, opacity: 1, stagger: 0.04, duration: 0.18, ease: "none" },
           0

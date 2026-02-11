@@ -12,11 +12,12 @@ const ARTIFACT_ROOT = path.join(ROOT, "artifacts", "screenshots");
 const sectionIds = [
   "hero",
   "program-tracks",
-  "track-tech",
-  "track-robotics",
-  "track-e-cell",
-  "track-e-sports",
+  "track-tech-coding",
+  "track-tech-talks",
+  "track-business",
   "track-cultural",
+  "track-esports",
+  "track-robotics",
   "sponsors",
   "about",
   "contact",
@@ -24,14 +25,20 @@ const sectionIds = [
 
 const transitionCheckpoints = [
   {
+    id: "transition-hero-to-program-wipe",
+    from: "hero",
+    to: "program-tracks",
+    offsetFactor: 0.32,
+  },
+  {
     id: "transition-program-to-track-tech",
     from: "program-tracks",
-    to: "track-tech",
+    to: "track-tech-coding",
     offsetFactor: 0.32,
   },
   {
     id: "transition-track-to-sponsors",
-    from: "track-cultural",
+    from: "track-robotics",
     to: "sponsors",
     offsetFactor: 0.28,
   },
