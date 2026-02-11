@@ -463,6 +463,11 @@
   background: rgba(16, 21, 35, 0.55);
 }
 
+.btn--compact {
+  padding: 0.52rem 0.92rem;
+  font-size: 0.72rem;
+}
+
 .btn--disabled {
   color: rgba(246, 248, 255, 0.55);
   border-color: rgba(141, 161, 218, 0.2);
@@ -584,6 +589,13 @@
   margin-top: var(--space-sm);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.program-overview__actions {
+  margin-top: var(--space-sm);
+  display: flex;
+  justify-content: center;
   gap: var(--space-sm);
 }
 
@@ -843,13 +855,10 @@
     ),
     radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.03), transparent 38%);
   border-radius: var(--radius-lg);
-  padding: 1.2rem;
-  min-height: 14.5rem;
   box-shadow:
     0 12px 26px rgba(5, 8, 17, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  display: grid;
-  gap: 0.82rem;
+  display: block;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -868,6 +877,13 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+.program-card[open] {
+  border-color: rgba(160, 179, 236, 0.58);
+  box-shadow:
+    0 16px 34px rgba(5, 8, 17, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 .program-card__accent {
   position: absolute;
   left: 0;
@@ -876,6 +892,7 @@
   width: 2px;
   background: linear-gradient(180deg, var(--track-accent-start), var(--track-accent-end));
   opacity: 0.78;
+  pointer-events: none;
 }
 
 .program-card::after {
@@ -893,8 +910,6 @@
 }
 
 .program-card--featured {
-  padding: 1.4rem;
-  min-height: 14rem;
   background:
     linear-gradient(
       164deg,
@@ -912,10 +927,6 @@
   box-shadow:
     0 8px 22px rgba(5, 8, 17, 0.26),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.program-card {
-  min-height: 14.5rem;
 }
 
 .program-card__meta {
@@ -941,13 +952,10 @@
 
 .program-card__title,
 .program-card__description,
-.program-card__footer {
+.program-card__footer,
+.program-card__toggle {
   position: relative;
   z-index: 1;
-}
-
-.program-card--slot-deck {
-  min-height: 12.8rem;
 }
 
 .program-card__meta {
@@ -1007,6 +1015,106 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
+}
+
+.program-card__summary {
+  list-style: none;
+  display: grid;
+  gap: 0.82rem;
+  padding: 1.2rem;
+  margin: 0;
+  cursor: pointer;
+  min-height: 14.5rem;
+}
+
+.program-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+.program-card__summary::marker {
+  content: "";
+}
+
+.program-card--featured .program-card__summary {
+  padding: 1.4rem;
+  min-height: 14rem;
+}
+
+.program-card--slot-deck .program-card__summary {
+  min-height: 12.8rem;
+}
+
+.program-card__toggle {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.program-card__details {
+  border-top: 1px solid rgba(124, 148, 208, 0.28);
+  padding: 1rem 1.2rem 1.2rem;
+  display: grid;
+  gap: 0.9rem;
+  color: var(--text-1);
+}
+
+.program-card__details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.2rem;
+}
+
+.program-card__detail {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.86rem;
+}
+
+.program-card__detail span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: var(--text-2);
+}
+
+.program-card__detail strong {
+  color: var(--text-0);
+  font-weight: 600;
+}
+
+.program-card__detail--full {
+  grid-column: 1 / -1;
+}
+
+.program-card__detail ul {
+  margin: 0.2rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text-1);
+  display: grid;
+  gap: 0.25rem;
+}
+
+.program-card__details-empty {
+  margin: 0;
+  color: var(--text-2);
+}
+
+.program-card__note {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.82rem;
+}
+
+.program-card__actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.program-card__cta {
+  align-self: flex-start;
 }
 
 .program-card__prize {
@@ -1224,6 +1332,10 @@
   .about-grid,
   .contact-grid,
   .sponsor-panel__content ul {
+    grid-template-columns: 1fr;
+  }
+
+  .program-card__details-grid {
     grid-template-columns: 1fr;
   }
 

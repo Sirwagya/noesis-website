@@ -61,18 +61,34 @@ export const trackMeta = [
   },
 ];
 
-export const programItems = [
+export const UNSTOP_MAIN_URL =
+  "https://unstop.com/college-fests/noesis-vedam-school-of-technology-439395";
+
+const rawProgramItems = [
   {
     id: "scratch-that-code",
-    title: "Scratch that Code",
+    title: "Scratch That Code",
     trackId: "tech-coding",
     tagline: "Sprintathon",
     description:
-      "8-hour hackathon sprint where innovation meets speed. Build, code, and ship under pressure.",
+      "An 8-hour offline hackathon where teams build on a problem statement. A mid-way twist can shift the entire approach.",
     prizeText: "INR 50,000",
     entryType: "paid",
     priority: 10,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/hackathons/scratch-that-code-8-hour-hackathon-noesis-vedam-school-of-technology-1635489",
+    details: {
+      teamSize: "3 - 5 members",
+      location:
+        "Vedam Campus, 5th Floor, School of Engineering, Ajeenkya DY Patil University, Pune",
+      date: "February 21, 2026",
+      deadline: "February 21, 2026, 06:30 PM (CUT)",
+      fee: "₹300",
+      totalPrize: "₹50,000",
+      prizes: ["1st Place: ₹25,000", "2nd Place: ₹15,000", "3rd Place: ₹10,000"],
+      note: "Deadline listed in CUT on Unstop. Please verify local IST timing.",
+    },
   },
   {
     id: "codeblitz",
@@ -80,11 +96,22 @@ export const programItems = [
     trackId: "tech-coding",
     tagline: "ICPC Simulation",
     description:
-      "Competitive programming simulation with tight constraints, accuracy scoring, and leaderboard pressure.",
+      "Offline ICPC-style contest testing algorithmic speed and accuracy within a 3-hour window.",
     prizeText: "INR 45,000",
     entryType: "paid",
     priority: 9,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/hackathons/codeblitz-noesis-vedam-school-of-technology-1639000",
+    details: {
+      teamSize: "Individual participation",
+      location: "Vedam Campus, Pune",
+      date: "February 27, 2026",
+      time: "05:30 AM - 08:30 AM (CUT)",
+      deadline: "February 23, 2026, 06:30 PM",
+      eligibility: "Undergraduate, Postgraduate, Engineering, Management, and other streams.",
+      note: "Time listed in CUT on Unstop. Please verify local IST timing.",
+    },
   },
   {
     id: "peek-a-code",
@@ -160,15 +187,25 @@ export const programItems = [
   },
   {
     id: "vedam-stock-exchange",
-    title: "Vedam Stock Exchange",
+    title: "VSX: Buy or Bail",
     trackId: "business",
     tagline: "Buy or Bail",
     description:
-      "Live market simulation with strategy rounds, risk analysis, and timed decision windows.",
-    prizeText: "INR 35,000",
+      "Stock market simulation where teams manage a virtual portfolio. A mid-event market twist tests risk strategy.",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 8,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/vsx-buy-or-bail-stock-exchange-simulation-noesis-vedam-school-of-technology-1639218",
+    details: {
+      teamSize: "1 - 4 members",
+      location: "Vedam Campus, Pune",
+      date: "February 28, 2026",
+      deadline: "February 23, 2026, 06:30 PM",
+      totalPrize: "₹10,000",
+      prizes: ["1st Place: ₹5,000", "2nd Place: ₹3,000", "3rd Place: ₹2,000"],
+    },
   },
   {
     id: "unplugged",
@@ -208,15 +245,25 @@ export const programItems = [
   },
   {
     id: "step-up-showdown",
-    title: "Step Up Showdown",
+    title: "House & Pop",
     trackId: "cultural",
     tagline: "Dance Competition",
     description:
-      "Crew and solo dance face-off judged on choreography, stage control, and technical precision.",
-    prizeText: "Free Entry",
+      "Solo or group dance competition focused on House and Popping styles. Online qualifier leads to an offline finale.",
+    prizeText: "INR 10,000",
     entryType: "free",
     priority: 10,
     source: "event",
+    registrationUrl:
+      "https://unstop.com/events/house-pop-dance-competition-noesis-vedam-school-of-technology-1639249",
+    details: {
+      teamSize: "1 - 8 members",
+      stages:
+        "Online qualifier: submit a 1-minute video by February 20, 2026. Grand finals: live offline performance on February 28, 2026.",
+      deadline: "February 23, 2026, 06:30 PM",
+      totalPrize: "₹10,000",
+      prizes: ["1st Place: ₹5,000", "2nd Place: ₹3,000", "3rd Place: ₹2,000"],
+    },
   },
   {
     id: "after-hours",
@@ -256,15 +303,26 @@ export const programItems = [
   },
   {
     id: "chess",
-    title: "Chess",
+    title: "No Scope/Lock-In - Chess",
     trackId: "esports",
     tagline: "Mind Games",
     description:
-      "Rapid-format strategic chess matches with leaderboard progression and knockout finals.",
-    prizeText: "INR 20,000",
+      "Structured chess tournament with rapid rounds and high-pressure tie-breakers.",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 7,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/events/no-scopelock-in-chess-noesis-vedam-school-of-technology-1638846",
+    details: {
+      teamSize: "Individual participation",
+      location: "Vedam Campus, Pune",
+      date: "February 26, 2026",
+      deadline: "February 23, 2026, 06:30 PM",
+      format: "Rapid 10 minutes · Tie-breaker: 1 minute (Bullet)",
+      totalPrize: "₹10,000",
+      prizes: ["Winner: ₹5,000", "Runner Up: ₹3,000", "Second Runner Up: ₹2,000"],
+    },
   },
   {
     id: "fifa",
@@ -303,6 +361,11 @@ export const programItems = [
     source: "competition",
   },
 ];
+
+export const programItems = rawProgramItems.map((item) => ({
+  ...item,
+  registrationUrl: item.registrationUrl ?? UNSTOP_MAIN_URL,
+}));
 
 export const programTrackIds = trackMeta.map((track) => track.id);
 
