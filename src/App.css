@@ -656,8 +656,8 @@
 
 .track-chapter__layout {
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.6fr);
-  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.45fr);
+  gap: clamp(1.4rem, 2.2vw, 2.1rem);
   align-items: start;
 }
 
@@ -665,10 +665,10 @@
   position: sticky;
   top: 7.2rem;
   display: grid;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   align-self: start;
   align-content: start;
-  padding-left: 1.05rem;
+  padding-left: 0.9rem;
 }
 
 .track-chapter__title-tower::before {
@@ -695,7 +695,7 @@
 .track-chapter__header {
   display: grid;
   gap: var(--space-sm);
-  padding: 1.4rem 1.5rem;
+  padding: 1.2rem 1.3rem;
   border-radius: var(--radius-xl);
   border: 1px solid var(--track-border, rgba(126, 148, 214, 0.22));
   background:
@@ -752,14 +752,16 @@
 
 .track-chapter__featured-zone {
   position: relative;
-  min-height: 16.5rem;
+  min-height: 14rem;
+  display: grid;
+  align-items: stretch;
 }
 
 .track-chapter__featured-zone::before {
   content: "Featured";
   position: absolute;
-  top: -0.9rem;
-  right: 1.2rem;
+  top: -0.6rem;
+  right: 1rem;
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
   font-size: 0.68rem;
@@ -775,14 +777,12 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 2vw, 1.75rem);
+  align-items: stretch;
 }
 
-.track-chapter__deck .program-card--lane-left {
-  margin-top: 0.8rem;
-}
-
+.track-chapter__deck .program-card--lane-left,
 .track-chapter__deck .program-card--lane-right {
-  margin-top: -0.6rem;
+  margin-top: 0;
 }
 
 .program-card {
@@ -848,8 +848,8 @@
 }
 
 .program-card--featured {
-  padding: 1.56rem;
-  min-height: 16.25rem;
+  padding: 1.4rem;
+  min-height: 14rem;
   background:
     linear-gradient(
       164deg,
