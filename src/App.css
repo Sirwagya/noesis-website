@@ -683,8 +683,8 @@
 }
 
 .track-chapter__title-tower {
-  position: sticky;
-  top: 7.2rem;
+  position: relative;
+  top: auto;
   display: grid;
   gap: var(--space-sm);
   align-self: start;

@@ -111,18 +111,6 @@ function getDesktopLayerShift(preset) {
   return shift ?? MOTION_PROFILE.desktop.chapter.layerShift.mid;
 }
 
-function getLaneMultiplier(lane) {
-  if (lane === "left") {
-    return -1;
-  }
-
-  if (lane === "right") {
-    return 1;
-  }
-
-  return 0;
-}
-
 function createNavScene(nav, config) {
   if (!nav) {
     return;
@@ -428,12 +416,7 @@ export function setupScrollScenes({
         return;
       }
 
-      const stage = element.querySelector(".track-chapter__title-tower");
-      const featured = element.querySelector(".program-card--featured");
       const cards = Array.from(element.querySelectorAll(".program-card"));
-      const deckCards = cards.filter((card) => !card.classList.contains("program-card--featured"));
-      const beatRows = Math.max(Math.ceil(deckCards.length / 2), 1);
-      const beatCount = Math.max(beatRows + 1, 2);
       const shift = getDesktopLayerShift(element.dataset.parallaxPreset);
 
       ScrollTrigger.create({
@@ -483,76 +466,6 @@ export function setupScrollScenes({
         }
       );
 
-      if (stage) {
-        gsap.fromTo(
-          stage,
-          { yPercent: -3 },
-          {
-            yPercent: 4,
-            ease: "none",
-            scrollTrigger: {
-              trigger: element,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: config.chapter.stageScrub,
-            },
-          }
-        );
-
-        ScrollTrigger.create({
-          trigger: element,
-          start: "top top+=108",
-          end: config.chapter.microPinEnd,
-          scrub: config.chapter.microPinScrub,
-          pin: stage,
-          pinSpacing: true,
-        });
-      }
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: element,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: config.cards.scrub,
-            snap: {
-              snapTo: gsap.utils.snap(1 / (beatCount - 1)),
-              duration: { min: 0.08, max: 0.24 },
-              delay: 0,
-              ease: "power1.out",
-            },
-          },
-        })
-        .fromTo(
-          featured,
-          { yPercent: config.featured.fromY },
-          { yPercent: config.featured.toY, ease: "none" },
-          0
-        )
-        .fromTo(
-          deckCards,
-          {
-            yPercent: (_, target) =>
-              config.cards.fromYFactor * Number(target.dataset.depth || "2"),
-            xPercent: (_, target) => {
-              const depth = Number(target.dataset.depth || "2");
-              const lane = getLaneMultiplier(target.dataset.lane || "deck");
-              return lane * (config.cards.fromXBase + depth * config.cards.fromXDepth);
-            },
-          },
-          {
-            yPercent: (_, target) =>
-              config.cards.toYFactor * Number(target.dataset.depth || "2"),
-            xPercent: (_, target) => {
-              const depth = Number(target.dataset.depth || "2");
-              const lane = getLaneMultiplier(target.dataset.lane || "deck");
-              return lane * (config.cards.toXBase + depth * config.cards.toXDepth);
-            },
-            ease: "none",
-          },
-          0
-        );
     });
 
     staticSections.forEach((section) => {
@@ -702,8 +615,6 @@ export function setupScrollScenes({
         return;
       }
 
-      const cards = Array.from(element.querySelectorAll(".program-card"));
-
       ScrollTrigger.create({
         trigger: element,
         start: "top 68%",
@@ -743,38 +654,6 @@ export function setupScrollScenes({
         }
       );
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: element,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: config.cards.scrub,
-          },
-        })
-        .fromTo(
-          cards,
-          {
-            yPercent: (_, target) =>
-              config.cards.fromYFactor * Number(target.dataset.depth || "2"),
-            xPercent: (_, target) => {
-              const depth = Number(target.dataset.depth || "2");
-              const lane = getLaneMultiplier(target.dataset.lane || "deck");
-              return lane * (config.cards.fromXBase + depth * config.cards.fromXDepth);
-            },
-          },
-          {
-            yPercent: (_, target) =>
-              config.cards.toYFactor * Number(target.dataset.depth || "2"),
-            xPercent: (_, target) => {
-              const depth = Number(target.dataset.depth || "2");
-              const lane = getLaneMultiplier(target.dataset.lane || "deck");
-              return lane * (config.cards.toXBase + depth * config.cards.toXDepth);
-            },
-            ease: "none",
-          },
-          0
-        );
     });
 
     staticSections.forEach((section) => {
