@@ -6,6 +6,7 @@ import {
   programTrackIds,
   trackMeta,
 } from "./data/programTracksData";
+import { sponsorshipSections, sponsorshipTiers } from "./data/sponsorshipData";
 import { setupScrollScenes } from "./lib/scrollScenes";
 import "./App.css";
 
@@ -314,35 +315,55 @@ function App() {
             <p className="section__eyebrow">Partnerships</p>
             <h2 className="section__title">Sponsors</h2>
             <p className="section__lead">
-              Partner with NOESIS to power the next generation of student talent, innovation, and
-              campus-scale cultural energy.
+              Partner with NOESIS to reach high-signal builders, creators, and early founders across
+              India&apos;s fastest-growing tech ecosystem.
             </p>
-            <div className="sponsor-impact">
-              <article>
-                <h3>Audience Reach</h3>
-                <p>Student builders, competitive teams, and campus creators across India.</p>
-              </article>
-              <article>
-                <h3>Brand Moments</h3>
-                <p>Live activations, challenge naming rights, and immersive showcase spaces.</p>
-              </article>
-              <article>
-                <h3>Year-Round Funnel</h3>
-                <p>Digital lead capture, campus ambassadors, and curated post-fest hiring access.</p>
-              </article>
+            <div className="sponsor-accordion" role="list">
+              {sponsorshipTiers.map((tier) => (
+                <details key={tier.id} className="sponsor-panel" role="listitem">
+                  <summary className="sponsor-panel__summary">
+                    <div>
+                      <span className="sponsor-panel__title">{tier.name}</span>
+                      <span className="sponsor-panel__price">{tier.price}</span>
+                    </div>
+                    <span className="sponsor-panel__summary-text">{tier.summary}</span>
+                  </summary>
+                  <div className="sponsor-panel__content">
+                    <ul>
+                      {tier.benefits.map((benefit) => (
+                        <li key={benefit}>{benefit}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+              ))}
             </div>
-            <div className="sponsor-grid" role="list" aria-label="Sponsor slots">
-              {["Title Partner", "Innovation Partner", "Experience Partner", "Community Partner"].map(
-                (slot) => (
-                  <article key={slot} className="sponsor-card" role="listitem">
-                    <h3>{slot}</h3>
-                    <p>Partner Slots Opening Soon</p>
-                  </article>
-                )
-              )}
+
+            <div className="sponsor-accordion sponsor-accordion--secondary" role="list">
+              {sponsorshipSections.map((section) => (
+                <details key={section.id} className="sponsor-panel" role="listitem">
+                  <summary className="sponsor-panel__summary">
+                    <div>
+                      <span className="sponsor-panel__title">{section.title}</span>
+                    </div>
+                    <span className="sponsor-panel__summary-text">{section.summary}</span>
+                  </summary>
+                  <div className="sponsor-panel__content">
+                    <ul>
+                      {section.details.map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+              ))}
             </div>
+
             <div className="sponsor-cta">
-              <a className="btn btn--primary" href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsorship">
+              <a
+                className="btn btn--primary"
+                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsorship"
+              >
                 Request Sponsorship Deck
               </a>
               <span>Dedicated partnership lanes for tech, gaming, and culture.</span>

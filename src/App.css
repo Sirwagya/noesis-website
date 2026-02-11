@@ -1220,11 +1220,10 @@
   }
 
   .track-chapter__deck,
-  .sponsor-grid,
   .about-stats,
-  .sponsor-impact,
   .about-grid,
-  .contact-grid {
+  .contact-grid,
+  .sponsor-panel__content ul {
     grid-template-columns: 1fr;
   }
 
@@ -1300,7 +1299,7 @@
   }
 }
 
-.sponsor-impact,
+
 .about-grid,
 .contact-grid {
   display: grid;
@@ -1308,7 +1307,6 @@
   gap: var(--space-md);
 }
 
-.sponsor-impact article,
 .about-grid article,
 .contact-grid article {
   border-radius: var(--radius-lg);
@@ -1318,14 +1316,12 @@
   box-shadow: var(--shadow-md);
 }
 
-.sponsor-impact h3,
 .about-grid h3,
 .contact-grid h3 {
   margin: 0 0 0.4rem;
   font-size: 1rem;
 }
 
-.sponsor-impact p,
 .about-grid p,
 .contact-grid p {
   margin: 0;
@@ -1340,4 +1336,89 @@
   gap: var(--space-sm);
   flex-wrap: wrap;
   color: var(--text-2);
+}
+
+.sponsor-accordion {
+  margin-top: var(--space-sm);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.sponsor-accordion--secondary {
+  margin-top: var(--space-md);
+}
+
+.sponsor-panel {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(137, 157, 214, 0.2);
+  background: rgba(12, 18, 33, 0.55);
+  box-shadow: 0 12px 28px rgba(5, 8, 17, 0.28);
+  overflow: hidden;
+}
+
+.sponsor-panel__summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.2rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sponsor-panel__summary::-webkit-details-marker {
+  display: none;
+}
+
+.sponsor-panel__title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+  color: var(--text-0);
+}
+
+.sponsor-panel__price {
+  margin-left: 0.6rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(141, 161, 218, 0.4);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+.sponsor-panel__summary-text {
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.sponsor-panel__content {
+  padding: 0 1.2rem 1rem;
+  border-top: 1px solid rgba(120, 140, 196, 0.18);
+}
+
+.sponsor-panel__content ul {
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1.2rem;
+  list-style: none;
+  color: var(--text-2);
+  font-size: 0.88rem;
+}
+
+.sponsor-panel__content li::before {
+  content: "•";
+  margin-right: 0.4rem;
+  color: rgba(168, 188, 238, 0.6);
+}
+
+.sponsor-panel[open] {
+  background: rgba(14, 20, 35, 0.68);
+  border-color: rgba(160, 180, 236, 0.35);
+}
+
+.sponsor-panel:focus-within {
+  outline: 2px solid rgba(184, 156, 255, 0.4);
+  outline-offset: 2px;
 }
