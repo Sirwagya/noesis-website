@@ -1,7 +1,7 @@
 export const trackMeta = [
   {
     id: "tech-coding",
-    label: "Tech/Coding",
+    label: "Tech",
     description: "Algorithm battles, rapid prototyping, and challenge-driven coding formats.",
     accentStart: "#5b8cff",
     accentEnd: "#8a3ffc",

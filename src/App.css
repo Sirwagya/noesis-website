@@ -782,6 +782,29 @@
   align-items: stretch;
 }
 
+.track-chapter__deck {
+  position: relative;
+}
+
+.track-chapter__deck::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    180deg,
+    rgba(120, 140, 196, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 100% 240px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.track-chapter__deck > * {
+  position: relative;
+  z-index: 1;
+}
+
 .track-chapter__deck .program-card--span {
   position: relative;
 }
@@ -821,7 +844,7 @@
     radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.03), transparent 38%);
   border-radius: var(--radius-lg);
   padding: 1.2rem;
-  min-height: 13.5rem;
+  min-height: 14.5rem;
   box-shadow:
     0 12px 26px rgba(5, 8, 17, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
@@ -883,6 +906,28 @@
       color-mix(in srgb, var(--track-accent-start) 30%, transparent),
       color-mix(in srgb, var(--track-accent-end) 22%, transparent)
     );
+}
+
+.program-card--featured {
+  box-shadow:
+    0 8px 22px rgba(5, 8, 17, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.program-card {
+  min-height: 14.5rem;
+}
+
+.program-card__meta {
+  min-height: 2.2rem;
+  align-items: center;
+}
+
+.program-card__badge,
+.program-card__entry {
+  min-height: 1.6rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .program-card--span {
