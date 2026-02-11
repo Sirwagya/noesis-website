@@ -1,0 +1,35 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="720" rx="48" fill="transparent"/>
+  <g stroke="rgba(255,255,255,0.18)" stroke-width="1.5">
+    <path d="M90 120H300L360 180H540" />
+    <path d="M180 240H420L480 300H630" />
+    <path d="M110 380H260L320 440H520" />
+    <path d="M150 520H350L420 590H610" />
+    <path d="M260 90V210L320 270V390" />
+    <path d="M420 150V260L480 320V470" />
+    <path d="M520 220V340L580 400V560" />
+  </g>
+  <g fill="rgba(255,255,255,0.35)">
+    <circle cx="90" cy="120" r="6"/>
+    <circle cx="300" cy="120" r="5"/>
+    <circle cx="360" cy="180" r="6"/>
+    <circle cx="540" cy="180" r="5"/>
+    <circle cx="180" cy="240" r="6"/>
+    <circle cx="420" cy="240" r="5"/>
+    <circle cx="480" cy="300" r="6"/>
+    <circle cx="630" cy="300" r="5"/>
+    <circle cx="110" cy="380" r="6"/>
+    <circle cx="260" cy="380" r="5"/>
+    <circle cx="320" cy="440" r="6"/>
+    <circle cx="520" cy="440" r="5"/>
+    <circle cx="150" cy="520" r="6"/>
+    <circle cx="350" cy="520" r="5"/>
+    <circle cx="420" cy="590" r="6"/>
+    <circle cx="610" cy="590" r="5"/>
+  </g>
+  <g fill="rgba(120,180,255,0.6)">
+    <circle cx="260" cy="90" r="7"/>
+    <circle cx="420" cy="150" r="6"/>
+    <circle cx="520" cy="220" r="7"/>
+  </g>
+</svg>

@@ -305,53 +305,24 @@ export function setupScrollScenes({
       scrub: config.wipe.scrub,
     });
 
-    const heroTitle = hero.querySelector(".hero__title");
-    const heroRevealItems = [
-      hero.querySelector(".hero__eyebrow"),
-      hero.querySelector(".hero__subtitle"),
-      hero.querySelector(".hero__meta"),
-      hero.querySelector(".hero__actions"),
-    ].filter(Boolean);
-
-    gsap.set(heroRevealItems, { y: 34, opacity: 0 });
+    const heroScrollHint = hero.querySelector(".hero__scroll-hint");
     const overviewHeadline = overview.querySelector(".program-overview__headline");
     const overviewSummary = overview.querySelector(".program-overview__summary");
     const railItems = overview.querySelectorAll(".track-rail__item");
     gsap.set([overviewHeadline, overviewSummary], { y: 16, autoAlpha: 0 });
     gsap.set(railItems, { y: 14, autoAlpha: 0 });
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: "top top",
-          end: config.hero.end,
-          scrub: config.hero.scrub,
-          pin: true,
-          anticipatePin: 1,
-        },
-      })
-      .to(
-        heroTitle,
-        {
-          scale: 0.82,
-          yPercent: -14,
-          transformOrigin: "50% 50%",
-          ease: "none",
-        },
-        0
-      )
-      .to(
-        heroRevealItems,
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.08,
-          duration: 0.45,
-          ease: "none",
-        },
-        0.04
-      );
+    // hero entry is static; no pin or scroll-driven reveal for hero content
+
+    if (heroScrollHint) {
+      ScrollTrigger.create({
+        trigger: hero,
+        start: "top top+=2",
+        end: "bottom top",
+        onEnter: () => gsap.to(heroScrollHint, { autoAlpha: 0, duration: 0.2, ease: "none" }),
+        onLeaveBack: () => gsap.to(heroScrollHint, { autoAlpha: 1, duration: 0.2, ease: "none" }),
+      });
+    }
 
     const trackCount = Math.max(chapterElements.length, 1);
 

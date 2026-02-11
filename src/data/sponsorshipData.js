@@ -3,7 +3,7 @@ export const sponsorshipTiers = [
     id: "title",
     name: "Title Sponsor",
     price: "₹2.5L",
-    summary: "Fest co-branding and keynote presence across NOESIS.",
+    summary: "Fest co-branding + keynote presence across NOESIS.",
     benefits: [
       "Fest co-branding (“NOESIS presented by ___”)",
       "Opening ceremony mention",
@@ -28,7 +28,7 @@ export const sponsorshipTiers = [
     id: "powered-by",
     name: "Powered By",
     price: "₹1.5L",
-    summary: "Major event ownership plus premium on-ground visibility.",
+    summary: "Major event ownership + premium visibility.",
     benefits: [
       "Ownership of a major event or zone",
       "Dedicated workshop or challenge",
@@ -49,7 +49,7 @@ export const sponsorshipTiers = [
     id: "platinum",
     name: "Platinum",
     price: "₹75K",
-    summary: "Event-level branding with workshop association.",
+    summary: "Event branding + workshop association.",
     benefits: [
       "Event-level branding",
       "Workshop/competition association",
@@ -66,7 +66,7 @@ export const sponsorshipTiers = [
     id: "gold",
     name: "Gold",
     price: "₹50K",
-    summary: "Logo placement + social mentions + on-ground visibility.",
+    summary: "Logo placement + social mentions + visibility.",
     benefits: [
       "Logo placement on assets",
       "Social media mentions",
@@ -76,11 +76,53 @@ export const sponsorshipTiers = [
   },
 ];
 
+export const sponsorshipMetrics = [
+  {
+    label: "Audience",
+    value: "800–1000",
+    note: "Engaged builders, gamers, creators, founders",
+  },
+  {
+    label: "Instagram",
+    value: "4M+ views",
+    note: "5.5K followers (last 3 months)",
+  },
+  {
+    label: "LinkedIn",
+    value: "240K views",
+    note: "3K followers (last 3 months)",
+  },
+  {
+    label: "YouTube",
+    value: "5.1M views",
+    note: "12.2K subscribers (last 3 months)",
+  },
+];
+
+export const sponsorshipPillars = [
+  {
+    title: "Brand Visibility",
+    description: "Stage mentions, campus assets, and digital placements across NOESIS.",
+  },
+  {
+    title: "Engagement",
+    description: "Workshops, challenges, judging, and product demos with student teams.",
+  },
+  {
+    title: "Talent Access",
+    description: "Mentorship, hiring funnels, and opt-in resume access.",
+  },
+  {
+    title: "Creator Amplification",
+    description: "Influencer-led reach across tech and creator communities.",
+  },
+];
+
 export const sponsorshipSections = [
   {
     id: "audience",
     title: "Audience & Who Attends",
-    summary: "800–1000 engaged builders, creators, and early founders.",
+    summary: "Builders, creators, gamers, and early founders.",
     details: [
       "800–1000 highly engaged students",
       "Vedam + colleges across India",
@@ -91,7 +133,7 @@ export const sponsorshipSections = [
   {
     id: "visibility",
     title: "Brand Visibility",
-    summary: "High-signal campus visibility across on-ground assets.",
+    summary: "Campus visibility across on-ground assets.",
     details: [
       "Logo on posters, website, certificates, ID cards",
       "Standees, banners, backdrops, merchandise",
@@ -102,7 +144,7 @@ export const sponsorshipSections = [
   {
     id: "engagement",
     title: "Engagement",
-    summary: "Hands-on brand touchpoints beyond logo placement.",
+    summary: "Hands-on brand touchpoints beyond logos.",
     details: [
       "Workshops & challenges",
       "Judging & mentoring",
@@ -114,7 +156,7 @@ export const sponsorshipSections = [
   {
     id: "reach",
     title: "Digital Reach",
-    summary: "Multi-platform reach through Vedam’s channels.",
+    summary: "Multi-platform reach through Vedam channels.",
     details: [
       "Instagram: 5.5K followers · 4M+ views (last 3 months)",
       "LinkedIn: 3K followers · 240K views (last 3 months)",
@@ -137,7 +179,7 @@ export const sponsorshipSections = [
   {
     id: "why",
     title: "Why Sponsor NOESIS",
-    summary: "Early access to high‑signal builders and technologists.",
+    summary: "Early access to high-signal builders.",
     details: [
       "Access to early-stage builders & technologists",
       "Visibility among students with real execution mindset",

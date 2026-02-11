@@ -1,7 +1,10 @@
 import { ProgramCard } from "./ProgramCard";
 
-export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex }) {
+export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex, onOpen }) {
   const [featured, ...others] = items;
+  const handleOpen = (item) => {
+    onOpen?.(item, items);
+  };
 
   return (
     <section
@@ -46,6 +49,7 @@ export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex
                   depthLayer={featured.depthLayer}
                   lane="feature"
                   beatIndex={0}
+                  onOpen={handleOpen}
                 />
               ) : null}
               {others.map((item, index) => (
@@ -55,6 +59,7 @@ export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex
                   depthLayer={item.depthLayer}
                   lane={index % 2 === 0 ? "left" : "right"}
                   beatIndex={index + 1}
+                  onOpen={handleOpen}
                 />
               ))}
             </div>

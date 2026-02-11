@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TrackChapter } from "./components/TrackChapter";
 import { TrackRail } from "./components/TrackRail";
+import { ProgramDetailsModal } from "./components/ProgramDetailsModal";
 import {
   getProgramItemsByTrack,
   programTrackIds,
   trackMeta,
   UNSTOP_MAIN_URL,
 } from "./data/programTracksData";
-import { sponsorshipSections, sponsorshipTiers } from "./data/sponsorshipData";
+import {
+  sponsorshipMetrics,
+  sponsorshipPillars,
+  sponsorshipSections,
+  sponsorshipTiers,
+} from "./data/sponsorshipData";
 import { setupScrollScenes } from "./lib/scrollScenes";
 import "./App.css";
 
@@ -45,6 +51,7 @@ function App() {
   const [activeNavSection, setActiveNavSection] = useState("hero");
   const [activeTrackId, setActiveTrackId] = useState(trackMeta[0].id);
   const [navSolid, setNavSolid] = useState(false);
+  const [activeProgram, setActiveProgram] = useState(null);
 
   const sectionRefs = useRef(new Map());
   const heroRef = useRef(null);
@@ -101,6 +108,30 @@ function App() {
     },
     [scrollToSection]
   );
+
+  const handleProgramOpen = useCallback((item, list = []) => {
+    const index = list.findIndex((entry) => entry.id === item.id);
+    setActiveProgram({ item, list, index });
+  }, []);
+
+  const handleProgramClose = useCallback(() => {
+    setActiveProgram(null);
+  }, []);
+
+  const handleProgramNavigate = useCallback((direction) => {
+    setActiveProgram((current) => {
+      if (!current) return current;
+      const nextIndex = current.index + direction;
+      if (nextIndex < 0 || nextIndex >= current.list.length) {
+        return current;
+      }
+      return {
+        item: current.list[nextIndex],
+        list: current.list,
+        index: nextIndex,
+      };
+    });
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -212,11 +243,9 @@ function App() {
           <div className="site-nav__cta">
             <a
               className="btn btn--nav"
-              href="#contact"
-              onClick={(event) => {
-                event.preventDefault();
-                scrollToSection("contact");
-              }}
+              href={UNSTOP_MAIN_URL}
+              target="_blank"
+              rel="noreferrer"
             >
               Join Waitlist
             </a>
@@ -240,22 +269,18 @@ function App() {
         <div className="wipe-transition" aria-hidden="true" />
 
         <section id="hero" ref={setHeroSectionRef} className="hero chapter">
-          <div className="hero__content">
-            <div className="hero__brand">
+          <div className="hero__content hero__stacked">
+            <div className="hero__left">
+              <p className="hero__eyebrow">NOESIS 2026 · Vedam Tech Fest</p>
               <img className="hero__logo" src="/noesis-logo.png" alt="NOESIS" />
               <div className="hero__tagline-shell">
-                <p className="hero__tagline">Where Innovation Meets Imagination</p>
+                <h1 className="hero__title hero__tagline">Build the Future. Own the Stage.</h1>
                 <p className="hero__tagline hero__tagline--reflection" aria-hidden="true">
-                  Where Innovation Meets Imagination
+                  Build the Future. Own the Stage.
                 </p>
               </div>
-            </div>
-            <div className="hero__copy">
-              <p className="hero__summary">
-                Noesis is the flagship techno-cultural fest where innovation and imagination collide
-                to build, break, and rebuild for a fast-changing world. It is a living ground where
-                technology, creativity, business, and mentorship exist on the same plane,
-                dissolving the line between learning and doing.
+              <p className="hero__summary hero__subtitle">
+                India’s immersive student tech‑fest.
               </p>
               <div className="hero__actions">
                 <button
@@ -277,7 +302,20 @@ function App() {
                 </a>
               </div>
             </div>
+            <div className="hero__ambient" aria-hidden="true">
+              <img className="hero__ambient-image" src="/hero-circuit.svg" alt="" />
+            </div>
           </div>
+          <a
+            className="hero__scroll-hint"
+            href="#program-tracks"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection("program-tracks");
+            }}
+          >
+            Scroll to explore tracks <span aria-hidden="true">↓</span>
+          </a>
         </section>
 
         <section
@@ -318,6 +356,7 @@ function App() {
             sectionId={`track-${track.id}`}
             chapterRef={registerSectionRef(`track-${track.id}`)}
             chapterIndex={chapterIndex}
+            onOpen={handleProgramOpen}
           />
         ))}
 
@@ -329,7 +368,26 @@ function App() {
               Partner with NOESIS to reach high-signal builders, creators, and early founders across
               India&apos;s fastest-growing tech ecosystem.
             </p>
-            <div className="sponsor-accordion" role="list">
+            <div className="sponsor-metrics" role="list">
+              {sponsorshipMetrics.map((metric) => (
+                <article key={metric.label} className="sponsor-metric-card" role="listitem">
+                  <span className="sponsor-metric-card__label">{metric.label}</span>
+                  <strong className="sponsor-metric-card__value">{metric.value}</strong>
+                  <span className="sponsor-metric-card__note">{metric.note}</span>
+                </article>
+              ))}
+            </div>
+
+            <div className="sponsor-pillars">
+              {sponsorshipPillars.map((pillar) => (
+                <article key={pillar.title} className="sponsor-pillar">
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.description}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="sponsor-accordion sponsor-accordion--tiers" role="list">
               {sponsorshipTiers.map((tier) => (
                 <details key={tier.id} className="sponsor-panel" role="listitem">
                   <summary className="sponsor-panel__summary">
@@ -377,7 +435,13 @@ function App() {
               >
                 Request Sponsorship Deck
               </a>
-              <span>Dedicated partnership lanes for tech, gaming, and culture.</span>
+              <a
+                className="btn btn--ghost btn--compact"
+                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsor%20Call"
+              >
+                Schedule a Call
+              </a>
+              <span>Custom packages for tech, gaming, and culture partners.</span>
             </div>
           </div>
         </section>
@@ -464,6 +528,16 @@ function App() {
           </div>
         </section>
       </main>
+      <ProgramDetailsModal
+        item={activeProgram?.item ?? null}
+        hasPrev={Boolean(activeProgram && activeProgram.index > 0)}
+        hasNext={
+          Boolean(activeProgram && activeProgram.list.length - 1 > activeProgram.index)
+        }
+        onPrev={() => handleProgramNavigate(-1)}
+        onNext={() => handleProgramNavigate(1)}
+        onClose={handleProgramClose}
+      />
     </>
   );
 }
