@@ -38,31 +38,26 @@ export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex
           </aside>
 
           <div className="track-chapter__deck-shell track-chapter__deck-beat">
-            {featured ? (
-              <div className="track-chapter__featured-zone">
+            <div className="track-chapter__deck" role="list" aria-label={`${track.label} programs`}>
+              {featured ? (
                 <ProgramCard
                   item={featured}
-                  variant="featured"
+                  variant={["featured", "span"]}
                   depthLayer={featured.depthLayer}
                   lane="feature"
                   beatIndex={0}
                 />
-              </div>
-            ) : null}
-
-            {others.length > 0 ? (
-              <div className="track-chapter__deck" role="list" aria-label={`${track.label} programs`}>
-                {others.map((item, index) => (
-                  <ProgramCard
-                    key={item.id}
-                    item={item}
-                    depthLayer={item.depthLayer}
-                    lane={index % 2 === 0 ? "left" : "right"}
-                    beatIndex={index + 1}
-                  />
-                ))}
-              </div>
-            ) : null}
+              ) : null}
+              {others.map((item, index) => (
+                <ProgramCard
+                  key={item.id}
+                  item={item}
+                  depthLayer={item.depthLayer}
+                  lane={index % 2 === 0 ? "left" : "right"}
+                  beatIndex={index + 1}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

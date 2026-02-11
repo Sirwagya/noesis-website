@@ -239,41 +239,41 @@ function App() {
 
         <section id="hero" ref={setHeroSectionRef} className="hero chapter">
           <div className="hero__content">
-            <p className="hero__eyebrow">NOESIS 2026</p>
-            <h1 className="hero__title">NOESIS</h1>
-            <p className="hero__subtitle">
-              India&apos;s most immersive student tech-fest where builders, gamers, founders, and
-              performers share one stage.
-            </p>
-            <div className="hero__details">
-              <span>January 16-18, 2026 · Vedam College, India</span>
-              <span>48+ Hours · 20+ Experiences · 500+ Participants</span>
+            <div className="hero__brand">
+              <img className="hero__logo" src="/noesis-logo.png" alt="NOESIS" />
+              <div className="hero__tagline-shell">
+                <p className="hero__tagline">Where Innovation Meets Imagination</p>
+                <p className="hero__tagline hero__tagline--reflection" aria-hidden="true">
+                  Where Innovation Meets Imagination
+                </p>
+              </div>
             </div>
-
-            <ul className="hero__meta" aria-label="Festival overview">
-              <li>Live Tracks</li>
-              <li>Flagship Challenges</li>
-              <li>Creator Showcase</li>
-            </ul>
-
-            <div className="hero__actions">
-              <button
-                type="button"
-                className="btn btn--primary"
-                onClick={() => scrollToSection("program-tracks")}
-              >
-                Explore Program Tracks
-              </button>
-              <a
-                className="btn btn--ghost"
-                href="#contact"
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToSection("contact");
-                }}
-              >
-                Contact Organizers
-              </a>
+            <div className="hero__copy">
+              <p className="hero__summary">
+                Noesis is the flagship techno-cultural fest where innovation and imagination collide
+                to build, break, and rebuild for a fast-changing world. It is a living ground where
+                technology, creativity, business, and mentorship exist on the same plane,
+                dissolving the line between learning and doing.
+              </p>
+              <div className="hero__actions">
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  onClick={() => scrollToSection("program-tracks")}
+                >
+                  Explore Program Tracks
+                </button>
+                <a
+                  className="btn btn--ghost"
+                  href="#contact"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    scrollToSection("contact");
+                  }}
+                >
+                  Contact Organizers
+                </a>
+              </div>
             </div>
           </div>
         </section>

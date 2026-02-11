@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { UI_CONSTANTS } from '../constants/ui'
+import { useEffect, useMemo, useState } from 'react'
 import { ANIMATION_DURATIONS } from '../constants/animations'
 
 /**
@@ -9,31 +8,31 @@ import { ANIMATION_DURATIONS } from '../constants/animations'
  * @returns {JSX.Element|null} Loader component or null when hidden
  */
 export function PageLoader() {
-  const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
+  const [isFading, setIsFading] = useState(false)
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+
+  const lines = useMemo(
+    () => ['Altering reality…', 'Loading up the Simulation…', 'Entering'],
+    [],
+  )
 
   useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval)
-          // Fade out after loading completes
-          setTimeout(() => {
-            setIsVisible(false)
-          }, ANIMATION_DURATIONS.PAGE_LOADER_FADE)
-          return 100
-        }
-        return prev + UI_CONSTANTS.PAGE_LOADER_INCREMENT
-      })
-    }, UI_CONSTANTS.PAGE_LOADER_INTERVAL)
+    if (!isVisible) {
+      document.body.style.overflow = ''
+      return
+    }
 
-    // Also check if page is actually loaded
+    document.body.style.overflow = 'hidden'
+
+    const minimumDuration = prefersReducedMotion ? 600 : 2600
+    const start = performance.now()
+    let loadResolved = false
+
     const handleLoad = () => {
-      setProgress(100)
-      setTimeout(() => {
-        setIsVisible(false)
-      }, ANIMATION_DURATIONS.PAGE_LOADER_FADE)
+      loadResolved = true
     }
 
     if (document.readyState === 'complete') {
@@ -42,28 +41,42 @@ export function PageLoader() {
       window.addEventListener('load', handleLoad)
     }
 
+    const tick = () => {
+      const elapsed = performance.now() - start
+      if (elapsed >= minimumDuration && loadResolved) {
+        setIsFading(true)
+        setTimeout(() => {
+          setIsVisible(false)
+        }, ANIMATION_DURATIONS.PAGE_LOADER_FADE)
+        return
+      }
+
+      requestAnimationFrame(tick)
+    }
+
+    requestAnimationFrame(tick)
+
     return () => {
-      clearInterval(interval)
+      document.body.style.overflow = ''
       window.removeEventListener('load', handleLoad)
     }
-  }, [])
+  }, [isVisible, prefersReducedMotion])
 
   if (!isVisible) return null
 
   return (
-    <div className={`page-loader ${!isVisible ? 'page-loader--hidden' : ''}`}>
-      <div className="page-loader__content">
-        <div className="page-loader__logo">
-          <img src="/noesis-logo.png" alt="NOESIS 2026" />
-        </div>
-        <div className="page-loader__progress">
-          <div 
-            className="page-loader__progress-bar"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <div className="page-loader__text">
-          Loading... <span className="page-loader__percentage">{progress}%</span>
+    <div className={`page-loader ${isFading ? 'page-loader--hidden' : ''}`}>
+      <div className="page-loader__content" aria-live="polite">
+        <div className="page-loader__lines">
+          {lines.map((line, index) => (
+            <p
+              key={line}
+              className="page-loader__line"
+              style={{ '--line-delay': `${index * 0.4}s` }}
+            >
+              {line}
+            </p>
+          ))}
         </div>
       </div>
     </div>
