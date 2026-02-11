@@ -1,0 +1,144 @@
+<svg width="900" height="1320" viewBox="0 0 900 1320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgDeep" x1="450" y1="0" x2="450" y2="1320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#161E44" stop-opacity="0.88" />
+      <stop offset="0.48" stop-color="#121A38" stop-opacity="0.64" />
+      <stop offset="1" stop-color="#0B1227" stop-opacity="0.84" />
+    </linearGradient>
+    <radialGradient id="hazeTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(450 220) rotate(90) scale(330 460)">
+      <stop offset="0" stop-color="#9B79FF" stop-opacity="0.56" />
+      <stop offset="1" stop-color="#9B79FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="hazeBottom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(510 1000) rotate(90) scale(300 520)">
+      <stop offset="0" stop-color="#44D8FF" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#44D8FF" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="towerBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7A93FF" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#7A93FF" stop-opacity="0.02" />
+    </linearGradient>
+    <linearGradient id="towerMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#91F1FF" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#91F1FF" stop-opacity="0.03" />
+    </linearGradient>
+    <linearGradient id="towerFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D0DEFF" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#D0DEFF" stop-opacity="0.04" />
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BBF6FF" stop-opacity="0.44" />
+      <stop offset="1" stop-color="#BBF6FF" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="road" x1="450" y1="800" x2="450" y2="1290" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7E7CFF" stop-opacity="0" />
+      <stop offset="0.62" stop-color="#7E7CFF" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#58DBFF" stop-opacity="0.38" />
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="1320" rx="42" fill="url(#bgDeep)" />
+  <rect width="900" height="1320" rx="42" fill="url(#hazeTop)" />
+  <rect width="900" height="1320" rx="42" fill="url(#hazeBottom)" />
+
+  <g opacity="0.12" stroke="#CFE2FF" stroke-width="1">
+    <path d="M90 180H810" />
+    <path d="M90 260H810" />
+    <path d="M90 340H810" />
+    <path d="M90 420H810" />
+    <path d="M90 500H810" />
+    <path d="M90 580H810" />
+    <path d="M90 660H810" />
+    <path d="M90 740H810" />
+    <path d="M90 820H810" />
+    <path d="M90 900H810" />
+    <path d="M90 980H810" />
+    <path d="M90 1060H810" />
+    <path d="M150 130V1120" />
+    <path d="M230 130V1120" />
+    <path d="M310 130V1120" />
+    <path d="M390 130V1120" />
+    <path d="M470 130V1120" />
+    <path d="M550 130V1120" />
+    <path d="M630 130V1120" />
+    <path d="M710 130V1120" />
+  </g>
+
+  <g opacity="0.35">
+    <rect x="88" y="500" width="58" height="470" rx="8" fill="url(#towerBack)" />
+    <rect x="160" y="450" width="72" height="520" rx="8" fill="url(#towerBack)" />
+    <rect x="248" y="390" width="64" height="580" rx="8" fill="url(#towerBack)" />
+    <rect x="328" y="470" width="58" height="500" rx="8" fill="url(#towerBack)" />
+    <rect x="402" y="350" width="72" height="620" rx="8" fill="url(#towerBack)" />
+    <rect x="490" y="420" width="66" height="550" rx="8" fill="url(#towerBack)" />
+    <rect x="572" y="360" width="74" height="610" rx="8" fill="url(#towerBack)" />
+    <rect x="662" y="430" width="68" height="540" rx="8" fill="url(#towerBack)" />
+    <rect x="746" y="500" width="58" height="470" rx="8" fill="url(#towerBack)" />
+  </g>
+
+  <g opacity="0.44">
+    <rect x="118" y="650" width="84" height="360" rx="10" fill="url(#towerMid)" />
+    <rect x="226" y="590" width="92" height="420" rx="10" fill="url(#towerMid)" />
+    <rect x="342" y="620" width="88" height="390" rx="10" fill="url(#towerMid)" />
+    <rect x="454" y="520" width="94" height="490" rx="10" fill="url(#towerMid)" />
+    <rect x="572" y="600" width="92" height="410" rx="10" fill="url(#towerMid)" />
+    <rect x="688" y="640" width="86" height="370" rx="10" fill="url(#towerMid)" />
+  </g>
+
+  <g opacity="0.52">
+    <rect x="150" y="760" width="110" height="300" rx="12" fill="url(#towerFront)" />
+    <rect x="288" y="700" width="120" height="360" rx="12" fill="url(#towerFront)" />
+    <rect x="436" y="740" width="124" height="320" rx="12" fill="url(#towerFront)" />
+    <rect x="588" y="780" width="116" height="280" rx="12" fill="url(#towerFront)" />
+  </g>
+
+  <g opacity="0.26">
+    <rect x="129" y="704" width="6" height="300" fill="url(#beam)" />
+    <rect x="220" y="648" width="6" height="356" fill="url(#beam)" />
+    <rect x="322" y="622" width="6" height="382" fill="url(#beam)" />
+    <rect x="430" y="564" width="6" height="440" fill="url(#beam)" />
+    <rect x="538" y="616" width="6" height="388" fill="url(#beam)" />
+    <rect x="646" y="664" width="6" height="340" fill="url(#beam)" />
+    <rect x="744" y="722" width="6" height="282" fill="url(#beam)" />
+  </g>
+
+  <g stroke="#D8EAFF" stroke-opacity="0.36" stroke-width="1.8" stroke-linecap="round">
+    <path d="M138 670H252L296 634H430L474 594H614" />
+    <path d="M184 752H312L354 716H486L534 674H700" />
+    <path d="M220 838H372L412 804H552L598 762H754" />
+    <path d="M256 920H420L468 884H610L658 842H780" />
+    <path d="M296 634V920" />
+    <path d="M474 594V884" />
+    <path d="M598 762V640" />
+  </g>
+
+  <g fill="#EAF4FF" fill-opacity="0.74">
+    <circle cx="138" cy="670" r="4.6" />
+    <circle cx="252" cy="670" r="3.4" />
+    <circle cx="296" cy="634" r="4.2" />
+    <circle cx="430" cy="634" r="3.8" />
+    <circle cx="474" cy="594" r="4.4" />
+    <circle cx="614" cy="594" r="3.9" />
+    <circle cx="184" cy="752" r="4.2" />
+    <circle cx="486" cy="716" r="4.1" />
+    <circle cx="700" cy="674" r="3.9" />
+    <circle cx="220" cy="838" r="4.1" />
+    <circle cx="552" cy="804" r="4" />
+    <circle cx="754" cy="762" r="3.8" />
+    <circle cx="256" cy="920" r="4" />
+    <circle cx="610" cy="884" r="4" />
+    <circle cx="780" cy="842" r="3.8" />
+  </g>
+
+  <path d="M90 1120L292 860H610L810 1120V1220H90V1120Z" fill="url(#road)" />
+  <path d="M180 1220L368 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+  <path d="M268 1220L430 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+  <path d="M356 1220L492 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+  <path d="M444 1220L554 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+  <path d="M532 1220L616 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+  <path d="M620 1220L678 890" stroke="#CDE6FF" stroke-opacity="0.24" stroke-width="2" />
+
+  <g opacity="0.18" fill="none" stroke="#E3EEFF" stroke-width="1">
+    <rect x="68" y="110" width="764" height="1140" rx="28" />
+    <rect x="90" y="132" width="720" height="1096" rx="22" />
+  </g>
+</svg>

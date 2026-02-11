@@ -1,0 +1,142 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyNight" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#18234B" stop-opacity="0.64" />
+      <stop offset="0.52" stop-color="#101936" stop-opacity="0.54" />
+      <stop offset="1" stop-color="#090F22" stop-opacity="0.22" />
+    </linearGradient>
+    <radialGradient id="moonHaze" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1040 300) rotate(90) scale(280 460)">
+      <stop offset="0" stop-color="#9CB3FF" stop-opacity="0.36" />
+      <stop offset="1" stop-color="#9CB3FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cityGlowL" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(520 560) rotate(90) scale(260 500)">
+      <stop offset="0" stop-color="#7F8FFF" stop-opacity="0.3" />
+      <stop offset="1" stop-color="#7F8FFF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cityGlowR" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1400 600) rotate(90) scale(260 520)">
+      <stop offset="0" stop-color="#5CE2FF" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#5CE2FF" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="towerBack" x1="0" y1="250" x2="0" y2="980" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8DA8FF" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#7388D8" stop-opacity="0.04" />
+    </linearGradient>
+    <linearGradient id="towerMid" x1="0" y1="330" x2="0" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8FEFFF" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#8FEFFF" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="towerFront" x1="0" y1="420" x2="0" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E7F3FF" stop-opacity="0.24" />
+      <stop offset="1" stop-color="#CCDFFF" stop-opacity="0.04" />
+    </linearGradient>
+
+    <pattern id="windowsSmall" width="16" height="14" patternUnits="userSpaceOnUse">
+      <rect x="2" y="2" width="2" height="2" fill="#E7F4FF" fill-opacity="0.22" />
+      <rect x="10" y="5" width="2" height="2" fill="#D6EAFF" fill-opacity="0.18" />
+    </pattern>
+    <pattern id="windowsTall" width="18" height="12" patternUnits="userSpaceOnUse">
+      <rect x="3" y="2" width="2" height="3" fill="#F0F8FF" fill-opacity="0.24" />
+      <rect x="11" y="3" width="2" height="2" fill="#D7ECFF" fill-opacity="0.2" />
+    </pattern>
+
+    <linearGradient id="bridgeLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DBEEFF" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#DBEEFF" stop-opacity="0.02" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#skyNight)" />
+  <ellipse cx="1040" cy="300" rx="420" ry="260" fill="url(#moonHaze)" />
+  <ellipse cx="520" cy="560" rx="500" ry="280" fill="url(#cityGlowL)" />
+  <ellipse cx="1400" cy="600" rx="520" ry="300" fill="url(#cityGlowR)" />
+
+  <g opacity="0.22" stroke="#D6E9FF" stroke-width="1">
+    <path d="M0 760H1920" />
+    <path d="M0 700H1920" />
+    <path d="M0 640H1920" />
+    <path d="M0 580H1920" />
+    <path d="M0 520H1920" />
+    <path d="M120 460V980" />
+    <path d="240 430V980" />
+    <path d="360 400V980" />
+    <path d="480 380V980" />
+    <path d="600 360V980" />
+    <path d="720 340V980" />
+    <path d="840 320V980" />
+    <path d="960 310V980" />
+    <path d="1080 320V980" />
+    <path d="1200 340V980" />
+    <path d="1320 360V980" />
+    <path d="1440 380V980" />
+    <path d="1560 400V980" />
+    <path d="1680 430V980" />
+    <path d="1800 460V980" />
+  </g>
+
+  <g opacity="0.3">
+    <path d="M36 980V610L88 570L122 598L154 548L214 620V980H36Z" fill="url(#towerBack)" />
+    <path d="M194 980V560L252 532L286 560L322 520L380 585V980H194Z" fill="url(#towerBack)" />
+    <path d="M356 980V500L430 468L470 504L510 452L592 530V980H356Z" fill="url(#towerBack)" />
+    <path d="M552 980V438L636 400L676 436L726 388L822 476V980H552Z" fill="url(#towerBack)" />
+    <path d="M770 980V410L856 372L898 406L938 362L1040 448V980H770Z" fill="url(#towerBack)" />
+    <path d="M996 980V430L1078 394L1114 426L1158 380L1248 468V980H996Z" fill="url(#towerBack)" />
+    <path d="M1214 980V470L1290 434L1328 466L1370 422L1456 510V980H1214Z" fill="url(#towerBack)" />
+    <path d="M1406 980V520L1476 492L1512 524L1548 486L1628 564V980H1406Z" fill="url(#towerBack)" />
+    <path d="M1574 980V560L1640 534L1672 566L1708 526L1778 594V980H1574Z" fill="url(#towerBack)" />
+  </g>
+
+  <g opacity="0.38">
+    <path d="M92 1010V700L158 662L212 700L250 660L322 730V1010H92Z" fill="url(#towerMid)" />
+    <path d="M278 1010V650L352 612L404 650L444 612L520 684V1010H278Z" fill="url(#towerMid)" />
+    <path d="M490 1010V604L572 566L624 604L666 562L750 646V1010H490Z" fill="url(#towerMid)" />
+    <path d="M728 1010V566L812 530L868 566L914 522L1004 614V1010H728Z" fill="url(#towerMid)" />
+    <path d="M992 1010V590L1076 552L1130 590L1174 546L1262 634V1010H992Z" fill="url(#towerMid)" />
+    <path d="M1248 1010V632L1324 598L1376 632L1416 596L1492 672V1010H1248Z" fill="url(#towerMid)" />
+    <path d="M1470 1010V682L1542 648L1588 682L1624 652L1698 726V1010H1470Z" fill="url(#towerMid)" />
+  </g>
+
+  <g opacity="0.46">
+    <path d="M180 1038V768L268 728L324 768L370 724L466 822V1038H180Z" fill="url(#towerFront)" />
+    <path d="M440 1038V730L536 690L596 730L642 684L748 786V1038H440Z" fill="url(#towerFront)" />
+    <path d="M750 1038V698L856 656L918 698L964 650L1078 760V1038H750Z" fill="url(#towerFront)" />
+    <path d="M1100 1038V734L1198 694L1258 734L1302 690L1410 794V1038H1100Z" fill="url(#towerFront)" />
+    <path d="M1406 1038V778L1490 742L1544 778L1584 738L1678 828V1038H1406Z" fill="url(#towerFront)" />
+  </g>
+
+  <g opacity="0.24">
+    <rect x="86" y="648" width="230" height="320" fill="url(#windowsSmall)" />
+    <rect x="342" y="590" width="420" height="372" fill="url(#windowsTall)" />
+    <rect x="790" y="550" width="500" height="430" fill="url(#windowsSmall)" />
+    <rect x="1314" y="620" width="360" height="340" fill="url(#windowsTall)" />
+  </g>
+
+  <g opacity="0.22" stroke="url(#bridgeLine)" stroke-width="2" stroke-linecap="round">
+    <path d="M180 760H470L520 722H760L812 684H1088L1138 650H1430" />
+    <path d="M246 840H550L600 804H852L902 768H1188L1240 732H1540" />
+    <path d="M328 916H650L698 884H944L994 850H1270L1320 816H1606" />
+    <path d="M520 722V884" />
+    <path d="M812 684V850" />
+    <path d="M1138 650V816" />
+  </g>
+
+  <g fill="#EAF5FF" fill-opacity="0.54">
+    <circle cx="180" cy="760" r="3.8" />
+    <circle cx="470" cy="760" r="2.8" />
+    <circle cx="520" cy="722" r="3.2" />
+    <circle cx="812" cy="684" r="3.2" />
+    <circle cx="1138" cy="650" r="3.4" />
+    <circle cx="1430" cy="650" r="2.8" />
+    <circle cx="246" cy="840" r="3" />
+    <circle cx="852" cy="804" r="3" />
+    <circle cx="1240" cy="732" r="3" />
+    <circle cx="328" cy="916" r="2.8" />
+    <circle cx="994" cy="850" r="2.8" />
+    <circle cx="1606" cy="816" r="2.6" />
+  </g>
+
+  <g opacity="0.16" fill="none" stroke="#DCEEFF" stroke-width="1.2">
+    <rect x="24" y="168" width="1872" height="856" rx="36" />
+    <rect x="54" y="198" width="1812" height="796" rx="28" />
+  </g>
+</svg>

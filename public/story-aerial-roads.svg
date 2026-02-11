@@ -1,0 +1,85 @@
+<svg width="1920" height="1200" viewBox="0 0 1920 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="roadFillMain" x1="960" y1="450" x2="960" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EFF8FF" stop-opacity="0.28" />
+      <stop offset="0.56" stop-color="#A8D5FF" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#5EE8FF" stop-opacity="0.03" />
+    </linearGradient>
+    <linearGradient id="roadFillAlt" x1="960" y1="510" x2="960" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D6B6FF" stop-opacity="0.24" />
+      <stop offset="0.62" stop-color="#99B4FF" stop-opacity="0.16" />
+      <stop offset="1" stop-color="#99B4FF" stop-opacity="0.02" />
+    </linearGradient>
+    <linearGradient id="laneEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E6F4FF" stop-opacity="0.44" />
+      <stop offset="1" stop-color="#E6F4FF" stop-opacity="0.02" />
+    </linearGradient>
+    <radialGradient id="coreHalo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 980) rotate(90) scale(260 620)">
+      <stop offset="0" stop-color="#72E7FF" stop-opacity="0.36" />
+      <stop offset="1" stop-color="#72E7FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="entryHalo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 560) rotate(90) scale(210 520)">
+      <stop offset="0" stop-color="#A58BFF" stop-opacity="0.3" />
+      <stop offset="1" stop-color="#A58BFF" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="960" cy="980" rx="620" ry="260" fill="url(#coreHalo)" />
+  <ellipse cx="960" cy="560" rx="520" ry="210" fill="url(#entryHalo)" />
+
+  <path d="M298 1198L660 612H1260L1622 1198" fill="url(#roadFillMain)" />
+  <path d="M430 1198L742 688H1178L1490 1198" fill="url(#roadFillAlt)" />
+
+  <g stroke="url(#laneEdge)" stroke-width="2.3" stroke-linecap="round">
+    <path d="M330 1198L682 626" />
+    <path d="M396 1198L714 652" />
+    <path d="M462 1198L746 678" />
+    <path d="M528 1198L778 704" />
+    <path d="M594 1198L810 730" />
+    <path d="M660 1198L842 756" />
+    <path d="M726 1198L874 782" />
+    <path d="M792 1198L906 808" />
+
+    <path d="M1590 1198L1238 626" />
+    <path d="M1524 1198L1206 652" />
+    <path d="M1458 1198L1174 678" />
+    <path d="M1392 1198L1142 704" />
+    <path d="M1326 1198L1110 730" />
+    <path d="M1260 1198L1078 756" />
+    <path d="M1194 1198L1046 782" />
+    <path d="M1128 1198L1014 808" />
+
+    <path d="M780 1198L938 660" />
+    <path d="M846 1198L962 680" />
+    <path d="M912 1198L986 700" />
+    <path d="M978 1198L1010 720" />
+  </g>
+
+  <g stroke="#E8F7FF" stroke-opacity="0.2" stroke-width="1.6" stroke-linecap="round">
+    <path d="M612 944H1308" />
+    <path d="M662 864H1258" />
+    <path d="M712 790H1208" />
+    <path d="M762 722H1158" />
+    <path d="M806 660H1114" />
+  </g>
+
+  <g fill="#F0FAFF" fill-opacity="0.56">
+    <circle cx="960" cy="660" r="3.8" />
+    <circle cx="900" cy="742" r="3.1" />
+    <circle cx="1020" cy="742" r="3.1" />
+    <circle cx="836" cy="834" r="2.9" />
+    <circle cx="1084" cy="834" r="2.9" />
+    <circle cx="772" cy="924" r="2.7" />
+    <circle cx="1148" cy="924" r="2.7" />
+    <circle cx="706" cy="1008" r="2.5" />
+    <circle cx="1214" cy="1008" r="2.5" />
+  </g>
+
+  <g opacity="0.18" fill="none" stroke="#E1EFFF" stroke-width="1">
+    <path d="M298 1198H1622" />
+    <path d="M430 1022H1490" />
+    <path d="M546 880H1374" />
+    <path d="M648 764H1272" />
+    <path d="M738 668H1182" />
+  </g>
+</svg>

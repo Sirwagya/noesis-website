@@ -6,7 +6,6 @@ let isRegistered = false;
 const MOTION_PROFILE = {
   desktop: {
     nav: { end: "+=420", scrub: 0.32 },
-    hero: { end: "+=100%", scrub: 0.24 },
     wipe: { scrub: 0.24 },
     overview: {
       start: "top+=10% top",
@@ -45,6 +44,11 @@ const MOTION_PROFILE = {
     },
     canvas: {
       scrub: 0.55,
+      cityY: 9,
+      cityScale: 1.06,
+      cityOpacity: 0.54,
+      roadsY: -24,
+      roadsOpacity: 0.58,
       matrixY: 18,
       auroraY: -10,
       auroraX: 6,
@@ -60,7 +64,6 @@ const MOTION_PROFILE = {
   },
   mobile: {
     nav: { end: "+=320", scrub: 0.32 },
-    hero: { end: "+=64%", scrub: 0.24 },
     wipe: { scrub: 0.2 },
     overview: {
       start: "top+=8% top",
@@ -84,6 +87,11 @@ const MOTION_PROFILE = {
     section: { from: -10, to: 9, scrub: 0.4 },
     canvas: {
       scrub: 0.45,
+      cityY: 6,
+      cityScale: 1.03,
+      cityOpacity: 0.44,
+      roadsY: -14,
+      roadsOpacity: 0.46,
       matrixY: 10,
       auroraY: -7,
       auroraX: 4,
@@ -141,25 +149,52 @@ function createNavScene(nav, config) {
 }
 
 function createCanvasScene(layers, config) {
-  if (!layers.matrix || !layers.aurora || !layers.beams || !layers.grain) {
+  const hasAnyLayer = Object.values(layers).some(Boolean);
+  if (!hasAnyLayer) {
     return;
   }
 
-  gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: config.scrub,
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: document.body,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: config.scrub,
+    },
+  });
+
+  if (layers.city) {
+    timeline.to(
+      layers.city,
+      {
+        yPercent: config.cityY,
+        scale: config.cityScale,
+        opacity: config.cityOpacity,
+        ease: "none",
       },
-    })
-    .to(
+      0
+    );
+  }
+
+  // Roads move slightly faster than skyline to create depth separation.
+  if (layers.roads) {
+    timeline.to(
+      layers.roads,
+      { yPercent: config.roadsY, opacity: config.roadsOpacity, ease: "none" },
+      0
+    );
+  }
+
+  if (layers.matrix) {
+    timeline.to(
       layers.matrix,
       { yPercent: config.matrixY, opacity: config.matrixOpacity, ease: "none" },
       0
-    )
-    .to(
+    );
+  }
+
+  if (layers.aurora) {
+    timeline.to(
       layers.aurora,
       {
         yPercent: config.auroraY,
@@ -168,8 +203,11 @@ function createCanvasScene(layers, config) {
         ease: "none",
       },
       0
-    )
-    .to(
+    );
+  }
+
+  if (layers.beams) {
+    timeline.to(
       layers.beams,
       {
         yPercent: config.beamsY,
@@ -178,12 +216,16 @@ function createCanvasScene(layers, config) {
         ease: "none",
       },
       0
-    )
-    .to(
+    );
+  }
+
+  if (layers.grain) {
+    timeline.to(
       layers.grain,
       { yPercent: config.grainY, opacity: config.grainOpacity, ease: "none" },
       0
     );
+  }
 }
 
 function createChapterPulseToggles(chapters, pulseConfig) {
@@ -273,6 +315,8 @@ export function setupScrollScenes({
   const allChapters = Array.from(document.querySelectorAll(".chapter, .section"));
   const storyCanvasLayers = {
     matrix: document.querySelector(".story-canvas__layer--matrix"),
+    city: document.querySelector(".story-canvas__layer--city"),
+    roads: document.querySelector(".story-canvas__layer--roads"),
     aurora: document.querySelector(".story-canvas__layer--aurora"),
     beams: document.querySelector(".story-canvas__layer--beams"),
     grain: document.querySelector(".story-canvas__layer--grain"),
@@ -503,32 +547,22 @@ export function setupScrollScenes({
       scrub: config.wipe.scrub,
     });
 
-    const heroContent = hero.querySelectorAll(".hero__content > *");
-    gsap.set(heroContent, { y: 18, opacity: 0 });
+    const heroScrollHint = hero.querySelector(".hero__scroll-hint");
     const mobileOverviewHeadline = overview.querySelector(".program-overview__headline");
     const mobileOverviewSummary = overview.querySelector(".program-overview__summary");
     const mobileRailItems = overview.querySelectorAll(".track-rail__item");
     gsap.set([mobileOverviewHeadline, mobileOverviewSummary], { y: 12, autoAlpha: 0 });
     gsap.set(mobileRailItems, { y: 10, autoAlpha: 0 });
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: "top top",
-          end: config.hero.end,
-          scrub: config.hero.scrub,
-          pin: true,
-          anticipatePin: 1,
-        },
-      })
-      .to(heroContent, {
-        y: 0,
-        opacity: 1,
-        stagger: 0.06,
-        duration: 0.24,
-        ease: "none",
+    if (heroScrollHint) {
+      ScrollTrigger.create({
+        trigger: hero,
+        start: "top top+=2",
+        end: "bottom top",
+        onEnter: () => gsap.to(heroScrollHint, { autoAlpha: 0, duration: 0.2, ease: "none" }),
+        onLeaveBack: () => gsap.to(heroScrollHint, { autoAlpha: 1, duration: 0.2, ease: "none" }),
       });
+    }
 
     const trackCount = Math.max(chapterElements.length, 1);
     gsap

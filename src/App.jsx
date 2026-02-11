@@ -16,6 +16,7 @@ import {
 } from "./data/sponsorshipData";
 import { setupScrollScenes } from "./lib/scrollScenes";
 import "./App.css";
+import "./mobile.css";
 
 const navLinks = [
   { id: "hero", label: "Home" },
@@ -262,7 +263,9 @@ function App() {
       >
         <div className="story-canvas" aria-hidden="true">
           <div className="story-canvas__layer story-canvas__layer--matrix" />
+          <div className="story-canvas__layer story-canvas__layer--city" />
           <div className="story-canvas__layer story-canvas__layer--aurora" />
+          <div className="story-canvas__layer story-canvas__layer--roads" />
           <div className="story-canvas__layer story-canvas__layer--beams" />
           <div className="story-canvas__layer story-canvas__layer--grain" />
         </div>
@@ -303,7 +306,7 @@ function App() {
               </div>
             </div>
             <div className="hero__ambient" aria-hidden="true">
-              <img className="hero__ambient-image" src="/hero-circuit.svg" alt="" />
+              <img className="hero__ambient-image" src="/hero-cityscape.svg" alt="" />
             </div>
           </div>
           <a

@@ -1,0 +1,206 @@
+@media (max-width: 1023px) {
+  .story-canvas::after {
+    background:
+      radial-gradient(circle at 50% 52%, transparent 20%, rgba(3, 4, 9, 0.72) 100%),
+      linear-gradient(
+        180deg,
+        rgba(3, 5, 11, 0.86) 0%,
+        rgba(3, 5, 11, 0.46) 18%,
+        rgba(3, 5, 11, 0.4) 76%,
+        rgba(3, 5, 11, 0.84) 100%
+      );
+  }
+
+  .story-canvas__layer--city {
+    opacity: 0.36;
+    background-position: center 62%;
+  }
+
+  .story-canvas__layer--roads {
+    opacity: 0.32;
+    background-position: center 78%;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding-top: 5.8rem;
+    padding-bottom: 4.2rem;
+  }
+
+  .hero::after {
+    display: none;
+  }
+
+  .hero__content {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .hero__left {
+    gap: 0.65rem;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+  }
+
+  .hero__logo {
+    width: clamp(140px, 50vw, 220px);
+  }
+
+  .hero__title {
+    font-size: clamp(1.9rem, 8.4vw, 3.1rem);
+    line-height: 1.02;
+  }
+
+  .hero__summary {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    gap: 0.55rem;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero__ambient {
+    order: 2;
+    min-height: 180px;
+    border-radius: 18px;
+    box-shadow: 0 18px 36px rgba(6, 10, 20, 0.32);
+  }
+
+  .hero__ambient-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.84;
+  }
+
+  .hero__scroll-hint {
+    font-size: 0.62rem;
+    padding: 0.28rem 0.6rem;
+    bottom: 0.85rem;
+  }
+
+  .track-chapter {
+    padding: 4rem 1rem;
+  }
+
+  .track-chapter__title-tower .track-chapter__title {
+    font-size: clamp(1.9rem, 9vw, 3.1rem);
+  }
+
+  .track-chapter__deck-shell {
+    gap: 0.9rem;
+  }
+
+  .track-chapter__deck {
+    gap: 0.9rem;
+  }
+
+  .program-card {
+    padding: 0.95rem;
+  }
+
+  .program-card--featured {
+    padding: 1.05rem;
+  }
+
+  .program-card__title {
+    font-size: 1.05rem;
+  }
+
+  .program-card__description {
+    font-size: 0.92rem;
+  }
+
+  .program-card__footer {
+    font-size: 0.7rem;
+  }
+
+  .program-modal__panel {
+    width: 92vw;
+    max-height: 85svh;
+    padding: 1.05rem;
+  }
+
+  .program-modal__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .program-modal__nav {
+    width: 100%;
+  }
+
+  .program-modal__nav-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-canvas::after {
+    background:
+      radial-gradient(circle at 50% 54%, transparent 16%, rgba(3, 4, 9, 0.78) 100%),
+      linear-gradient(
+        180deg,
+        rgba(3, 5, 11, 0.92) 0%,
+        rgba(3, 5, 11, 0.58) 16%,
+        rgba(3, 5, 11, 0.5) 74%,
+        rgba(3, 5, 11, 0.9) 100%
+      );
+  }
+
+  .story-canvas__layer--city {
+    opacity: 0.3;
+    background-position: center 64%;
+  }
+
+  .story-canvas__layer--roads {
+    opacity: 0.24;
+    background-position: center 82%;
+  }
+
+  .hero {
+    padding-top: 5.2rem;
+    padding-bottom: 3.8rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.7rem, 9.2vw, 2.8rem);
+  }
+
+  .hero__summary {
+    font-size: 0.92rem;
+  }
+
+  .hero__ambient {
+    min-height: 160px;
+  }
+
+  .hero__ambient-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.78;
+  }
+
+  .hero__scroll-hint {
+    font-size: 0.58rem;
+    padding: 0.24rem 0.55rem;
+  }
+
+  .program-modal__nav {
+    flex-direction: column;
+  }
+}
