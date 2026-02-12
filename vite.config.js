@@ -13,6 +13,7 @@ export default defineConfig({
         manualChunks: {
           // Separate vendor chunks for better caching
           'react-vendor': ['react', 'react-dom'],
+          'gsap-vendor': ['gsap'],
         },
       },
     },

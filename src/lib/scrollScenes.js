@@ -5,27 +5,27 @@ let isRegistered = false;
 
 const MOTION_PROFILE = {
   desktop: {
-    nav: { end: "+=420", scrub: 0.32 },
-    wipe: { scrub: 0.24 },
+    nav: { end: "+=420", scrub: 0.09 },
+    wipe: { scrub: 0.07 },
     overview: {
       start: "top+=10% top",
-      endFactor: 92,
-      scrub: 0.28,
-      parallax: { from: -28, to: 24, scrub: 0.45 },
+      endFactor: 35,
+      scrub: 0.06,
+      parallax: { from: -45, to: 35, scrub: 0.09 },
     },
     chapter: {
-      revealScrub: 0.34,
-      parallaxScrub: 0.45,
-      stageScrub: 0.34,
+      revealScrub: 0.05,
+      parallaxScrub: 0.05,
+      stageScrub: 0.05,
       microPinEnd: "+=20%",
-      microPinScrub: 0.46,
+      microPinScrub: 0.07,
       layerShift: {
-        deep: { from: -28, to: 26 },
-        mid: { from: -22, to: 20 },
-        soft: { from: -16, to: 14 },
+        deep: { from: -40, to: 38 },
+        mid: { from: -32, to: 28 },
+        soft: { from: -24, to: 20 },
       },
     },
-    featured: { fromY: -5, toY: 9, scrub: 0.36 },
+    featured: { fromY: -5, toY: 9, scrub: 0.10 },
     cards: {
       fromYFactor: -4,
       toYFactor: 8,
@@ -33,17 +33,17 @@ const MOTION_PROFILE = {
       fromXDepth: 1.2,
       toXBase: 3,
       toXDepth: 1.6,
-      scrub: 0.36,
+      scrub: 0.10,
     },
     section: {
-      from: -18,
-      to: 16,
-      scrub: 0.4,
+      from: -28,
+      to: 24,
+      scrub: 0.07,
       innerFromY: 24,
-      innerScrub: 0.38,
+      innerScrub: 0.08,
     },
     canvas: {
-      scrub: 0.55,
+      scrub: 0.30,
       cityY: 9,
       cityScale: 1.06,
       cityOpacity: 0.54,
@@ -63,17 +63,17 @@ const MOTION_PROFILE = {
     pulse: { start: "top 66%", end: "top 34%" },
   },
   mobile: {
-    nav: { end: "+=320", scrub: 0.32 },
-    wipe: { scrub: 0.2 },
+    nav: { end: "+=320", scrub: 0.18 },
+    wipe: { scrub: 0.12 },
     overview: {
       start: "top+=8% top",
-      endFactor: 76,
-      scrub: 0.26,
-      parallax: { from: -14, to: 12, scrub: 0.4 },
+      endFactor: 30,
+      scrub: 0.12,
+      parallax: { from: -24, to: 18, scrub: 0.24 },
     },
     chapter: {
-      revealScrub: 0.3,
-      parallax: { from: -12, to: 10, scrub: 0.4 },
+      revealScrub: 0.12,
+      parallax: { from: -18, to: 15, scrub: 0.16 },
     },
     cards: {
       fromYFactor: -2,
@@ -82,11 +82,11 @@ const MOTION_PROFILE = {
       fromXDepth: 0.8,
       toXBase: 1.8,
       toXDepth: 1.1,
-      scrub: 0.35,
+      scrub: 0.20,
     },
-    section: { from: -10, to: 9, scrub: 0.4 },
+    section: { from: -16, to: 14, scrub: 0.22 },
     canvas: {
-      scrub: 0.45,
+      scrub: 0.26,
       cityY: 6,
       cityScale: 1.03,
       cityOpacity: 0.44,
@@ -298,12 +298,12 @@ export function setupScrollScenes({
   onTrackProgress,
 }) {
   if (typeof window === "undefined") {
-    return () => {};
+    return () => { };
   }
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReducedMotion) {
-    return () => {};
+    return () => { };
   }
 
   ensureRegistered();

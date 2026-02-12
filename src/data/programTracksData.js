@@ -119,23 +119,13 @@ const rawProgramItems = [
     trackId: "tech-coding",
     tagline: "Blind Coding Challenge",
     description:
-      "Solve coding challenges without relying on typical visual cues. Test memory and core logic skills.",
-    prizeText: "INR 30,000",
+      "How well do you know your syntax? Your monitor will be turned off. Rely entirely on memory, logic, and typing accuracy to write flawless code in the dark.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 8,
     source: "competition",
-  },
-  {
-    id: "minute-to-win-it",
-    title: "Minute to Win It",
-    trackId: "tech-coding",
-    tagline: "60-Second Coding Competition",
-    description:
-      "Ultra-fast challenge rounds focused on rapid reasoning, coding speed, and calm execution.",
-    prizeText: "INR 25,000",
-    entryType: "paid",
-    priority: 7,
-    source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/peek-a-code-blind-coding-competition-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "algoquest",
@@ -143,11 +133,13 @@ const rawProgramItems = [
     trackId: "tech-coding",
     tagline: "Coding Treasure Hunt",
     description:
-      "A clue-based algorithmic quest where each solved puzzle unlocks the next technical checkpoint.",
-    prizeText: "INR 40,000",
+      "A thrilling blend of logic puzzles and algorithmic challenges. Decipher clues, write functional code, and race against other teams to unlock the final treasure.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 6,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/algoquest-coding-treasure-hunt-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "tech-insiders-icpc-gsoc",
@@ -179,11 +171,27 @@ const rawProgramItems = [
     trackId: "business",
     tagline: "B-Plan Challenge",
     description:
-      "Pitch startup plans to mentors, defend assumptions, and shape investor-ready narratives.",
-    prizeText: "INR 50,000",
+      "Got a disruptive startup idea? Pitch your business plan to our panel of judges. Demonstrate market viability, innovation, and financial strategy to secure the top spot.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 10,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/build-or-bust-b-plan-challenge-noesis-vedam-school-of-technology-1639249",
+  },
+  {
+    id: "frames-ahoy",
+    title: "Frames Ahoy",
+    trackId: "business",
+    tagline: "UI/UX Competition",
+    description:
+      "A dedicated design battle evaluating your user research, wireframing, and interface design skills. Craft intuitive and visually stunning user experiences to win.",
+    prizeText: "TBD",
+    entryType: "paid",
+    priority: 9,
+    source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/frames-ahoy-uiux-competition-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "vedam-stock-exchange",
@@ -208,40 +216,18 @@ const rawProgramItems = [
     },
   },
   {
-    id: "unplugged",
-    title: "Unplugged",
+    id: "minute-to-win-it",
+    title: "Minute to Win It",
     trackId: "cultural",
-    tagline: "Jamming Session",
+    tagline: "60-Second Challenges",
     description:
-      "Collaborative acoustic jam celebrating live creativity, rhythm, and audience energy.",
-    prizeText: "Free Entry",
-    entryType: "free",
-    priority: 8,
-    source: "event",
-  },
-  {
-    id: "spotlight",
-    title: "Spotlight",
-    trackId: "cultural",
-    tagline: "Talent Show",
-    description:
-      "Open-stage showcase for cross-genre performances from music and dance to spoken word.",
-    prizeText: "Free Entry",
-    entryType: "free",
-    priority: 9,
-    source: "event",
-  },
-  {
-    id: "stand-up-comedy",
-    title: "Stand Up Comedy",
-    trackId: "cultural",
-    tagline: "Laugh Out Loud",
-    description:
-      "Curated stand-up segment featuring sharp sets, crowd work, and festival-night humor.",
-    prizeText: "Free Entry",
+      "Fast, fun, and chaotic. Compete in a series of tricky 60-second micro-challenges where every second counts!",
+    prizeText: "TBD",
     entryType: "free",
     priority: 7,
     source: "event",
+    registrationUrl:
+      "https://unstop.com/events/minute-to-win-it-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "step-up-showdown",
@@ -283,23 +269,13 @@ const rawProgramItems = [
     trackId: "esports",
     tagline: "Battle Royale",
     description:
-      "Team-based tactical survival showdown with elimination rounds and championship final.",
-    prizeText: "INR 30,000",
+      "Drop into the battlegrounds. Squad up and survive against the best teams on campus in this ultimate E-sports showdown.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 10,
     source: "competition",
-  },
-  {
-    id: "valorant",
-    title: "Valorant",
-    trackId: "esports",
-    tagline: "Tactical FPS",
-    description:
-      "Precision, utility usage, and team coordination battles in structured tournament brackets.",
-    prizeText: "INR 35,000",
-    entryType: "paid",
-    priority: 9,
-    source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/bgmi-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "chess",
@@ -330,35 +306,55 @@ const rawProgramItems = [
     trackId: "esports",
     tagline: "Virtual Football",
     description:
-      "Skill-driven football simulation cup featuring head-to-head eliminations and finals.",
-    prizeText: "INR 25,000",
+      "Take to the virtual pitch. Prove your console gaming skills and tactical prowess in our knockout FIFA tournament.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 8,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/fifa-noesis-vedam-school-of-technology-1639249",
+  },
+  {
+    id: "tekken",
+    title: "Tekken",
+    trackId: "esports",
+    tagline: "Fighting Game",
+    description:
+      "Master your combos and frame data in this intense 1v1 Tekken console fighting tournament.",
+    prizeText: "TBD",
+    entryType: "paid",
+    priority: 7,
+    source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/tekken-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "run-robo-run",
     title: "Run Robo Run",
     trackId: "robotics",
-    tagline: "Robo Race",
+    tagline: "RC Car Racing",
     description:
-      "Autonomous robot race challenge emphasizing design efficiency, control logic, and speed.",
-    prizeText: "INR 40,000",
+      "Rev your engines! Navigate custom-built RC bots and cars through a rigorous obstacle track in a high-speed time trial.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 9,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/run-robo-run-rc-car-racing-noesis-vedam-school-of-technology-1639249",
   },
   {
     id: "roboclash",
-    title: "ROBOCLASH",
+    title: "Robo Clash",
     trackId: "robotics",
-    tagline: "Robo War",
+    tagline: "Control Wars",
     description:
-      "Impact-focused bot combat arena where engineering durability meets tactical aggression.",
-    prizeText: "INR 45,000",
+      "Enter the arena for a classic Robo War. Build, control, and battle your custom machines against opponents to dominate the clash.",
+    prizeText: "TBD",
     entryType: "paid",
     priority: 10,
     source: "competition",
+    registrationUrl:
+      "https://unstop.com/competitions/robo-clash-control-wars-noesis-vedam-school-of-technology-1639249",
   },
 ];
 

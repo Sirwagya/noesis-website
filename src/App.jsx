@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TrackChapter } from "./components/TrackChapter";
 import { TrackRail } from "./components/TrackRail";
 import { ProgramDetailsModal } from "./components/ProgramDetailsModal";
+import { SponsorDetailsModal } from "./components/SponsorDetailsModal";
 import {
   getProgramItemsByTrack,
   programTrackIds,
@@ -10,12 +11,12 @@ import {
 } from "./data/programTracksData";
 import {
   sponsorshipMetrics,
-  sponsorshipPillars,
-  sponsorshipSections,
   sponsorshipTiers,
 } from "./data/sponsorshipData";
 import { setupScrollScenes } from "./lib/scrollScenes";
+import { Users, TrendingUp } from "lucide-react";
 import "./App.css";
+import "./sponsors.css";
 import "./mobile.css";
 
 const navLinks = [
@@ -53,6 +54,7 @@ function App() {
   const [activeTrackId, setActiveTrackId] = useState(trackMeta[0].id);
   const [navSolid, setNavSolid] = useState(false);
   const [activeProgram, setActiveProgram] = useState(null);
+  const [sponsorModalOpen, setSponsorModalOpen] = useState(false);
 
   const sectionRefs = useRef(new Map());
   const heroRef = useRef(null);
@@ -228,9 +230,8 @@ function App() {
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`site-nav__link ${
-                  activeNavSection === link.id ? "is-active" : ""
-                }`}
+                className={`site-nav__link ${activeNavSection === link.id ? "is-active" : ""
+                  }`}
                 aria-current={activeNavSection === link.id ? "page" : undefined}
                 onClick={(event) => {
                   event.preventDefault();
@@ -371,81 +372,95 @@ function App() {
               Partner with NOESIS to reach high-signal builders, creators, and early founders across
               India&apos;s fastest-growing tech ecosystem.
             </p>
-            <div className="sponsor-metrics" role="list">
-              {sponsorshipMetrics.map((metric) => (
-                <article key={metric.label} className="sponsor-metric-card" role="listitem">
-                  <span className="sponsor-metric-card__label">{metric.label}</span>
-                  <strong className="sponsor-metric-card__value">{metric.value}</strong>
-                  <span className="sponsor-metric-card__note">{metric.note}</span>
-                </article>
-              ))}
+
+            <div className="sponsor-metrics-preview">
+              <article className="sponsor-metric-card">
+                <div className="sponsor-metric-card__icon" aria-label="Audience icon" role="img">
+                  <Users size={24} aria-hidden="true" />
+                </div>
+                <span className="sponsor-metric-card__label">Audience</span>
+                <strong className="sponsor-metric-card__value">800–1000</strong>
+                <span className="sponsor-metric-card__note">Engaged builders & creators</span>
+              </article>
+              <article className="sponsor-metric-card">
+                <div className="sponsor-metric-card__icon" aria-label="Social reach icon" role="img">
+                  <TrendingUp size={24} aria-hidden="true" />
+                </div>
+                <span className="sponsor-metric-card__label">Social Reach</span>
+                <strong className="sponsor-metric-card__value">9M+ Views</strong>
+                <span className="sponsor-metric-card__note">Across Instagram, YouTube, LinkedIn</span>
+              </article>
             </div>
 
-            <div className="sponsor-pillars">
-              {sponsorshipPillars.map((pillar) => (
-                <article key={pillar.title} className="sponsor-pillar">
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.description}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className="sponsor-accordion sponsor-accordion--tiers" role="list">
-              {sponsorshipTiers.map((tier) => (
-                <details key={tier.id} className="sponsor-panel" role="listitem">
-                  <summary className="sponsor-panel__summary">
-                    <div>
-                      <span className="sponsor-panel__title">{tier.name}</span>
-                      <span className="sponsor-panel__price">{tier.price}</span>
+            <div className="sponsor-showcase">
+              {sponsorshipTiers.map((tier) => {
+                const IconComponent = tier.icon;
+                return (
+                  <article
+                    key={tier.id}
+                    className="sponsor-tier-card"
+                    style={{ "--tier-gradient": tier.gradient, "--tier-accent": tier.accentColor }}
+                  >
+                    <div
+                      className="sponsor-tier-card__icon"
+                      aria-label={tier.iconLabel}
+                      role="img"
+                    >
+                      <IconComponent size={32} aria-hidden="true" />
                     </div>
-                    <span className="sponsor-panel__summary-text">{tier.summary}</span>
-                  </summary>
-                  <div className="sponsor-panel__content">
-                    <ul>
-                      {tier.benefits.map((benefit) => (
-                        <li key={benefit}>{benefit}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </details>
-              ))}
-            </div>
-
-            <div className="sponsor-accordion sponsor-accordion--secondary" role="list">
-              {sponsorshipSections.map((section) => (
-                <details key={section.id} className="sponsor-panel" role="listitem">
-                  <summary className="sponsor-panel__summary">
-                    <div>
-                      <span className="sponsor-panel__title">{section.title}</span>
+                    <h3 className="sponsor-tier-card__name">{tier.name}</h3>
+                    <p className="sponsor-tier-card__tagline">{tier.tagline}</p>
+                    <div className="sponsor-tier-card__price">{tier.price}</div>
+                    <p className="sponsor-tier-card__summary">{tier.summary}</p>
+                    <div className="sponsor-tier-card__benefits">
+                      {tier.benefitsCount} benefits included
                     </div>
-                    <span className="sponsor-panel__summary-text">{section.summary}</span>
-                  </summary>
-                  <div className="sponsor-panel__content">
-                    <ul>
-                      {section.details.map((detail) => (
-                        <li key={detail}>{detail}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </details>
-              ))}
+                  </article>
+                );
+              })}
             </div>
 
-            <div className="sponsor-cta">
-              <a
+            <div className="sponsor-actions">
+              <button
                 className="btn btn--primary"
+                onClick={() => setSponsorModalOpen(true)}
+              >
+                View Full Sponsorship Details
+              </button>
+              <a
+                className="btn btn--ghost"
                 href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsorship"
               >
                 Request Sponsorship Deck
               </a>
-              <a
-                className="btn btn--ghost btn--compact"
-                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsor%20Call"
-              >
-                Schedule a Call
-              </a>
-              <span>Custom packages for tech, gaming, and culture partners.</span>
             </div>
+
+            {/* SEO Structured Data for Sponsorship */}
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Event",
+                "name": "NOESIS 2026",
+                "description": "India's immersive student tech-fest",
+                "startDate": "2026",
+                "location": {
+                  "@type": "Place",
+                  "name": "Vedam"
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": "Vedam",
+                  "url": "https://noesis.in"
+                },
+                "offers": sponsorshipTiers.map(tier => ({
+                  "@type": "Offer",
+                  "name": tier.name,
+                  "description": tier.summary,
+                  "price": tier.price,
+                  "priceCurrency": "INR"
+                }))
+              })}
+            </script>
           </div>
         </section>
 
@@ -540,6 +555,10 @@ function App() {
         onPrev={() => handleProgramNavigate(-1)}
         onNext={() => handleProgramNavigate(1)}
         onClose={handleProgramClose}
+      />
+      <SponsorDetailsModal
+        isOpen={sponsorModalOpen}
+        onClose={() => setSponsorModalOpen(false)}
       />
     </>
   );
