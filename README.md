@@ -1,108 +1,121 @@
-# NOESIS 2026 Frontend
+# NOESIS 2026 — Vedam Tech Fest Frontend
 
-NOESIS is a scroll-driven tech-fest frontend built with React + Vite.
+**NOESIS 2026** is the official web experience for the Vedam Tech Fest, featuring a highly interactive, scroll-driven user interface built with **React** and **GSAP**.
 
-## What This Version Delivers
+## 🚀 Overview
 
-- Program architecture based on **Tracks** instead of separate competitions/events sections:
-  - Tech
-  - Robotics
-  - E-Cell
-  - E-Sports
-  - Cultural
-- **GSAP ScrollTrigger**-powered scroll choreography:
-  - Floating-glass cinematic navbar interpolation
-  - Story-canvas global parallax (matrix, aurora, beams, grain)
-  - Pinned hero + pinned program tracks chapter
-  - Continuous depth-grid chapter/card parallax
-- Frontend-only placeholder-safe flow:
-  - `Register (Coming Soon)` state (no broken dead links)
-- Accessibility-conscious baseline:
-  - keyboard focus visibility
-  - reduced-motion fallback
-  - semantic section structure
+This repository houses the frontend application that serves as the digital gateway to the festival. It is designed to be immersive, cinematic, and highly responsive, pushing the boundaries of standard event websites.
 
-## Stack
+## ✨ Key Features
 
-- React 19
-- Vite 7
-- GSAP + ScrollTrigger
-- Playwright (visual QA capture)
+### 1. Cinematic Scroll Experience
+-   **GSAP ScrollTrigger**: Powering complex parallax effects, pin-scrolling, and motion choreography.
+-   **Story-Canvas**: A global background system featuring matrix rain, aurora effects, and beams that react to scroll position.
+-   **Floating-Glass Nav**: A dynamic navigation bar that adapts its appearance based on the active section.
 
-## Getting Started
+### 2. Sponsorship Portal (New)
+A fully redesigned, executive-style modal for potential sponsors, featuring:
+-   **Tiers & Benefits**: Interactive comparison of sponsorship packages with clear value badges and grid layouts.
+-   **Reach & Metrics**: A dashboard-style view of audience data, featuring glassmorphic cards and high-impact ROI banners.
+-   **Vertical Navigation**: Smooth sidebar navigation for easy access to detailed information.
+
+### 3. Program Tracks
+Architecture based on distinct tracks rather than generic pages:
+-   **Tech**
+-   **Robotics**
+-   **E-Cell**
+-   **E-Sports**
+-   **Cultural**
+
+## 📸 Visual Showcase
+
+### Sponsorship Tiers
+*Interactive tier comparison with "Benefits" badges and grid layout for easy scanning.*
+![Sponsorship Tiers](/docs/sponsorship-tiers.png)
+
+### Reach & Metrics Dashboard
+*High-impact ROI banner and glassmorphic platform cards showcasing audience reach.*
+![Reach Dashboard](/docs/reach-dashboard.png)
+
+## 🛠️ Tech Stack
+
+-   **Framework**: React 19 + Vite 7
+-   **Animation**: GSAP (GreenSock Animation Platform) + ScrollTrigger
+-   **Styling**: CSS Modules + Modern CSS Variables (Glassmorphism, Gradients)
+-   **Icons**: Lucide React
+-   **Quality Assurance**: Playwright (for visual regression testing)
+
+## ⚡ Getting Started
+
+### Prerequisites
+-   Node.js (v18+)
+-   npm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/your-username/noesis-website.git
+
+# Navigate to directory
+cd noesis-website
+
+# Install dependencies
 npm install
+```
+
+### Development
+
+Start the development server with hot reload:
+
+```bash
 npm run dev
 ```
+Visit `http://localhost:5173` to view the app.
 
-## Build and Lint
+### Build for Production
 
 ```bash
-npm run lint
 npm run build
 ```
+The output will be in the `dist/` folder.
 
-## Frontend QA Runbook
+## 🧪 QA & Testing
 
-### 1) Lint
+This project includes a visual QA pipeline using Playwright.
+
+### Run QA Checks
 
 ```bash
+# Lint code
 npm run qa:lint
-```
 
-### 2) Build
-
-```bash
+# Build project
 npm run qa:build
-```
 
-### 3) Screenshot Verification
-
-```bash
+# Capture Screenshots (Desktop & Mobile)
 npm run qa:screenshots
 ```
 
-This command:
+Screenshots are saved in `artifacts/screenshots/` for visual verification of layout stability across updates.
 
-- starts preview server if not already running
-- captures desktop and mobile screenshots for each static section id
-- captures transition checkpoints for seam/motion QA
-- stores outputs in:
-  - `artifacts/screenshots/desktop`
-  - `artifacts/screenshots/mobile`
-
-### 4) Full QA Chain
-
-```bash
-npm run qa:frontend
-```
-
-## Screenshot Stability Rule
-
-The screenshot pipeline intentionally waits only on static selectors/timeouts and **never** on observer/animation classes (such as `.in-view`).
-
-## Project Layout
+## 📂 Project Structure
 
 ```text
 src/
-  App.jsx
-  App.css
-  index.css
-  components/
-    ProgramCard.jsx
-    TrackChapter.jsx
-    TrackRail.jsx
-  data/
-    programTracksData.js
-  lib/
-    scrollScenes.js
-scripts/
-  capture-screenshots.mjs
-artifacts/
-  screenshots/
+├── components/          # React components
+│   ├── SponsorDetailsModal.jsx  # Main sponsorship modal
+│   ├── ProgramCard.jsx          # Event track cards
+│   ├── TrackChapter.jsx         # Section chapters
+│   └── TrackRail.jsx            # Scroll rail logic
+├── data/                # Static data files
+│   ├── sponsorshipData.js       # Sponsorship perks & metrics
+│   └── programTracksData.js     # Event track info
+├── lib/                 # Utilities
+│   └── scrollScenes.js          # GSAP animation configs
+├── styles/              # Global styles (if any)
+└── App.jsx              # Main application entry
 ```
 
-## Deployment
-
-Build output remains in `dist/` and can be deployed on Netlify using existing project setup.
+---
+*Built for Vedam Tech Fest 2026. Designed for Impact.*
