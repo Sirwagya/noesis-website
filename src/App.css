@@ -783,7 +783,7 @@
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: clamp(2rem, 4vw, 3.35rem);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   letter-spacing: -0.02em;
   line-height: 1.05;
 }
@@ -1462,8 +1462,8 @@
   width: min(100%, var(--max-content));
   margin: 0 auto;
   display: grid;
-  gap: var(--space-md);
-  padding: 1.7rem;
+  gap: var(--space-sm);
+  padding: 1.2rem;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(126, 148, 213, 0.18);
   background:

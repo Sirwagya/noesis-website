@@ -97,7 +97,7 @@ const rawProgramItems = [
     tagline: "ICPC Simulation",
     description:
       "Offline ICPC-style contest testing algorithmic speed and accuracy within a 3-hour window.",
-    prizeText: "INR 45,000",
+    prizeText: "INR 30,000",
     entryType: "paid",
     priority: 9,
     source: "competition",
@@ -120,7 +120,7 @@ const rawProgramItems = [
     tagline: "Blind Coding Challenge",
     description:
       "How well do you know your syntax? Your monitor will be turned off. Rely entirely on memory, logic, and typing accuracy to write flawless code in the dark.",
-    prizeText: "TBD",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 8,
     source: "competition",
@@ -134,7 +134,7 @@ const rawProgramItems = [
     tagline: "Coding Treasure Hunt",
     description:
       "A thrilling blend of logic puzzles and algorithmic challenges. Decipher clues, write functional code, and race against other teams to unlock the final treasure.",
-    prizeText: "TBD",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 6,
     source: "competition",
@@ -172,7 +172,7 @@ const rawProgramItems = [
     tagline: "B-Plan Challenge",
     description:
       "Got a disruptive startup idea? Pitch your business plan to our panel of judges. Demonstrate market viability, innovation, and financial strategy to secure the top spot.",
-    prizeText: "TBD",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 10,
     source: "competition",
@@ -186,7 +186,7 @@ const rawProgramItems = [
     tagline: "UI/UX Competition",
     description:
       "A dedicated design battle evaluating your user research, wireframing, and interface design skills. Craft intuitive and visually stunning user experiences to win.",
-    prizeText: "TBD",
+    prizeText: "INR 10,000",
     entryType: "paid",
     priority: 9,
     source: "competition",
@@ -222,7 +222,7 @@ const rawProgramItems = [
     tagline: "60-Second Challenges",
     description:
       "Fast, fun, and chaotic. Compete in a series of tricky 60-second micro-challenges where every second counts!",
-    prizeText: "TBD",
+    prizeText: "INR 10,000",
     entryType: "free",
     priority: 7,
     source: "event",
@@ -270,7 +270,7 @@ const rawProgramItems = [
     tagline: "Battle Royale",
     description:
       "Drop into the battlegrounds. Squad up and survive against the best teams on campus in this ultimate E-sports showdown.",
-    prizeText: "TBD",
+    prizeText: "INR 20,000",
     entryType: "paid",
     priority: 10,
     source: "competition",
@@ -307,7 +307,7 @@ const rawProgramItems = [
     tagline: "Virtual Football",
     description:
       "Take to the virtual pitch. Prove your console gaming skills and tactical prowess in our knockout FIFA tournament.",
-    prizeText: "TBD",
+    prizeText: "INR 5,000",
     entryType: "paid",
     priority: 8,
     source: "competition",
@@ -321,7 +321,7 @@ const rawProgramItems = [
     tagline: "Fighting Game",
     description:
       "Master your combos and frame data in this intense 1v1 Tekken console fighting tournament.",
-    prizeText: "TBD",
+    prizeText: "INR 5,000",
     entryType: "paid",
     priority: 7,
     source: "competition",
@@ -335,7 +335,7 @@ const rawProgramItems = [
     tagline: "RC Car Racing",
     description:
       "Rev your engines! Navigate custom-built RC bots and cars through a rigorous obstacle track in a high-speed time trial.",
-    prizeText: "TBD",
+    prizeText: "INR 20,000",
     entryType: "paid",
     priority: 9,
     source: "competition",
@@ -349,7 +349,7 @@ const rawProgramItems = [
     tagline: "Control Wars",
     description:
       "Enter the arena for a classic Robo War. Build, control, and battle your custom machines against opponents to dominate the clash.",
-    prizeText: "TBD",
+    prizeText: "INR 20,000",
     entryType: "paid",
     priority: 10,
     source: "competition",

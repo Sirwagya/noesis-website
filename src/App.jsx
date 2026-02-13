@@ -368,10 +368,6 @@ function App() {
           <div className="section__inner">
             <p className="section__eyebrow">Partnerships</p>
             <h2 className="section__title">Sponsors</h2>
-            <p className="section__lead">
-              Partner with NOESIS to reach high-signal builders, creators, and early founders across
-              India&apos;s fastest-growing tech ecosystem.
-            </p>
 
             <div className="sponsor-metrics-preview">
               <article className="sponsor-metric-card">
