@@ -139,7 +139,7 @@ const rawProgramItems = [
     priority: 6,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/algoquest-coding-treasure-hunt-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/algoquest-coding-treasurehunt-noesis-vedam-school-of-technology-1639053",
   },
   {
     id: "tech-insiders-icpc-gsoc",
