@@ -191,7 +191,7 @@ const rawProgramItems = [
     priority: 9,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/frames-ahoy-uiux-competition-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/frames-ahoy-uiux-competition-noesis-vedam-school-of-technology-1638464",
   },
   {
     id: "vedam-stock-exchange",
@@ -227,7 +227,7 @@ const rawProgramItems = [
     priority: 7,
     source: "event",
     registrationUrl:
-      "https://unstop.com/events/minute-to-win-it-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/hackathons/minute-to-win-it-noesis-vedam-school-of-technology-1639096",
   },
   {
     id: "step-up-showdown",
@@ -275,7 +275,7 @@ const rawProgramItems = [
     priority: 10,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/bgmi-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/no-scopelock-in-bgmi-noesis-vedam-school-of-technology-1638796",
   },
   {
     id: "chess",
@@ -312,7 +312,7 @@ const rawProgramItems = [
     priority: 8,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/fifa-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/no-scopelock-in-fifa-noesis-vedam-school-of-technology-1638848",
   },
   {
     id: "tekken",
@@ -326,7 +326,7 @@ const rawProgramItems = [
     priority: 7,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/tekken-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/no-scopelock-in-tekken-noesis-vedam-school-of-technology-1638847",
   },
   {
     id: "run-robo-run",
@@ -340,7 +340,7 @@ const rawProgramItems = [
     priority: 9,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/run-robo-run-rc-car-racing-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/run-robo-run-rc-car-racing-noesis-vedam-school-of-technology-1639454",
   },
   {
     id: "roboclash",
@@ -354,7 +354,7 @@ const rawProgramItems = [
     priority: 10,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/robo-clash-control-wars-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/robo-clash-control-wars-noesis-vedam-school-of-technology-1639458",
   },
 ];
 
