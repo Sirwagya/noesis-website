@@ -125,7 +125,7 @@ const rawProgramItems = [
     priority: 8,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/peek-a-code-blind-coding-competition-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/hackathons/peek-a-code-blind-coding-competition-noesis-vedam-school-of-technology-1639163",
   },
   {
     id: "algoquest",
@@ -177,7 +177,7 @@ const rawProgramItems = [
     priority: 10,
     source: "competition",
     registrationUrl:
-      "https://unstop.com/competitions/build-or-bust-b-plan-challenge-noesis-vedam-school-of-technology-1639249",
+      "https://unstop.com/competitions/build-or-bust-b-plan-challenge-noesis-vedam-school-of-technology-1639201",
   },
   {
     id: "frames-ahoy",
