@@ -1,7 +1,13 @@
 import { ProgramCard } from "./ProgramCard";
 
-export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex, onOpen }) {
-  const [featured, ...others] = items;
+export function TrackChapter({
+  track,
+  items,
+  sectionId,
+  chapterRef,
+  chapterIndex,
+  onOpen,
+}) {
   const handleOpen = (item) => {
     onOpen?.(item, items);
   };
@@ -28,8 +34,13 @@ export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex
         <div className="track-chapter__atmosphere" aria-hidden="true" />
 
         <div className="track-chapter__layout">
-          <aside className="track-chapter__title-tower" aria-label={`${track.label} chapter title`}>
-            <span className="track-chapter__index">{String(chapterIndex + 1).padStart(2, "0")}</span>
+          <aside
+            className="track-chapter__title-tower"
+            aria-label={`${track.label} chapter title`}
+          >
+            <span className="track-chapter__index">
+              {String(chapterIndex + 1).padStart(2, "0")}
+            </span>
             <header className="track-chapter__header">
               <p className="track-chapter__eyebrow">Program Track</p>
               <h2 id={`${sectionId}-title`} className="track-chapter__title">
@@ -41,24 +52,18 @@ export function TrackChapter({ track, items, sectionId, chapterRef, chapterIndex
           </aside>
 
           <div className="track-chapter__deck-shell track-chapter__deck-beat">
-            <div className="track-chapter__deck" role="list" aria-label={`${track.label} programs`}>
-              {featured ? (
-                <ProgramCard
-                  item={featured}
-                  variant={["featured", "span"]}
-                  depthLayer={featured.depthLayer}
-                  lane="feature"
-                  beatIndex={0}
-                  onOpen={handleOpen}
-                />
-              ) : null}
-              {others.map((item, index) => (
+            <div
+              className="track-chapter__deck"
+              role="list"
+              aria-label={`${track.label} programs`}
+            >
+              {items.map((item, index) => (
                 <ProgramCard
                   key={item.id}
                   item={item}
                   depthLayer={item.depthLayer}
                   lane={index % 2 === 0 ? "left" : "right"}
-                  beatIndex={index + 1}
+                  beatIndex={index}
                   onOpen={handleOpen}
                 />
               ))}

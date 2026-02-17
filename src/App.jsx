@@ -9,10 +9,7 @@ import {
   trackMeta,
   UNSTOP_MAIN_URL,
 } from "./data/programTracksData";
-import {
-  sponsorshipMetrics,
-  sponsorshipTiers,
-} from "./data/sponsorshipData";
+import { sponsorshipMetrics, sponsorshipTiers } from "./data/sponsorshipData";
 import { setupScrollScenes } from "./lib/scrollScenes";
 import { Users, TrendingUp } from "lucide-react";
 import "./App.css";
@@ -27,7 +24,13 @@ const navLinks = [
   { id: "contact", label: "Contact" },
 ];
 
-const staticSectionIds = ["hero", "program-tracks", "sponsors", "about", "contact"];
+const staticSectionIds = [
+  "hero",
+  "program-tracks",
+  "sponsors",
+  "about",
+  "contact",
+];
 const allSectionIds = [
   "hero",
   "program-tracks",
@@ -61,13 +64,17 @@ function App() {
   const overviewRef = useRef(null);
 
   const tracksWithItems = useMemo(
-    () => trackMeta.map((track) => ({ track, items: getProgramItemsByTrack(track.id) })),
-    []
+    () =>
+      trackMeta.map((track) => ({
+        track,
+        items: getProgramItemsByTrack(track.id),
+      })),
+    [],
   );
 
   const activeTrackMeta = useMemo(
     () => trackMeta.find((track) => track.id === activeTrackId) ?? trackMeta[0],
-    [activeTrackId]
+    [activeTrackId],
   );
 
   const registerSectionRef = useCallback((sectionId) => {
@@ -85,7 +92,7 @@ function App() {
       heroRef.current = node;
       registerSectionRef("hero")(node);
     },
-    [registerSectionRef]
+    [registerSectionRef],
   );
 
   const setOverviewSectionRef = useCallback(
@@ -93,15 +100,20 @@ function App() {
       overviewRef.current = node;
       registerSectionRef("program-tracks")(node);
     },
-    [registerSectionRef]
+    [registerSectionRef],
   );
 
   const scrollToSection = useCallback((sectionId) => {
     const section = document.getElementById(sectionId);
     if (!section) return;
 
-    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    section.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    const prefersReducedMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    )?.matches;
+    section.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
   }, []);
 
   const handleTrackSelect = useCallback(
@@ -109,7 +121,7 @@ function App() {
       setActiveTrackId(trackId);
       scrollToSection(`track-${trackId}`);
     },
-    [scrollToSection]
+    [scrollToSection],
   );
 
   const handleProgramOpen = useCallback((item, list = []) => {
@@ -177,7 +189,7 @@ function App() {
       {
         threshold: [0.2, 0.35, 0.5, 0.7],
         rootMargin: "-18% 0px -40% 0px",
-      }
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -223,15 +235,20 @@ function App() {
               scrollToSection("hero");
             }}
           >
-            NOESIS
+            <img
+              src="/noesis-logo.png"
+              alt="NOESIS"
+              className="site-nav__logo"
+            />
           </a>
           <nav className="site-nav__links" aria-label="Primary">
             {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`site-nav__link ${activeNavSection === link.id ? "is-active" : ""
-                  }`}
+                className={`site-nav__link ${
+                  activeNavSection === link.id ? "is-active" : ""
+                }`}
                 aria-current={activeNavSection === link.id ? "page" : undefined}
                 onClick={(event) => {
                   event.preventDefault();
@@ -242,16 +259,8 @@ function App() {
               </a>
             ))}
           </nav>
-          <div className="site-nav__cta">
-            <a
-              className="btn btn--nav"
-              href={UNSTOP_MAIN_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Join Waitlist
-            </a>
-          </div>
+          {/* Spacer to balance the brand on the left so links center properly */}
+          <div className="site-nav__spacer" aria-hidden="true" />
         </div>
       </header>
 
@@ -278,8 +287,13 @@ function App() {
               <p className="hero__eyebrow">NOESIS 2026 · Vedam Tech Fest</p>
               <img className="hero__logo" src="/noesis-logo.png" alt="NOESIS" />
               <div className="hero__tagline-shell">
-                <h1 className="hero__title hero__tagline">Build the Future. Own the Stage.</h1>
-                <p className="hero__tagline hero__tagline--reflection" aria-hidden="true">
+                <h1 className="hero__title hero__tagline">
+                  Build the Future. Own the Stage.
+                </h1>
+                <p
+                  className="hero__tagline hero__tagline--reflection"
+                  aria-hidden="true"
+                >
                   Build the Future. Own the Stage.
                 </p>
               </div>
@@ -307,7 +321,11 @@ function App() {
               </div>
             </div>
             <div className="hero__ambient" aria-hidden="true">
-              <img className="hero__ambient-image" src="/hero-cityscape.svg" alt="" />
+              <img
+                className="hero__ambient-image"
+                src="/hero-cityscape.svg"
+                alt=""
+              />
             </div>
           </div>
           <a
@@ -328,11 +346,14 @@ function App() {
           className="program-overview chapter"
         >
           <div className="program-overview__inner">
-            <p className="program-overview__eyebrow">Core Festival Experience</p>
+            <p className="program-overview__eyebrow">
+              Core Festival Experience
+            </p>
             <h2 className="program-overview__headline">Program Tracks</h2>
             <p className="program-overview__summary">
-              Choose a track, dive into high-stakes chapters, and move through a cinematic festival
-              timeline built for builders, gamers, founders, and performers.
+              Choose a track, dive into high-stakes chapters, and move through a
+              cinematic festival timeline built for builders, gamers, founders,
+              and performers.
             </p>
             <TrackRail
               tracks={trackMeta}
@@ -364,27 +385,45 @@ function App() {
           />
         ))}
 
-        <section id="sponsors" ref={registerSectionRef("sponsors")} className="section section--sponsors">
+        <section
+          id="sponsors"
+          ref={registerSectionRef("sponsors")}
+          className="section section--sponsors"
+        >
           <div className="section__inner">
             <p className="section__eyebrow">Partnerships</p>
             <h2 className="section__title">Sponsors</h2>
 
             <div className="sponsor-metrics-preview">
               <article className="sponsor-metric-card">
-                <div className="sponsor-metric-card__icon" aria-label="Audience icon" role="img">
+                <div
+                  className="sponsor-metric-card__icon"
+                  aria-label="Audience icon"
+                  role="img"
+                >
                   <Users size={24} aria-hidden="true" />
                 </div>
                 <span className="sponsor-metric-card__label">Audience</span>
                 <strong className="sponsor-metric-card__value">800–1000</strong>
-                <span className="sponsor-metric-card__note">Engaged builders & creators</span>
+                <span className="sponsor-metric-card__note">
+                  Engaged builders & creators
+                </span>
               </article>
               <article className="sponsor-metric-card">
-                <div className="sponsor-metric-card__icon" aria-label="Social reach icon" role="img">
+                <div
+                  className="sponsor-metric-card__icon"
+                  aria-label="Social reach icon"
+                  role="img"
+                >
                   <TrendingUp size={24} aria-hidden="true" />
                 </div>
                 <span className="sponsor-metric-card__label">Social Reach</span>
-                <strong className="sponsor-metric-card__value">9M+ Views</strong>
-                <span className="sponsor-metric-card__note">Across Instagram, YouTube, LinkedIn</span>
+                <strong className="sponsor-metric-card__value">
+                  9M+ Views
+                </strong>
+                <span className="sponsor-metric-card__note">
+                  Across Instagram, YouTube, LinkedIn
+                </span>
               </article>
             </div>
 
@@ -395,7 +434,10 @@ function App() {
                   <article
                     key={tier.id}
                     className="sponsor-tier-card"
-                    style={{ "--tier-gradient": tier.gradient, "--tier-accent": tier.accentColor }}
+                    style={{
+                      "--tier-gradient": tier.gradient,
+                      "--tier-accent": tier.accentColor,
+                    }}
                   >
                     <div
                       className="sponsor-tier-card__icon"
@@ -425,7 +467,7 @@ function App() {
               </button>
               <a
                 className="btn btn--ghost"
-                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Sponsorship"
+                href="mailto:noesisfest@gmail.com?subject=NOESIS%202026%20Sponsorship"
               >
                 Request Sponsorship Deck
               </a>
@@ -436,53 +478,70 @@ function App() {
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Event",
-                "name": "NOESIS 2026",
-                "description": "India's immersive student tech-fest",
-                "startDate": "2026",
-                "location": {
+                name: "NOESIS 2026",
+                description: "India's immersive student tech-fest",
+                startDate: "2026",
+                location: {
                   "@type": "Place",
-                  "name": "Vedam"
+                  name: "Vedam",
                 },
-                "organizer": {
+                organizer: {
                   "@type": "Organization",
-                  "name": "Vedam",
-                  "url": "https://noesis.in"
+                  name: "Vedam",
+                  url: "https://noesis.in",
                 },
-                "offers": sponsorshipTiers.map(tier => ({
+                offers: sponsorshipTiers.map((tier) => ({
                   "@type": "Offer",
-                  "name": tier.name,
-                  "description": tier.summary,
-                  "price": tier.price,
-                  "priceCurrency": "INR"
-                }))
+                  name: tier.name,
+                  description: tier.summary,
+                  price: tier.price,
+                  priceCurrency: "INR",
+                })),
               })}
             </script>
           </div>
         </section>
 
-        <section id="about" ref={registerSectionRef("about")} className="section section--about">
+        <section
+          id="about"
+          ref={registerSectionRef("about")}
+          className="section section--about"
+        >
           <div className="section__inner">
             <p className="section__eyebrow">About NOESIS</p>
             <h2 className="section__title">Where Engineering Meets Culture</h2>
             <p className="section__lead">
-              NOESIS is Vedam&apos;s duality-driven festival system where engineering discipline
-              and creative expression operate as one.
+              NOESIS is Vedam&apos;s duality-driven festival system where
+              engineering discipline and creative expression operate as one.
             </p>
             <div className="about-grid">
               <article>
                 <h3>Festival Format</h3>
-                <p>Five tracks, curated challenges, and an always-on stage for founders and performers.</p>
+                <p>
+                  Five tracks, curated challenges, and an always-on stage for
+                  founders and performers.
+                </p>
               </article>
               <article>
                 <h3>Community</h3>
-                <p>Student-led organization with mentors, alumni, and partner ecosystems.</p>
+                <p>
+                  Student-led organization with mentors, alumni, and partner
+                  ecosystems.
+                </p>
               </article>
               <article>
                 <h3>Outcomes</h3>
-                <p>Real product demos, team tryouts, portfolio showcases, and hiring-ready talent.</p>
+                <p>
+                  Real product demos, team tryouts, portfolio showcases, and
+                  hiring-ready talent.
+                </p>
               </article>
             </div>
-            <div className="about-stats" role="list" aria-label="Festival stats">
+            <div
+              className="about-stats"
+              role="list"
+              aria-label="Festival stats"
+            >
               <article className="about-stats__item" role="listitem">
                 <h3>48+</h3>
                 <p>Hours</p>
@@ -499,45 +558,58 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" ref={registerSectionRef("contact")} className="section section--contact">
+        <section
+          id="contact"
+          ref={registerSectionRef("contact")}
+          className="section section--contact"
+        >
           <div className="section__inner">
             <p className="section__eyebrow">Get Involved</p>
             <h2 className="section__title">Build With Us This Season</h2>
             <p className="section__lead">
-              Registrations open soon. Connect for partnerships, speaker spots, and collaboration
-              opportunities.
+              Registrations open soon. Connect for partnerships, speaker spots,
+              and collaboration opportunities.
             </p>
             <div className="contact-grid">
               <article>
                 <h3>Students</h3>
-                <p>Compete, create, and showcase your work across tech, culture, and esports tracks.</p>
+                <p>
+                  Compete, create, and showcase your work across tech, culture,
+                  and esports tracks.
+                </p>
               </article>
               <article>
                 <h3>Partners</h3>
-                <p>Bring brand activations, mentorship, and prize pools to the NOESIS floor.</p>
+                <p>
+                  Bring brand activations, mentorship, and prize pools to the
+                  NOESIS floor.
+                </p>
               </article>
               <article>
                 <h3>Speakers</h3>
-                <p>Share founder journeys, engineering playbooks, and creative sessions.</p>
+                <p>
+                  Share founder journeys, engineering playbooks, and creative
+                  sessions.
+                </p>
               </article>
             </div>
             <div className="contact-actions">
-              <a href="mailto:hello@noesis.in" className="btn btn--primary">
-                Email Organizers
-              </a>
               <a
-                href="mailto:hello@noesis.in?subject=NOESIS%202026%20Interest"
-                className="btn btn--ghost"
+                href="mailto:noesisfest@gmail.com"
+                className="btn btn--primary"
               >
-                Join the Waitlist
+                Email Organizers
               </a>
             </div>
             <div className="contact-info">
               <span>Partnerships · Speakers · Community</span>
-              <span>hello@noesis.in</span>
+              <span>noesisfest@gmail.com</span>
             </div>
             <footer className="footer">
-              <p>© 2026 NOESIS — Vedam Tech Fest. Designed for a scroll-driven festival story.</p>
+              <p>
+                © 2026 NOESIS — Vedam Tech Fest. Designed for a scroll-driven
+                festival story.
+              </p>
             </footer>
           </div>
         </section>
@@ -545,9 +617,9 @@ function App() {
       <ProgramDetailsModal
         item={activeProgram?.item ?? null}
         hasPrev={Boolean(activeProgram && activeProgram.index > 0)}
-        hasNext={
-          Boolean(activeProgram && activeProgram.list.length - 1 > activeProgram.index)
-        }
+        hasNext={Boolean(
+          activeProgram && activeProgram.list.length - 1 > activeProgram.index,
+        )}
         onPrev={() => handleProgramNavigate(-1)}
         onNext={() => handleProgramNavigate(1)}
         onClose={handleProgramClose}
